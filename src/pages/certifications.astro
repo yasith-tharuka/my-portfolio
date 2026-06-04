@@ -1,0 +1,605 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
+
+const title = "Certifications & Credentials | Yasith Tharuka";
+const description = "A showcase of professional certifications, technical credentials, leadership impact, and extracurricular milestones.";
+
+// Categories list
+const categories = [
+  { id: "all", name: "All Credentials" },
+  { id: "cs-engineering", name: "CS & Engineering" },
+  { id: "cloud", name: "Cloud" },
+  { id: "leadership-impact", name: "Leadership & Impact" },
+  { id: "memberships", name: "Professional Memberships" },
+  { id: "extracurricular", name: "Extracurricular" }
+];
+
+// Curated certifications/credentials list
+const certifications = [
+  // 1. CS50 (Harvard) - Jan 2026
+  {
+    title: "Certificate in CS50’s Introduction to Computer Science",
+    issuer: "Harvard",
+    date: "Issued Jan 2026",
+    category: "cs-engineering",
+    issuerLogo: "harvard.jpg",
+    skills: ["C Programming", "Python","Flask", "SQL & Database Design", "Algorithms"],
+    verifyUrl: "https://certificates.cs50.io/d4495557-78e6-48a8-993c-69ff057b07d3.pdf?size=letter",
+    proofImage: "/certificates/cs50x_certificate.png",
+    description: "A comprehensive introduction to computer science and programming fundamentals, emphasizing data structures, algorithms, and web development principles."
+  },
+  // 2. Java Programming: Solving Problems with Software (Duke University) - July 2025
+  {
+    title: "Java Programming: Solving Problems with Software",
+    issuer: "Duke University",
+    date: "Issued July 2025",
+    category: "cs-engineering",
+    issuerLogo: "Uni-Duke.jpg",
+    credentialId: "VPTMY6TC53VG",
+    skills: ["Object-Oriented Programming (OOP)", "Java"],
+    verifyUrl: "https://www.coursera.org/account/accomplishments/verify/VPTMY6TC53VG",
+    proofImage: "/certificates/java_duke_certificate.jpg",
+    description: "Demonstrated Java programming proficiency, problem‑solving ability, and object‑oriented design skills through hands‑on projects."
+  },
+  // 3. GDG DevFest Coordinator - 2024
+  {
+    title: "Community Organizer – GDG DevFest Sri Lanka",
+    issuer: "Google Developer Group (GDG)",
+    date: "2024",
+    category: "leadership-impact",
+    issuerLogo: "google_logo.jpg",
+    skills: ["Logistics Coordinator", "Tech Outreach", "Event Operations"],
+    proofImage: "/certificates/devfest_volunteer.png",
+    verifyUrl: "https://gdg.community.dev/gdg-sri-lanka/",
+    description: "Collaborated in organizing Sri Lanka's largest developer event. Managed session layouts, speaker alignments, and logistics."
+  },
+  // 4. IEEEXTREME 18.0 - Oct 2024
+  {
+    title: "IEEEXTREME 18.0 Programming Contest – Participant",
+    issuer: "IEEE",
+    date: "Oct 2024",
+    category: "extracurricular",
+    issuerLogo: "IEEE_UCSC.jpg",
+    skills: ["Competitive Programming", "Advanced Algorithms", "Dynamic Programming"],
+    proofImage: "/certificates/ieeextreme_score.png",
+    verifyUrl: "https://ieeextreme.org",
+    description: "Competed in the global 24-hour virtual programming challenge, solving high-difficulty logic problems under intense time constraints."
+  },
+  // 5. Google Cloud Certified (GCP) - Aug 2024
+  {
+    title: "Google Cloud Certified – Associate Cloud Engineer",
+    issuer: "Google Cloud",
+    date: "Issued Aug 2024",
+    category: "cloud",
+    issuerLogo: "google_cloud_logo.jpg",
+    credentialId: "GCP-ACE-9821",
+    skills: ["GCP Platform", "Kubernetes (GKE)", "IAM Roles", "Stackdriver"],
+    verifyUrl: "https://google.acredly.com/verification",
+    proofImage: "/certificates/google_certified.png",
+    description: "Demonstrated capacity to plan, configure, deploy, and secure cloud solutions, with active administration of GCP projects."
+  },
+  // 6. Deep Learning Specialization - Jun 2024
+  {
+    title: "Deep Learning Specialization",
+    issuer: "DeepLearning.AI (via Coursera)",
+    date: "Issued Jun 2024",
+    category: "cs-engineering",
+    issuerLogo: "google_logo.jpg",
+    skills: ["Neural Networks", "TensorFlow", "Computer Vision", "Sequence Models"],
+    verifyUrl: "https://coursera.org/verify/deeplearning",
+    proofImage: "/certificates/deeplearning_certified.png",
+    description: "A 5-course specialization covering fundamental deep learning concepts, structuring ML projects, convolutional networks, and NLP systems."
+  },
+  // 7. IEEE Student Branch Secretary - 2024 - Present
+  {
+    title: "IEEE Student Branch – Secretary & Committee Member",
+    issuer: "IEEE University of Moratuwa Student Branch",
+    date: "2024 - Present",
+    category: "leadership-impact",
+    issuerLogo: "IEEE_UCSC.jpg",
+    skills: ["Operations Management", "Strategic Planning", "Volunteer Leadership"],
+    verifyUrl: "https://www.ieee.org",
+    description: "Driving administrative operations, coordinating volunteers, and spearheading major university student activities and technical workshops."
+  },
+  // 8. IEEE CS Member - 2024 - Present
+  {
+    title: "IEEE Computer Society Member",
+    issuer: "IEEE Computer Society",
+    date: "2024 - Present",
+    category: "memberships",
+    issuerLogo: "IEEE_UCSC.jpg",
+    skills: ["Software Engineering", "AI Research", "Computer Architecture"],
+    verifyUrl: "https://www.computer.org",
+    description: "Specialized society access focusing on advanced computing research, standard publications, and modern technological guidelines."
+  },
+  // 9. ACM Student Member - 2024 - Present
+  {
+    title: "Association for Computing Machinery Student Member",
+    issuer: "ACM",
+    date: "2024 - Present",
+    category: "memberships",
+    issuerLogo: "github_logo.jpg",
+    skills: ["ACM Digital Library", "Computing Ethics", "Research Networks"],
+    verifyUrl: "https://www.acm.org",
+    description: "Engaging with global computing professionals, utilizing research resources, and participating in academic forums."
+  },
+  // 10. IEEE Student Member - 2023 - Present
+  {
+    title: "IEEE Student Member",
+    issuer: "Institute of Electrical and Electronics Engineers",
+    date: "2023 - Present",
+    category: "memberships",
+    issuerLogo: "IEEE_UCSC.jpg",
+    credentialId: "IEEE ID: #98765432",
+    skills: ["Global Networking", "Research Publications", "IEEE Spectrum Access"],
+    verifyUrl: "https://www.ieee.org",
+    proofImage: "/certificates/ieee_membership.png",
+    description: "Active member in the world's largest professional technical organization, participating in local and global engineering events."
+  },
+  // 11. Toastmasters - 2023 - Present
+  {
+    title: "Toastmasters Gavel Club – Member",
+    issuer: "Toastmasters International Affiliate",
+    date: "2023 - Present",
+    category: "extracurricular",
+    issuerLogo: "SLIC_logo.jpg",
+    skills: ["Public Speaking", "Communication Skills", "Evaluation"],
+    verifyUrl: "https://www.toastmasters.org",
+    description: "Actively participating in toastmasters events to build impromptu speaking, formal presentations, and structured feedback mechanisms."
+  },
+  // 12. National Hackathons - 2023 - 2024
+  {
+    title: "National Hackathons – Top 10 Finisher",
+    issuer: "Various (HackX, Mora Extreme)",
+    date: "2023 - 2024",
+    category: "extracurricular",
+    issuerLogo: "Uni-Moratuwa.jpg",
+    skills: ["Rapid Prototyping", "Pitching & Presentation", "Product Design"],
+    proofImage: "/certificates/hackx_cert.png",
+    description: "Designed, engineered, and presented novel products in 24-hour hackathons, qualifying in the top tiers nationally."
+  },
+  // 13. CivicPulse Lead - 2023
+  {
+    title: "Lead Volunteer – CivicPulse Initiative",
+    issuer: "University of Moratuwa",
+    date: "2023",
+    category: "leadership-impact",
+    issuerLogo: "Uni-Moratuwa.jpg",
+    skills: ["Full Stack Development", "Civic Technology", "Agile Management"],
+    verifyUrl: "https://github.com/yasith-tharuka/civicpulse",
+    description: "Led a software volunteer team to develop and launch CivicPulse, a web platform tracking and visualizing public civic benchmarks."
+  }
+];
+
+// SVG fallback emblem for credentials with no image proof
+const emblemBadge = `
+  <div class="flex flex-col items-center justify-center text-center p-6 bg-white rounded-2xl border border-gray-150 shadow-sm max-w-[280px]">
+    <div class="p-5 bg-blue-50/50 text-blue-600 rounded-full mb-4">
+      <svg class="w-16 h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+      </svg>
+    </div>
+    <h3 class="font-heading font-medium text-gray-900 text-base mb-1">Official Credential</h3>
+    <p class="text-xs text-gray-400 font-medium uppercase tracking-wider mb-2">Not Applicable</p>
+    <p class="text-[11px] text-gray-500 leading-normal">This membership or achievement has been officially logged and verified on the organization's member portal.</p>
+  </div>
+`;
+---
+
+<Layout title={title}>
+  <main class="w-full min-h-screen bg-white pt-12 pb-24 font-body">
+    <!-- Hero Section -->
+    <section class="max-w-7xl mx-auto px-6 mb-16">
+      <div class="flex flex-col md:flex-row md:items-start justify-between gap-8 pb-10 border-b border-gray-200">
+        <!-- Left: Sleek, large heading & descriptive subtext -->
+        <div class="max-w-3xl">
+          <span class="text-xs font-semibold text-blue-600 uppercase tracking-widest block mb-3">Achievements</span>
+          <h1 class="font-heading text-4xl sm:text-5xl font-normal text-gray-900 tracking-tight leading-tight mb-4">
+            Professional Credentials & Certifications
+          </h1>
+          <p class="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">
+            A curated summary of technical certifications, leadership roles, professional memberships, and extracurricular achievements verifying my expertise and community involvement.
+          </p>
+        </div>
+        <!-- Right: Pill button -->
+        <div class="flex-shrink-0 mt-4 md:mt-2">
+          <a
+            href="/"
+            class="inline-block bg-[#F1F3F4] text-gray-900 hover:bg-gray-200 px-6 py-3 rounded-full text-sm font-medium transition-all duration-200 hover:-translate-y-0.5"
+            id="back-home-button"
+          >
+            Return to Home
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Category Filter Tabs -->
+    <section class="max-w-7xl mx-auto px-6 mb-12">
+      <div class="flex flex-wrap gap-2 md:gap-3" id="filter-tabs-container">
+        {categories.map((cat, idx) => (
+          <button
+            data-filter={cat.id}
+            class={`filter-tab px-5 py-2.5 rounded-full text-sm font-medium border transition-all duration-200 cursor-pointer ${
+              idx === 0
+                ? "bg-[#0F0F10] text-white border-[#0F0F10]"
+                : "bg-white text-gray-600 border-gray-200 hover:bg-gray-50 hover:text-black"
+            }`}
+            id={`tab-btn-${cat.id}`}
+          >
+            {cat.name}
+          </button>
+        ))}
+      </div>
+    </section>
+
+    <!-- Certifications Grid -->
+    <section class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 transition-all duration-300" id="certs-grid">
+        {certifications.map((cert, idx) => (
+          <div
+            data-category={cert.category}
+            data-index={idx}
+            class="cert-card relative bg-[#F8F9FA] rounded-2xl border border-gray-150 p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-lg hover:border-gray-250 hover:-translate-y-1 cursor-pointer group"
+            id={`cert-card-${idx}`}
+          >
+            <!-- Hover Arrow indicator -->
+            <span class="absolute top-6 right-6 text-gray-300 group-hover:text-gray-900 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </span>
+
+            <div>
+              <!-- Issuer Logo (Google/Harvard/etc.) in Top Header -->
+              <div class="mb-6 flex items-center justify-between">
+                <span class="w-12 h-12 flex items-center justify-start issuer-logo-wrapper overflow-hidden">
+                  <img
+                    src={`/certificates/Issuer_Logos/${cert.issuerLogo}`}
+                    alt={`${cert.issuer} Logo`}
+                    class="w-full h-full object-contain"
+                    loading="lazy"
+                  />
+                </span>
+                
+                <span class="text-xs font-semibold text-gray-400 uppercase tracking-widest mr-8">
+                  {cert.category === "cs-engineering" && "Tech & CS"}
+                  {cert.category === "cloud" && "Cloud"}
+                  {cert.category === "leadership-impact" && "Leadership"}
+                  {cert.category === "memberships" && "Membership"}
+                  {cert.category === "extracurricular" && "Activities"}
+                </span>
+              </div>
+
+              <!-- Title & Organization -->
+              <h3 class="font-heading text-xl font-medium text-gray-900 leading-snug mb-2">
+                {cert.title}
+              </h3>
+              
+              <div class="flex items-wrap items-center gap-2 mb-4">
+                <span class="text-sm font-semibold text-gray-700">{cert.issuer}</span>
+                <span class="text-xs text-gray-400 font-bold">•</span>
+                <span class="text-xs font-medium text-gray-500">{cert.date}</span>
+              </div>
+
+              <!-- Description -->
+              <p class="text-sm text-gray-650 leading-relaxed mb-6 font-light">
+                {cert.description}
+              </p>
+
+              {/* Skills Tags */}
+              {cert.skills && cert.skills.length > 0 && (
+                <div class="flex flex-wrap gap-1.5 mb-6">
+                  {cert.skills.map((skill) => (
+                    <span class="bg-white text-gray-700 border border-gray-150 text-[11px] px-2.5 py-0.5 rounded-full font-medium shadow-sm">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <!-- Bottom Section (Verification / ID) -->
+            <div class="pt-4 border-t border-gray-150 flex items-center justify-between mt-auto">
+              {cert.credentialId ? (
+                <span class="text-xs font-mono text-gray-400">
+                  {cert.credentialId}
+                </span>
+              ) : (
+                <span class="text-xs text-gray-400 italic font-light">
+                  View Proof Details
+                </span>
+              )}
+
+              <span class="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 group-hover:text-blue-800 transition-colors">
+                View Proof
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Detailed Modal Panel Overlay (Horizontal Split "Small Tab" Design) -->
+    <div
+      id="cert-modal-backdrop"
+      class="fixed inset-0 bg-black/40 backdrop-blur-md z-50 flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300"
+    >
+      <!-- Modal Box: Details left, Cert image right -->
+      <div
+        id="cert-modal-box"
+        class="relative w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-2xl transform scale-95 opacity-0 transition-all duration-300 grid grid-cols-1 md:grid-cols-12 min-h-[400px] md:min-h-[500px]"
+      >
+        <!-- Close button inside the modal box -->
+        <button
+          id="cert-modal-close"
+          class="absolute top-5 right-5 z-10 w-10 h-10 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-full flex items-center justify-center transition-colors cursor-pointer"
+          aria-label="Close panel"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
+        <!-- Left Column: Details (7 cols out of 12) -->
+        <div class="col-span-12 md:col-span-7 p-8 md:p-10 flex flex-col justify-between">
+          <div>
+            <!-- Issuer Logo Header -->
+            <div class="flex items-center justify-between mb-6">
+              <div id="modal-logo-container" class="w-12 h-12 flex items-center justify-start overflow-hidden">
+                <!-- Dynamic img logo cloned here -->
+              </div>
+              <span id="modal-category-badge" class="text-xs font-semibold text-blue-600 uppercase tracking-widest mr-8">
+                <!-- Dynamic Category Badge injected here -->
+              </span>
+            </div>
+
+            <!-- Title -->
+            <h2 id="modal-title" class="font-heading text-2xl md:text-3xl font-medium text-gray-900 leading-snug mb-3">
+              <!-- Title injected here -->
+            </h2>
+
+            <!-- Issuer & Date info -->
+            <div class="flex items-center gap-2.5 mb-6 text-sm text-gray-650 font-normal">
+              <span id="modal-issuer" class="font-semibold text-gray-800"></span>
+              <span class="text-gray-400 font-bold">•</span>
+              <span id="modal-date" class="font-medium text-gray-500"></span>
+            </div>
+
+            <!-- Description -->
+            <p id="modal-description" class="text-sm md:text-base text-gray-650 leading-relaxed font-light mb-8">
+              <!-- Description injected here -->
+            </p>
+
+            <!-- Skills list tags -->
+            <div class="mb-8">
+              <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Skills & Technologies</h4>
+              <div id="modal-skills-container" class="flex flex-wrap gap-2">
+                <!-- Skills badges dynamically injected -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer section with credential ID & link -->
+          <div class="pt-6 border-t border-gray-150 flex items-center justify-between mt-auto">
+            <div>
+              <span class="block text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-0.5">Credential ID</span>
+              <span id="modal-credential-id" class="text-xs font-mono text-gray-600 font-medium"></span>
+            </div>
+
+            <a
+              id="modal-verify-btn"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 bg-[#0F0F10] text-white hover:bg-gray-800 px-6 py-3 rounded-full text-xs font-semibold transition-all duration-200 shadow-sm"
+            >
+              Verify Credential
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Column: Proof Image (5 cols out of 12) -->
+        <div id="modal-proof-column" class="col-span-12 md:col-span-5 bg-gray-50 border-t md:border-t-0 md:border-l border-gray-100 flex items-center justify-center p-6 md:p-8 min-h-[300px] md:min-h-0">
+          <!-- Container for Certificate Image or Emblem Badge -->
+          <div id="modal-proof-container" class="w-full h-full flex items-center justify-center">
+            <!-- Dynamic Proof content injected here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  /* Custom micro-animations for card filter transitions */
+  .cert-card {
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .cert-card.opacity-0 {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+</style>
+
+<script define:vars={{ certifications, emblemBadge }}>
+  // Client-side scripting for interactive filter tabs & details modal
+  document.addEventListener("DOMContentLoaded", () => {
+    const tabs = document.querySelectorAll(".filter-tab");
+    const cards = document.querySelectorAll(".cert-card");
+    
+    // Modal elements
+    const backdrop = document.getElementById("cert-modal-backdrop");
+    const box = document.getElementById("cert-modal-box");
+    const closeBtn = document.getElementById("cert-modal-close");
+    
+    const modalLogo = document.getElementById("modal-logo-container");
+    const modalCatBadge = document.getElementById("modal-category-badge");
+    const modalTitle = document.getElementById("modal-title");
+    const modalIssuer = document.getElementById("modal-issuer");
+    const modalDate = document.getElementById("modal-date");
+    const modalDesc = document.getElementById("modal-description");
+    const modalSkills = document.getElementById("modal-skills-container");
+    const modalCredId = document.getElementById("modal-credential-id");
+    const modalVerifyBtn = document.getElementById("modal-verify-btn");
+    const modalProofContainer = document.getElementById("modal-proof-container");
+
+    const catLabels = {
+      "cs-engineering": "Tech & CS",
+      "cloud": "Cloud",
+      "leadership-impact": "Leadership",
+      "memberships": "Membership",
+      "extracurricular": "Activities"
+    };
+
+    // --- Tab Filtering Logic ---
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const filterValue = tab.getAttribute("data-filter");
+
+        // Update active states on tab buttons
+        tabs.forEach((t) => {
+          if (t === tab) {
+            t.classList.remove("bg-white", "text-gray-650", "border-gray-200", "hover:bg-gray-50", "hover:text-black");
+            t.classList.add("bg-[#0F0F10]", "text-white", "border-[#0F0F10]");
+          } else {
+            t.classList.add("bg-white", "text-gray-650", "border-gray-200", "hover:bg-gray-50", "hover:text-black");
+            t.classList.remove("bg-[#0F0F10]", "text-white", "border-[#0F0F10]");
+          }
+        });
+
+        // Filter cards
+        cards.forEach((card) => {
+          const cardCategory = card.getAttribute("data-category");
+          
+          if (filterValue === "all" || cardCategory === filterValue) {
+            card.style.display = "flex";
+            void card.offsetHeight;
+            card.classList.remove("opacity-0", "scale-95", "hidden");
+            card.classList.add("opacity-100", "scale-100");
+          } else {
+            card.classList.remove("opacity-100", "scale-100");
+            card.classList.add("opacity-0", "scale-95");
+            
+            const onTransitionEnd = (e) => {
+              if (e.propertyName === "opacity" && card.classList.contains("opacity-0")) {
+                card.style.display = "none";
+                card.removeEventListener("transitionend", onTransitionEnd);
+              }
+            };
+            card.addEventListener("transitionend", onTransitionEnd);
+          }
+        });
+      });
+    });
+
+    // --- Modal Open/Close Logic ---
+    function openModal() {
+      if (backdrop && box) {
+        backdrop.classList.remove("opacity-0", "pointer-events-none");
+        backdrop.classList.add("opacity-100");
+        box.classList.remove("scale-95", "opacity-0");
+        box.classList.add("scale-100", "opacity-100");
+        document.body.style.overflow = "hidden";
+      }
+    }
+
+    function closeModal() {
+      if (backdrop && box) {
+        backdrop.classList.remove("opacity-100");
+        backdrop.classList.add("opacity-0", "pointer-events-none");
+        box.classList.remove("scale-100", "opacity-100");
+        box.classList.add("scale-95", "opacity-0");
+        document.body.style.overflow = "";
+      }
+    }
+
+    // Populate and open modal on card click
+    cards.forEach((card) => {
+      card.addEventListener("click", () => {
+        const index = parseInt(card.getAttribute("data-index") || "0", 10);
+        const cert = certifications[index];
+
+        // Clone the logo from the card directly to the modal
+        const logoWrapper = card.querySelector(".issuer-logo-wrapper");
+        if (logoWrapper && modalLogo) {
+          modalLogo.innerHTML = logoWrapper.innerHTML;
+        }
+
+        // Set text content
+        if (modalTitle) modalTitle.textContent = cert.title;
+        if (modalIssuer) modalIssuer.textContent = cert.issuer;
+        if (modalDate) modalDate.textContent = cert.date;
+        if (modalDesc) modalDesc.textContent = cert.description;
+        if (modalCatBadge) modalCatBadge.textContent = catLabels[cert.category] || "";
+
+        // Build skills tags
+        if (modalSkills) {
+          modalSkills.innerHTML = "";
+          if (cert.skills && cert.skills.length > 0) {
+            cert.skills.forEach(skill => {
+              const span = document.createElement("span");
+              span.className = "bg-gray-100 text-gray-700 border border-gray-150 text-[11px] px-2.5 py-0.5 rounded-full font-medium shadow-sm";
+              span.textContent = skill;
+              modalSkills.appendChild(span);
+            });
+          }
+        }
+
+        // Set Credential ID
+        if (modalCredId) {
+          modalCredId.textContent = cert.credentialId || "Not Applicable";
+        }
+
+        // Verify URL Button
+        if (modalVerifyBtn) {
+          if (cert.verifyUrl) {
+            modalVerifyBtn.style.display = "inline-flex";
+            modalVerifyBtn.setAttribute("href", cert.verifyUrl);
+          } else {
+            modalVerifyBtn.style.display = "none";
+          }
+        }
+
+        // Proof Content: Image or Embellished Emblem Fallback
+        if (modalProofContainer) {
+          if (cert.proofImage) {
+            modalProofContainer.innerHTML = `
+              <div class="relative w-full h-full flex items-center justify-center max-h-[300px] md:max-h-[380px] rounded-2xl overflow-hidden border border-gray-200 shadow-sm bg-gray-100 p-3">
+                <img 
+                  src="${cert.proofImage}" 
+                  alt="${cert.title} Proof" 
+                  class="w-full h-full object-contain rounded-xl hover:scale-[1.02] transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
+            `;
+          } else {
+            modalProofContainer.innerHTML = emblemBadge;
+          }
+        }
+
+        openModal();
+      });
+    });
+
+    // Close button interactions
+    if (closeBtn) closeBtn.addEventListener("click", closeModal);
+    if (backdrop) {
+      backdrop.addEventListener("click", (e) => {
+        if (e.target === backdrop) closeModal();
+      });
+    }
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+  });
+</script>

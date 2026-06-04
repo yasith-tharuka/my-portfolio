@@ -1,0 +1,536 @@
+---
+// src/components/Hero.astro
+---
+
+<section
+    id="hero-section"
+    class="relative w-full overflow-hidden py-16 md:py-24 flex items-center justify-center border-b border-gray-100 min-h-[85vh]"
+>
+    <!-- Particle Canvas Overlay -->
+    <canvas
+        id="particle-canvas"
+        class="absolute inset-0 w-full h-full pointer-events-none z-10 block"
+    ></canvas>
+
+    <div
+        class="relative z-20 max-w-7xl mx-auto px-6 w-full grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-center"
+    >
+        <!-- Left Side: Interactive Slide Show (First on desktop, second on mobile) -->
+        <div
+            id="slideshow-wrapper"
+            class="col-span-1 md:col-span-6 order-2 md:order-1 flex flex-col items-center justify-center relative min-h-[350px] md:min-h-[450px]"
+        >
+            <!-- Slide Container -->
+            <div
+                id="slides-container"
+                class="relative w-full max-w-lg aspect-[4/3] rounded-2xl border border-gray-150 bg-[#F8F9FA] shadow-md overflow-hidden flex items-center justify-center"
+            >
+                <!-- Slide 1: Web Interface -->
+                <div
+                    class="slide absolute inset-0 opacity-100 transition-opacity duration-700 flex flex-col p-4 bg-white"
+                    data-index="0"
+                >
+                    <!-- Browser Chrome -->
+                    <div
+                        class="flex items-center gap-1.5 border-b border-gray-100 pb-3 mb-4"
+                    >
+                        <div class="w-3.5 h-3.5 rounded-full bg-[#EA4335]">
+                        </div>
+                        <div class="w-3.5 h-3.5 rounded-full bg-[#FBBC05]">
+                        </div>
+                        <div class="w-3.5 h-3.5 rounded-full bg-[#34A853]">
+                        </div>
+                        <div
+                            class="ml-4 flex-1 bg-[#F1F3F4] rounded-md h-5 text-[10px] text-gray-400 flex items-center px-3 font-mono"
+                        >
+                            yasith-tharuka/volunteer
+                        </div>
+                    </div>
+                    <!-- Web Page Content -->
+                    <div
+                        class="flex-1 w-full h-full overflow-hidden rounded-lg"
+                    >
+                        <img
+                            src="/Hero_Images/volunteer.png"
+                            alt="Volunteer work and projects"
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
+                </div>
+
+                <!-- Slide 2: Certificates -->
+                <div
+                    class="slide absolute inset-0 opacity-0 transition-opacity duration-700 flex flex-col p-4 bg-black"
+                    data-index="1"
+                >
+                    <!-- Browser Chrome -->
+                    <div
+                        class="flex items-center gap-1.5 border-b border-zinc-800 pb-3 mb-4"
+                    >
+                        <div class="w-3.5 h-3.5 rounded-full bg-[#EA4335]">
+                        </div>
+                        <div class="w-3.5 h-3.5 rounded-full bg-[#FBBC05]">
+                        </div>
+                        <div class="w-3.5 h-3.5 rounded-full bg-[#34A853]">
+                        </div>
+                        <div
+                            class="ml-4 flex-1 bg-zinc-900 rounded-md h-5 text-[10px] text-zinc-500 flex items-center px-3 font-mono"
+                        >
+                            yasith-tharuka/certificates
+                        </div>
+                    </div>
+                    <!-- Web Page Content -->
+                    <div
+                        class="flex-1 w-full h-full overflow-hidden rounded-lg bg-black"
+                    >
+                        <img
+                            src="/Hero_Images/certificates.png"
+                            alt="Certificates and achievements"
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
+                </div>
+
+
+                <!-- Slide 3: Terminal -->
+                <div
+                    class="slide absolute inset-0 opacity-0 transition-opacity duration-700 flex flex-col p-4 bg-[#070B19]"
+                    data-index="2"
+                >
+                    <!-- Terminal Chrome -->
+                    <div
+                        class="flex items-center gap-1.5 border-b border-[#1E293B] pb-3 mb-4"
+                    >
+                        <div class="w-3.5 h-3.5 rounded-full bg-[#EA4335]">
+                        </div>
+                        <div class="w-3.5 h-3.5 rounded-full bg-[#FBBC05]">
+                        </div>
+                        <div class="w-3.5 h-3.5 rounded-full bg-[#34A853]">
+                        </div>
+                        <span class="ml-4 text-xs font-mono text-gray-500"
+                            >bash - terminal</span
+                        >
+                    </div>
+                    <!-- Terminal content -->
+                    <div class="flex-1 font-mono text-[11px] sm:text-xs text-left p-2 leading-relaxed">
+                        <span class="text-gray-400">$</span> <span class="text-white">git log --oneline --recent</span><br />
+                        <span class="text-yellow-300">a1b2c3d</span> <span class="text-white">Deploy Acoustic ML Classifier using Scikit-learn</span><br />
+                        <span class="text-yellow-300">f4e5d6c</span> <span class="text-white">Merge pull request: Open-source tech stack updates</span><br />
+                        <span class="text-yellow-300">7b8a9f0</span> <span class="text-white">Initialize CivicPulse - CS50x Final Submission</span><br />
+                        <span class="text-yellow-300">9c8d7e6</span> <span class="text-white">Setup Python/Flask backend architecture</span><br />
+                        <span class="text-gray-400">$</span> <span class="text-white animate-pulse">_</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide Dots Indicators -->
+            <div
+                class="flex items-center justify-center gap-2 mt-4 relative z-30"
+            >
+                <button
+                    class="slide-dot w-2 h-2 rounded-full bg-blue-500 cursor-pointer"
+                    data-index="0"
+                    aria-label="Go to slide 1"></button>
+                <button
+                    class="slide-dot w-2 h-2 rounded-full bg-gray-300 hover:bg-gray-400 cursor-pointer"
+                    data-index="1"
+                    aria-label="Go to slide 2"></button>
+                <button
+                    class="slide-dot w-2 h-2 rounded-full bg-gray-300 hover:bg-gray-400 cursor-pointer"
+                    data-index="2"
+                    aria-label="Go to slide 3"></button>
+            </div>
+        </div>
+
+        <!-- Right Side: Content Container (First on mobile, second on desktop) -->
+        <div
+            class="col-span-1 md:col-span-6 order-1 md:order-2 flex flex-col items-center md:items-start text-center md:text-left justify-center"
+        >
+            <!-- Heading / Name -->
+            <h1
+                class="landing-title text-gray-900 mb-4 min-h-[1.2em] flex items-center md:justify-start justify-center"
+            >
+                <span id="typewriter-name" data-text="Yasith Tharuka"
+                    >Yasith Tharuka</span
+                ><span
+                    id="name-cursor"
+                    class="inline-block text-gray-900 cursor-blink ml-1 select-none"
+                    >|</span
+                >
+            </h1>
+
+            <!-- Subheading / Title -->
+            <h2
+                class="landing-subtitle text-gray-500 mb-8 min-h-[1.2em] flex items-center md:justify-start justify-center"
+            >
+                <span
+                    id="typewriter-title"
+                    data-text="Computer Science Undergraduate"
+                    >Computer Science Undergraduate</span
+                ><span
+                    id="title-cursor"
+                    class="inline-block text-gray-400 cursor-blink hidden ml-1 select-none"
+                    >|</span
+                >
+            </h2>
+
+            <!-- Description (fades in) -->
+            <p
+                id="hero-desc"
+                class="font-body text-base sm:text-lg text-gray-600 max-w-xl leading-relaxed mb-10 fade-in-element"
+            >
+                Pushing the boundaries of open-source software and machine
+                learning. Computer Science undergraduate, full-stack developer,
+                and IEEE Volunteer
+            </p>
+
+            <!-- CTA Buttons (fades in) -->
+            <div
+                id="hero-ctas"
+                class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto fade-in-element"
+            >
+                <a
+                    href="#projects"
+                    class="w-full sm:w-auto bg-[#0F0F10] text-white px-8 py-3.5 rounded-full text-sm font-medium hover:bg-gray-800 transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 text-center cursor-pointer"
+                >
+                    View Projects
+                </a>
+                <a
+                    href="#contact"
+                    class="w-full sm:w-auto bg-white text-gray-750 border border-gray-250 px-8 py-3.5 rounded-full text-sm font-medium hover:bg-gray-50 hover:border-gray-300 hover:text-black transition-all duration-200 hover:-translate-y-0.5 text-center cursor-pointer"
+                >
+                    Get in Touch
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .landing-title {
+        font-family: "Google Sans Flex", "Google Sans", sans-serif;
+        font-size: 50px;
+        font-weight: 450;
+        letter-spacing: var(--landing-main-text-letter-spacing);
+        line-height: 56px;
+    }
+    @media (min-width: 768px) {
+        .landing-title {
+            font-size: 62px;
+            line-height: 84px;
+        }
+    }
+    .landing-subtitle {
+        font-family: "Google Sans Flex", "Google Sans", sans-serif;
+        font-size: 20px;
+        font-weight: 400;
+        letter-spacing: -0.2px;
+        line-height: 24px;
+    }
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
+    .cursor-blink {
+        animation: blink 0.8s step-end infinite;
+    }
+    .fade-in-element {
+        opacity: 0;
+        transform: translateY(15px);
+        transition:
+            opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+            transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fade-in-element.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<script>
+    // Particle overlay: small, denser, more visible particles that float over the sentence.
+    const canvas = document.getElementById(
+        "particle-canvas",
+    ) as HTMLCanvasElement | null;
+    const ctx = canvas?.getContext("2d") || null;
+    const heroSection = document.getElementById("hero-section");
+
+    if (canvas && ctx && heroSection) {
+        let containerWidth = 0;
+        let containerHeight = 0;
+        let mouse = { x: null as number | null, y: null as number | null };
+
+        function resize() {
+            if (!heroSection || !canvas || !ctx) return;
+
+            const rect = heroSection.getBoundingClientRect();
+            containerWidth = rect.width;
+            containerHeight = rect.height;
+
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = Math.round(containerWidth * dpr);
+            canvas.height = Math.round(containerHeight * dpr);
+            canvas.style.width = containerWidth + "px";
+            canvas.style.height = containerHeight + "px";
+            ctx.scale(dpr, dpr);
+        }
+
+        class Particle {
+            x: number;
+            y: number;
+            vx: number;
+            vy: number;
+            size: number;
+            alpha: number;
+
+            constructor(x: number, y: number) {
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 0.6;
+                this.vy = (Math.random() - 0.5) * 0.6;
+                this.size = Math.random() * 1.25 + 0.6; // small particles
+                this.alpha = Math.random() * 0.7 + 0.3; // more visible
+            }
+
+            update() {
+                // simple motion
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // subtle attraction to mouse (if present)
+                if (mouse.x !== null && mouse.y !== null) {
+                    const dx = mouse.x - this.x;
+                    const dy = mouse.y - this.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        const ang = Math.atan2(dy, dx);
+                        // Repel from mouse slightly as in original logic (negative sign)
+                        this.vx -= Math.cos(ang) * 0.02;
+                        this.vy -= Math.sin(ang) * 0.02;
+                    }
+                }
+
+                // Limit max velocity to prevent particles from accelerating infinitely
+                const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+                const maxSpeed = 1.5;
+                if (speed > maxSpeed) {
+                    this.vx = (this.vx / speed) * maxSpeed;
+                    this.vy = (this.vy / speed) * maxSpeed;
+                }
+
+                // wrap around edges
+                if (this.x < -10) this.x = containerWidth + 10;
+                if (this.x > containerWidth + 10) this.x = -10;
+                if (this.y < -10) this.y = containerHeight + 10;
+                if (this.y > containerHeight + 10) this.y = -10;
+            }
+
+            draw() {
+                if (!ctx) return;
+                ctx.save();
+                ctx.fillStyle = `rgba(0,0,0,${this.alpha})`;
+                ctx.shadowBlur = 2;
+                ctx.shadowColor = "rgba(0,0,0,0.2)";
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        let particles: Particle[] = [];
+
+        function initParticles() {
+            particles = [];
+            // density: roughly one particle per 6000px^2, constrained
+            const area = containerWidth * containerHeight;
+            const count = Math.max(120, Math.min(600, Math.floor(area / 6000)));
+            for (let i = 0; i < count; i++) {
+                particles.push(
+                    new Particle(
+                        Math.random() * containerWidth,
+                        Math.random() * containerHeight,
+                    ),
+                );
+            }
+        }
+
+        function connectParticles(maxDist = 90) {
+            if (!ctx) return;
+            ctx.lineWidth = 0.5;
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const a = particles[i];
+                    const b = particles[j];
+                    const dx = a.x - b.x;
+                    const dy = a.y - b.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < maxDist) {
+                        const alpha = 0.15 * (1 - dist / maxDist);
+                        ctx.strokeStyle = `rgba(100, 100, 100, ${alpha})`;
+                        ctx.beginPath();
+                        ctx.moveTo(a.x, a.y);
+                        ctx.lineTo(b.x, b.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            if (!ctx || !canvas) return;
+            ctx.clearRect(0, 0, containerWidth, containerHeight);
+            for (let p of particles) {
+                p.update();
+                p.draw();
+            }
+            connectParticles(80);
+            requestAnimationFrame(animate);
+        }
+
+        // Mouse listeners relative to canvas
+        heroSection.addEventListener("mousemove", (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+        });
+
+        heroSection.addEventListener("mouseleave", () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        // Resize listening
+        window.addEventListener("resize", () => {
+            resize();
+            initParticles();
+        });
+
+        // Initialize particles
+        resize();
+        initParticles();
+        animate();
+    }
+
+    // Typewriter animation logic
+    const nameEl = document.getElementById("typewriter-name");
+    const titleEl = document.getElementById("typewriter-title");
+    const nameCursor = document.getElementById("name-cursor");
+    const titleCursor = document.getElementById("title-cursor");
+    const descEl = document.getElementById("hero-desc");
+    const ctasEl = document.getElementById("hero-ctas");
+
+    if (nameEl && titleEl) {
+        const nameText = nameEl.getAttribute("data-text") || "";
+        const titleText = titleEl.getAttribute("data-text") || "";
+
+        // Clear contents for typewriter effect
+        nameEl.textContent = "";
+        titleEl.textContent = "";
+
+        let nameIndex = 0;
+        let titleIndex = 0;
+
+        function typeName() {
+            if (nameEl && nameIndex < nameText.length) {
+                nameEl.textContent += nameText.charAt(nameIndex);
+                nameIndex++;
+                setTimeout(typeName, 100);
+            } else {
+                if (nameCursor) nameCursor.classList.add("hidden");
+                if (titleCursor) titleCursor.classList.remove("hidden");
+                setTimeout(typeTitle, 400);
+            }
+        }
+
+        function typeTitle() {
+            if (titleEl && titleIndex < titleText.length) {
+                titleEl.textContent += titleText.charAt(titleIndex);
+                titleIndex++;
+                setTimeout(typeTitle, 60);
+            } else {
+                if (titleCursor) titleCursor.classList.add("hidden");
+                setTimeout(() => {
+                    if (descEl) descEl.classList.add("visible");
+                    setTimeout(() => {
+                        if (ctasEl) ctasEl.classList.add("visible");
+                    }, 300);
+                }, 300);
+            }
+        }
+
+        // Start typing after a short delay
+        setTimeout(typeName, 500);
+    }
+
+    // Slide Carousel logic
+    const slides = document.querySelectorAll(".slide");
+    const dots = document.querySelectorAll(".slide-dot");
+    const slideshowWrapper = document.getElementById("slideshow-wrapper");
+    let currentSlide = 0;
+    let slideInterval: any;
+    let isMouseOverSlides = false;
+
+    function showSlide(index: number) {
+        slides.forEach((slide, i) => {
+            if (i === index) {
+                slide.classList.remove("opacity-0");
+                slide.classList.add("opacity-100");
+            } else {
+                slide.classList.remove("opacity-100");
+                slide.classList.add("opacity-0");
+            }
+        });
+
+        dots.forEach((dot, i) => {
+            if (i === index) {
+                dot.classList.remove("bg-gray-300", "hover:bg-gray-400");
+                dot.classList.add("bg-blue-500");
+            } else {
+                dot.classList.remove("bg-blue-500");
+                dot.classList.add("bg-gray-300", "hover:bg-gray-400");
+            }
+        });
+
+        currentSlide = index;
+    }
+
+    function nextSlide() {
+        let next = (currentSlide + 1) % slides.length;
+        showSlide(next);
+    }
+
+    function startSlideShow() {
+        if (isMouseOverSlides) return;
+        stopSlideShow();
+        slideInterval = setInterval(nextSlide, 4000);
+    }
+
+    function stopSlideShow() {
+        if (slideInterval) clearInterval(slideInterval);
+    }
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+            stopSlideShow();
+            showSlide(index);
+            startSlideShow();
+        });
+    });
+
+    if (slideshowWrapper) {
+        slideshowWrapper.addEventListener("mouseenter", () => {
+            isMouseOverSlides = true;
+            stopSlideShow();
+        });
+        slideshowWrapper.addEventListener("mouseleave", () => {
+            isMouseOverSlides = false;
+            startSlideShow();
+        });
+    }
+
+    if (slides.length > 0) {
+        startSlideShow();
+    }
+</script>

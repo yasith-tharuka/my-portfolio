@@ -18,11 +18,16 @@ const { title } = Astro.props;
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
             rel="stylesheet"
         />
+        <!-- Product Sans (Google Sans) CDN -->
+        <link href="https://fonts.cdnfonts.com/css/product-sans" rel="stylesheet" />
+        <!-- Google Sans CDN -->
+        <link href="https://fonts.cdnfonts.com/css/google-sans" rel="stylesheet" />
 
         <style is:global>
             :root {
-                --font-heading: "Outfit", sans-serif;
+                --font-heading: "Google Sans Flex", "Google Sans", "Product Sans", "Outfit", sans-serif;
                 --font-body: "Inter", sans-serif;
+                --landing-main-text-letter-spacing: -0.6px;
             }
             body {
                 background-color: #ffffff;
@@ -40,6 +45,12 @@ const { title } = Astro.props;
             .font-heading {
                 font-family: var(--font-heading);
                 letter-spacing: -0.02em; /* Gives that tight, modern Antigravity look */
+            }
+            .font-body {
+                font-family: var(--font-body);
+            }
+            .font-san {
+                font-family: "Product Sans", "Outfit", sans-serif;
             }
         </style>
     </head>

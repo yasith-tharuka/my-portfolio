@@ -20,6 +20,7 @@
             id="slideshow-wrapper"
             class="col-span-1 md:col-span-6 order-2 md:order-1 flex flex-col items-center justify-center relative min-h-[350px] md:min-h-[450px]"
         >
+            <div id="projects" class="absolute -top-20"></div>
             <!-- Slide Container -->
             <div
                 id="slides-container"
@@ -991,7 +992,9 @@
                 element.classList.remove("opacity-0");
                 if (
                     element.parentElement &&
-                    element.parentElement.classList.contains("transition-opacity")
+                    element.parentElement.classList.contains(
+                        "transition-opacity",
+                    )
                 ) {
                     element.parentElement.classList.remove("opacity-0");
                 }
@@ -1001,7 +1004,10 @@
 
                 function type() {
                     if (i < item.text.length) {
-                        element.textContent += item.text.slice(i, i + chunkSize);
+                        element.textContent += item.text.slice(
+                            i,
+                            i + chunkSize,
+                        );
                         i += chunkSize;
                         typewriterTimeouts.push(setTimeout(type, 10));
                     }

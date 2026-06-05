@@ -1,0 +1,1227 @@
+---
+// src/components/Volunteer.astro
+
+// Define props
+interface Props {
+  limit?: number;
+  showViewMore?: boolean;
+}
+
+const { limit, showViewMore = false } = Astro.props;
+
+// Complete dataset for the 10 volunteer experiences
+const volunteerExperiences = [
+  {
+    id: "challenge-sphere",
+    title: "Program Coordinator - IEEE Challenge Sphere 2026",
+    organization: "IEEE Sri Lanka Section",
+    duration: "Apr 2026 - Present",
+    period: "3 mos",
+    category: "science-tech",
+    categoryLabel: "Science & Tech",
+    description: "Serving on the national organizing committee for IEEE Challenge Sphere 2026, a flagship event by the IEEE Sri Lanka Section Student Activities Committee (SLSAC).",
+    logo: "IEEE_UCSC.jpg",
+    color: "#4285F4", // Google Blue
+    activities: [
+      "Serving on the national organizing committee to lead program planning, speaker alignments, and SLSAC coordinators.",
+      "Coordinating session schedules, resource allocation, and logistical pipelines across university student branches.",
+      "Managing participant outreach, feedback forms, and event registration pipelines on a national scale."
+    ],
+    media: []
+  },
+  {
+    id: "cloud-summit",
+    title: "Remote Marketing & Design Volunteer (Washington DC, USA) - IEEE Cloud Summit 2026",
+    organization: "IEEE",
+    duration: "May 2026 - Present",
+    period: "2 mos",
+    category: "science-tech",
+    categoryLabel: "Science & Tech",
+    description: "Remote marketing and design volunteer for the IEEE Cloud Summit 2026, organized by the IEEE Washington DC Section, USA.",
+    logo: "IEEE_UCSC.jpg",
+    color: "#4285F4", // Google Blue
+    activities: [
+      "Collaborated with the IEEE Washington DC Section to design digital marketing banners, brochures, and speaker badges.",
+      "Assisted in formatting international PR distributions and drafting email campaigns for prospective summit attendees.",
+      "Coordinated with marketing chairs to align branding guidelines across digital channels."
+    ],
+    media: []
+  },
+  {
+    id: "public-visibility",
+    title: "Public Visibility Sub-Committee Team Member",
+    organization: "IEEE Student Branch of SLIIT",
+    duration: "Mar 2026 - Present",
+    period: "4 mos",
+    category: "science-tech",
+    categoryLabel: "Science & Tech",
+    description: "Serving as an active designer and editor in SLIIT's student branch publicity campaigns.",
+    logo: "sliit_logo.jpg",
+    color: "#4285F4", // Google Blue
+    activities: [
+      "Designing visual graphics, YouTube thumbnails, and social media flyers using standard brand elements.",
+      "Created reusable deck templates and typography systems for the standing committee publications.",
+      "Collaborated on video edits and micro-interactions for public announcements to boost student engagement."
+    ],
+    media: [
+      { 
+        id: "pub-sub",
+        type: "image", 
+        name: "Public Visibility Sub-Committee", 
+        desc: "Design templates and typography guidelines created for public sub-committee operations.",
+        mockTheme: "linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)",
+        mockTitle: "Public Visibility Sub-Committee"
+      },
+      { 
+        id: "sb-standing",
+        type: "image", 
+        name: "IEEE SB 2026 Standing Committee", 
+        desc: "Branding collateral and administrative visibility assets for the standing committee.",
+        mockTheme: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
+        mockTitle: "IEEE SB 2026 Standing Committee"
+      },
+      { 
+        id: "pub-team",
+        type: "image", 
+        name: "Public Visibility Team .jpg", 
+        desc: "Highlight poster featuring design team layouts, typography spacing, and color theory implementations.",
+        mockTheme: "linear-gradient(135deg, #111827 0%, #374151 100%)",
+        mockTitle: "Public Visibility Design Team"
+      }
+    ]
+  },
+  {
+    id: "icpc-ambassador",
+    title: "Student Branch Ambassador | Sri Lanka Regional",
+    organization: "ICPC - International Collegiate Programming Contest",
+    duration: "Nov 2025 - Feb 2026",
+    period: "4 mos",
+    category: "science-tech",
+    categoryLabel: "Science & Tech",
+    description: "Served as the Student Branch Ambassador for SLIIT City Uni during the ICPC Sri Lanka Regional Contest 2025/26.",
+    logo: "sliit_logo.jpg",
+    color: "#EA4335", // Google Red
+    activities: [
+      "Represented SLIIT City Uni as the primary point of contact for Sri Lanka's first-ever ICPC Regional Contest.",
+      "Coordinated contest registration, team communication pipelines, and delegate alignments under regional guidelines.",
+      "Helped manage contest day check-in desks and participant logistics, ensuring operations ran smoothly."
+    ],
+    media: [
+      { 
+        id: "icpc-letter",
+        type: "document", 
+        name: "ICPC 2025 Sri Lanka Service Letter - Ambassador", 
+        desc: "Official service letter recognizing role as Student Branch Ambassador during the ICPC Sri Lanka Regional Contest 2025/26, highlighting coordination excellence.",
+        letterHeader: "INTERNATIONAL COLLEGIATE PROGRAMMING CONTEST",
+        letterSubHeader: "Sri Lanka Regional Secretariat — 2025/26",
+        letterTitle: "LETTER OF SERVICE APPRECIATION",
+        letterBody: "This service letter is awarded to Yasith Tharuka in recognition of his outstanding contribution and service as the Student Branch Ambassador for SLIIT City Uni during the first-ever ICPC Sri Lanka Regional Contest. Throughout the contest cycle, he successfully coordinated student registrations, streamlined administrative communications, and represented regional contest standards with diligence and integrity.",
+        letterSignatory: "Prof. Karunaratne Silva\nICPC Sri Lanka Regional Director"
+      }
+    ]
+  },
+  {
+    id: "publicity-member",
+    title: "Publicity Team Member - LeadSpring '25, LaunchPad '25 & RevUp 1.0",
+    organization: "IEEE Student Branch of SLIIT",
+    duration: "Oct 2025 - Dec 2025",
+    period: "3 mos",
+    category: "science-tech",
+    categoryLabel: "Science & Tech",
+    description: "Served on the organizing committees for LeadSpring 2025, RevUp 1.0, and LaunchPad ’25.",
+    logo: "sliit_logo.jpg",
+    color: "#4285F4", // Google Blue
+    activities: [
+      "Designed event visibility layouts and promotional calendars across major social handles.",
+      "Drafted public relations announcements and newsletters that generated record participant registration metrics.",
+      "Supported digital outreach channels and speaker highlight cards for organizing committees."
+    ],
+    media: [
+      { 
+        id: "leadspring",
+        type: "image", 
+        name: "LeadSpring '25 Organizing Committee", 
+        desc: "Public relations and registration-boost templates designed for the LeadSpring '25 launch.",
+        mockTheme: "linear-gradient(135deg, #064e3b 0%, #059669 100%)",
+        mockTitle: "LeadSpring '25 Committee"
+      },
+      { 
+        id: "launchpad",
+        type: "image", 
+        name: "LaunchPad 1.0 Organizing Committee", 
+        desc: "Marketing templates, speaker announcement graphics, and PR schedule layouts.",
+        mockTheme: "linear-gradient(135deg, #701a75 0%, #d946ef 100%)",
+        mockTitle: "LaunchPad 1.0 Committee"
+      },
+      { 
+        id: "revup",
+        type: "image", 
+        name: "RevUp '25 Organizing Committee", 
+        desc: "Coordinated social campaign cards and outreach designs for RevUp 1.0.",
+        mockTheme: "linear-gradient(135deg, #7c2d12 0%, #ea580c 100%)",
+        mockTitle: "RevUp '25 Committee"
+      }
+    ]
+  },
+  {
+    id: "sliitxtreme-secretary",
+    title: "Secretary Team Member of SLIITXtreme 4.0 Organizing Committee",
+    organization: "IEEE Computer Society of SLIIT",
+    duration: "Sep 2025 - Oct 2025",
+    period: "2 mos",
+    category: "science-tech",
+    categoryLabel: "Science & Tech",
+    description: "Supported the team on event day by assisting with logistics and ensuring smooth overall operations.",
+    logo: "sliit_logo.jpg",
+    color: "#4285F4", // Google Blue
+    activities: [
+      "Assisted day-of logistics, managing attendee registrations, and badges at check-in desks.",
+      "Coordinated information flows and participant directions across coding halls.",
+      "Supported administrative tasks of the Computer Society organizing committee."
+    ],
+    media: [
+      { 
+        id: "xtreme-org",
+        type: "image", 
+        name: "SLIITXtreme 4.0 Organizing Committee", 
+        desc: "Official credentials and organizational framework for the SLIITXtreme 4.0 Hackathon.",
+        mockTheme: "linear-gradient(135deg, #4c1d95 0%, #8b5cf6 100%)",
+        mockTitle: "SLIITXtreme 4.0 Committee"
+      },
+      { 
+        id: "xtreme-pub",
+        type: "image", 
+        name: "SLIITXtreme 4.0 Public Visibility Team - Organizing Committee", 
+        desc: "Campaign designs and team credits banner designed for event day.",
+        mockTheme: "linear-gradient(135deg, #1e1b4b 0%, #4f46e5 100%)",
+        mockTitle: "SLIITXtreme 4.0 Visibility"
+      },
+      { 
+        id: "xtreme-photo",
+        type: "image", 
+        name: "SLIITXtreme_4.0_002.jpeg", 
+        desc: "Visual representation capturing event day registrations and check-in logistics operations.",
+        mockTheme: "linear-gradient(135deg, #030712 0%, #1f2937 100%)",
+        mockTitle: "SLIITXtreme 4.0 Setup"
+      }
+    ]
+  },
+  {
+    id: "election-2024",
+    title: "Parliamentary Election 2024 : Assistant to Presiding Officer",
+    organization: "Election Commission of Sri Lanka",
+    duration: "Nov 2024",
+    period: "1 mo",
+    category: "social-services",
+    categoryLabel: "Social Services",
+    description: "Assisted in the strict enforcement of election laws and protocol within the polling station, ensuring zero procedural violations.",
+    logo: "election_commission",
+    color: "#FBBC05", // Google Yellow
+    activities: [
+      "Assisted the Presiding Officer in enforcing strict election protocols and maintaining complete station security.",
+      "Handled ballot boxes, verification registries, and official seals with absolute accountability.",
+      "Provided guidelines and directions to polling attendees, ensuring a compliant voting process."
+    ],
+    media: []
+  },
+  {
+    id: "photography-club",
+    title: "Committee Member of SCU Photography Club",
+    organization: "SLIIT City UNI",
+    duration: "May 2025 - May 2026",
+    period: "1 yr 1 mo",
+    category: "education",
+    categoryLabel: "Education",
+    description: "Active committee member assisting in club operations and event media coverage.",
+    logo: "sliit_logo.jpg",
+    color: "#34A853", // Google Green
+    activities: [
+      "Assisted in club meeting logistics, photo walk operations, and database archives.",
+      "Captured high-resolution photographs covering the SCU Annual General Meeting 2025.",
+      "Collaborated with student photography teams for campus event distributions."
+    ],
+    media: [
+      { 
+        id: "scu-agm",
+        type: "image", 
+        name: "SCU_AGM_2025", 
+        desc: "Annual General Meeting coverage and photography archive highlights.",
+        mockTheme: "linear-gradient(135deg, #065f46 0%, #10b981 100%)",
+        mockTitle: "SCU Photography Club AGM"
+      }
+    ]
+  },
+  {
+    id: "election-2025",
+    title: "Local Government Election 2025 : Assistant to Presiding Officer",
+    organization: "Election Commission of Sri Lanka",
+    duration: "May 2025",
+    period: "1 mo",
+    category: "social-services",
+    categoryLabel: "Social Services",
+    description: "Assisted in the strict enforcement of election laws and protocol within the polling station, ensuring zero procedural violations.",
+    logo: "election_commission",
+    color: "#FBBC05", // Google Yellow
+    activities: [
+      "Ensured electoral registry alignments, distributed ballot materials, and authenticated identities.",
+      "Entrusted with security details, ballot box logistics, and post-polling seals verification.",
+      "Collaborated with law enforcement to maintain polling station protocol compliance."
+    ],
+    media: []
+  },
+  {
+    id: "edu-week",
+    title: "Day Volunteer - IEEE Education Week 2026",
+    organization: "IEEE Young Professionals Sri Lanka",
+    duration: "May 2026",
+    period: "1 mo",
+    category: "education",
+    categoryLabel: "Education",
+    description: "Contributed as a day volunteer supporting event flow and logistics during IEEE Education Week 2026.",
+    logo: "IEEE_UCSC.jpg",
+    color: "#34A853", // Google Green
+    activities: [
+      "Assisted in technical setup, presenter microphone distributions, and slides flow.",
+      "Guided visiting professional speakers, student delegates, and attendees to designated venues.",
+      "Supported administrative coordination to maintain tight schedule timelines."
+    ],
+    media: []
+  }
+];
+
+const categories = [
+  { id: "all", name: "All Initiatives" },
+  { id: "science-tech", name: "Science & Tech", colorClass: "border-[#4285F4] text-[#4285F4] hover:bg-[#e8f0fe] active-tab-blue" },
+  { id: "education", name: "Education", colorClass: "border-[#34A853] text-[#34A853] hover:bg-[#e6f4ea] active-tab-green" },
+  { id: "social-services", name: "Social Services", colorClass: "border-[#FBBC05] text-[#b06000] hover:bg-[#fef7e0] active-tab-amber" }
+];
+
+// Determine what subset of items to show based on the limit prop
+const displayedExperiences = limit ? volunteerExperiences.slice(0, limit) : volunteerExperiences;
+const showFilters = !limit; // Hide filters completely on the homepage
+---
+
+<div class="relative overflow-hidden w-full bg-[#FAFAFC] border-t border-gray-150 py-20 font-body">
+  <!-- Interactive Background "Water Bubble Magic" droplets for liquid refraction -->
+  <div class="absolute top-10 left-5 w-60 h-60 rounded-full bg-blue-400/18 blur-3xl animate-float-bubble-1 pointer-events-none"></div>
+  <div class="absolute bottom-10 right-5 w-72 h-72 rounded-full bg-emerald-400/15 blur-3xl animate-float-bubble-2 pointer-events-none"></div>
+  <div class="absolute top-1/3 left-1/4 w-44 h-44 rounded-full bg-amber-400/10 blur-3xl animate-float-bubble-3 pointer-events-none"></div>
+  <div class="absolute bottom-1/3 right-1/4 w-48 h-48 rounded-full bg-purple-400/10 blur-3xl animate-float-bubble-2 pointer-events-none"></div>
+
+  <!-- Main Content Box -->
+  <div class="max-w-6xl mx-auto px-6 relative z-10">
+    
+    <!-- Section Header (Stacked Bold style based on user image) -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+      <div class="max-w-2xl">
+        {showFilters && (
+          <span class="text-xs font-semibold text-[#4285F4] uppercase tracking-widest block mb-2 font-san">Impact & Outreach</span>
+        )}
+        <h2 class="font-san text-3xl sm:text-4xl md:text-5xl font-normal text-gray-900 leading-[1.15] tracking-tight">
+          Volunteer experience <br class="hidden sm:inline" />for community impact
+        </h2>
+        {showFilters && (
+          <p class="text-sm sm:text-base text-gray-500 leading-relaxed mt-3 font-light">
+            An overview of my contributions across technology committees, student leadership bodies, and public civic service initiatives.
+          </p>
+        )}
+      </div>
+    </div>
+
+    <!-- Liquid Glass Category Filter Tabs (Only shown when showFilters is true) -->
+    {showFilters && (
+      <div class="flex flex-wrap gap-2.5 md:gap-3.5 mb-10" id="vol-tabs-container">
+        {categories.map((cat, idx) => (
+          <button
+            data-filter={cat.id}
+            class={`vol-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium border transition-all duration-300 cursor-pointer font-san ${
+              idx === 0
+                ? "bg-white/40 text-black border-white/50 shadow-sm backdrop-blur-md active-all"
+                : "bg-white/10 text-gray-700 border-white/20 hover:bg-white/30 hover:border-white/40 hover:text-black shadow-sm backdrop-blur-md"
+            }`}
+            id={`vol-tab-${cat.id}`}
+          >
+            {cat.name}
+          </button>
+        ))}
+      </div>
+    )}
+
+    <!-- List Layout of Horizontal Cards -->
+    <div class="flex flex-col gap-6" id="vol-cards-wrapper">
+      {displayedExperiences.map((vol, idx) => (
+        <div
+          data-category={vol.category}
+          data-index={idx}
+          class="vol-horizontal-card relative bg-white/20 backdrop-blur-xl rounded-[2.2rem] border border-white/45 p-6 md:p-8 flex flex-col md:flex-row md:items-start justify-between transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white/30 hover:border-white/60 group shadow-sm overflow-hidden shadow-[inset_0_1px_2px_rgba(255,255,255,0.65),0_8px_32px_rgba(0,0,0,0.02)] animate-fade-in"
+          id={`vol-card-item-${vol.id}`}
+        >
+          <!-- Accent bubble glow overlay -->
+          <div 
+            class="absolute -top-10 -left-10 w-24 h-24 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl pointer-events-none"
+            style={`background-color: ${vol.color}25`}
+          ></div>
+
+          <!-- Left Column (Expanded slider and document live under description here) -->
+          <div class="flex-1 md:pr-8 flex flex-col justify-between">
+            <div>
+              <div class="flex items-start gap-4 mb-4">
+                <!-- Bubble styled Logo container -->
+                <span class="w-12 h-12 flex items-center justify-center bg-white/50 border border-white/50 backdrop-blur-md rounded-2xl shadow-sm p-1.5 flex-shrink-0 transition-all duration-300 group-hover:rounded-[1.1rem]">
+                  {vol.logo === "election_commission" ? (
+                    <svg class="w-7 h-7 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  ) : (
+                    <img
+                      src={`/certificates/Issuer_Logos/${vol.logo}`}
+                      alt={`${vol.organization} Logo`}
+                      class="w-full h-full object-contain"
+                      loading="lazy"
+                    />
+                  )}
+                </span>
+
+                <div>
+                  <!-- Styled strictly in Google Sans (font-san class) with normal letter tracking -->
+                  <h3 class="font-san text-lg sm:text-xl font-medium tracking-normal text-gray-900 leading-snug group-hover:text-[#4285F4] transition-colors">
+                    {vol.title}
+                  </h3>
+                  <div class="flex flex-wrap items-center gap-2 mt-1.5 text-xs text-gray-500 font-light font-sans">
+                    <span class="font-semibold text-gray-700">{vol.organization}</span>
+                    <span class="text-gray-300">•</span>
+                    <span>{vol.duration}</span>
+                    <span class="text-gray-300">•</span>
+                    <span class="bg-blue-50/70 border border-blue-150/20 backdrop-blur-sm text-blue-600 px-2 py-0.5 rounded-full text-[10px] font-semibold">{vol.period}</span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="text-xs sm:text-sm text-gray-650 leading-relaxed font-light mt-3">
+                {vol.description}
+              </p>
+            </div>
+
+            <!-- Left Expanded Visual Panels Container (Occupies wide empty space) -->
+            <div class="w-full mt-0">
+              <!-- Slider Panel (Left Column Expanded) -->
+              {vol.media && vol.media.some(m => m.type === "image") && (
+                <div 
+                  class="gallery-expanded-panel max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out"
+                  id={`gallery-panel-${vol.id}`}
+                >
+                  <!-- Visual-Only Slider with Explicit Min-Heights -->
+                  <div class="relative w-full aspect-[2.1/1] min-h-[200px] sm:min-h-[250px] md:min-h-[290px] rounded-2xl overflow-hidden border border-white/25 bg-white/5 shadow-sm backdrop-blur-md" id={`slider-${vol.id}`}>
+                    {vol.media.filter(m => m.type === "image").map((item, mIdx) => (
+                      <div 
+                        class={`slide-item absolute inset-0 transition-opacity duration-300 flex flex-col justify-center select-none cursor-pointer ${
+                          mIdx === 0 ? "opacity-100 z-10" : "opacity-0 z-0"
+                        }`}
+                        data-slide-index={mIdx}
+                        data-vol-id={vol.id}
+                      >
+                        {item.type === "document" ? (
+                          <!-- Standard Document Mockup with Glass properties -->
+                          <div class="w-full h-full bg-white/70 px-8 py-5 flex flex-col justify-between text-gray-800 text-[7px] relative overflow-hidden font-sans border border-white/35 rounded-2xl backdrop-blur-sm shadow-[inset_0_1px_2px_rgba(255,255,255,0.7)]">
+                            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-400 via-blue-400 to-amber-400"></div>
+                            <div class="text-center font-bold text-gray-900 border-b border-gray-150 pb-2 uppercase tracking-wide text-[8px] font-san">{item.letterHeader}</div>
+                            <div class="my-auto py-1 text-justify leading-relaxed font-light">{item.letterBody.substring(0, 160)}...</div>
+                            <div class="border-t border-gray-150 pt-1.5 flex justify-between font-semibold items-center text-[6.5px]">
+                              <span>{item.letterSignatory.split('\n')[0]}</span>
+                              <span class="text-red-500 scale-90">VERIFIED LETTER</span>
+                            </div>
+                          </div>
+                        ) : (
+                          <!-- Visual-Only Gradient Graphic (No texts/borders inside the card frame) -->
+                          <div class="w-full h-full flex items-center justify-center relative overflow-hidden transition-transform duration-500 hover:scale-[1.01]" style={`background: ${item.mockTheme}`}>
+                            <!-- Background Bubbles visual design -->
+                            <div class="absolute -top-12 -right-12 w-40 h-40 rounded-full bg-white/5 blur-xl pointer-events-none"></div>
+                            <div class="absolute bottom-[-40px] left-[-40px] w-32 h-32 rounded-full bg-white/5 blur-xl pointer-events-none"></div>
+                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-white/10 blur-md pointer-events-none"></div>
+                            
+                            <!-- Small stylized icon center (glass bubble) -->
+                            <div class="z-10 w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-lg transition-transform duration-300 hover:rotate-12">
+                              <svg class="w-8 h-8 text-white/80" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                              </svg>
+                            </div>
+                            
+                            <!-- Water bubble indicators at bottom right -->
+                            <div class="absolute bottom-4 right-4 flex items-center gap-1.5 bg-black/15 backdrop-blur-md rounded-full px-3 py-1 text-[8px] text-white/95 border border-white/10 font-mono tracking-wider">
+                              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                              CLICK TO ZOOM
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+
+                    <!-- Slide Controls (Prev / Next Glass buttons) -->
+                    {vol.media.length > 1 && (
+                      <>
+                        <button 
+                          class="slider-prev absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/50 hover:bg-white/75 border border-white/40 flex items-center justify-center text-gray-800 hover:text-black cursor-pointer shadow-md hover:scale-105 active:scale-95 transition-all backdrop-blur-sm"
+                          aria-label="Previous image"
+                        >
+                          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                          </svg>
+                        </button>
+                        <button 
+                          class="slider-next absolute right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/50 hover:bg-white/75 border border-white/40 flex items-center justify-center text-gray-800 hover:text-black cursor-pointer shadow-md hover:scale-105 active:scale-95 transition-all backdrop-blur-sm"
+                          aria-label="Next image"
+                        >
+                          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                        
+                        <!-- Slide Indicator Dots -->
+                        <div class="absolute bottom-3 left-0 right-0 z-20 flex justify-center gap-1.5">
+                          {vol.media.map((_, mIdx) => (
+                            <span 
+                              class={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${mIdx === 0 ? "bg-white scale-125 px-1.5 rounded-sm" : "bg-white/40"}`}
+                              data-dot-index={mIdx}
+                            ></span>
+                          ))}
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              <!-- Document Sheet Panel (Left Column Expanded) -->
+              {vol.media && vol.media.some(m => m.type === "document") && (
+                <div 
+                  class="letter-expanded-panel max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out"
+                  id={`letter-panel-${vol.id}`}
+                             <!-- Standard letterhead mock block inline with Glass borders -->
+                  {vol.media.map((item, mIdx) => {
+                    if (item.type !== "document") return null;
+                    return (
+                      <div 
+                        class="vol-document-item w-full bg-white/75 rounded-2xl border border-white/45 shadow-sm p-6 flex flex-col justify-between text-gray-800 text-[10px] sm:text-xs relative overflow-hidden font-sans mx-auto max-w-[480px] aspect-[1/1.3] backdrop-blur-sm shadow-[inset_0_1px_2px_rgba(255,255,255,0.7)] cursor-pointer hover:shadow-md transition-all duration-300 hover:scale-[1.01]"
+                        data-vol-id={vol.id}
+                        data-media-index={mIdx}
+                      >
+                        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 via-blue-500 to-amber-500"></div>
+                        
+                        <div class="text-center border-b border-gray-150 pb-4">
+                          <span class="block text-[9px] font-bold text-gray-900 tracking-wider uppercase font-san">{item.letterHeader}</span>
+                          <span class="block text-[6.5px] text-gray-400 mt-1 tracking-widest font-medium uppercase">{item.letterSubHeader}</span>
+                        </div>
+                        
+                        <div class="my-auto flex flex-col justify-center gap-3.5 py-4">
+                          <h5 class="text-center text-[10px] font-bold text-gray-900 tracking-widest border-b border-gray-100 pb-1.5 max-w-[80%] mx-auto font-san">{item.letterTitle}</h5>
+                          <p class="text-[8.5px] text-gray-650 leading-relaxed text-justify font-light whitespace-normal">
+                            {item.letterBody}
+                          </p>
+                        </div>
+                        
+                        <div class="flex items-end justify-between border-t border-gray-150 pt-4 text-[7px] font-medium text-gray-500">
+                          <div>
+                            <span class="block font-bold text-gray-900 whitespace-pre-line leading-tight font-san text-[8px]">{item.letterSignatory}</span>
+                            <span class="block text-[5.5px] text-gray-400 mt-1 uppercase font-semibold">SLIIT City Campus Liaison</span>
+                          </div>
+                          
+                          <!-- Mini stamp -->
+                          <div class="relative flex items-center justify-center w-12 h-12 border border-red-500/20 rounded-full text-red-500/40 text-[6px] font-bold rotate-12 select-none uppercase">
+                            <div class="text-center scale-90">
+                              <span>ICPC</span>
+                              <span class="block text-[3.5px] font-semibold mt-0.5">OFFICIAL</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Water bubble indicator for document zoom -->
+                        <div class="absolute bottom-4 right-4 flex items-center gap-1.5 bg-black/15 backdrop-blur-md rounded-full px-3 py-1 text-[8px] text-white/95 border border-white/10 font-mono tracking-wider">
+                          <span class="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse"></span>
+                          CLICK TO ZOOM
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <!-- Right Column Accordion Menu (Toggles left-side visual panels with Glass styles) -->
+          <div class="w-full md:w-[330px] shrink-0 mt-6 md:mt-0 border-t md:border-t-0 md:border-l border-white/20 pt-5 md:pt-0 md:pl-8 flex flex-col gap-2 relative z-10">
+            
+            <!-- Accordion 1: Activities & Scope (Expends inline in right column) -->
+            <div class="acc-item border border-white/25 bg-white/10 hover:bg-white/20 hover:border-white/40 rounded-2xl overflow-hidden transition-all duration-300 shadow-sm backdrop-blur-md">
+              <button 
+                class="acc-toggle-btn w-full px-4 py-3 flex items-center justify-between text-xs font-semibold text-gray-755 hover:text-black cursor-pointer text-left font-san"
+              >
+                <span class="flex items-center gap-2">
+                  <svg class="w-3.5 h-3.5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                  </svg>
+                  Scope of Activities
+                </span>
+                <svg class="acc-chevron w-3.5 h-3.5 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div class="acc-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-4 bg-white/5">
+                <ul class="list-disc pl-4 py-3.5 text-[11px] sm:text-xs text-gray-650 space-y-1.5 font-light leading-relaxed font-sans">
+                  {vol.activities.map(act => (
+                    <li>{act}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <!-- Accordion 2: Photo Slideshow Gallery Toggle (Expends left-side wide slideshow) -->
+            {vol.media && vol.media.some(m => m.type === "image") && (
+              <div class="acc-item border border-white/25 bg-white/10 hover:bg-white/20 hover:border-white/40 rounded-2xl overflow-hidden transition-all duration-300 shadow-sm backdrop-blur-md" id={`acc-gallery-item-${vol.id}`}>
+                <button 
+                  class="vol-gallery-toggle-btn w-full px-4 py-3 flex items-center justify-between text-xs font-semibold text-gray-755 hover:text-black cursor-pointer text-left font-san"
+                  data-vol-id={vol.id}
+                >
+                  <span class="flex items-center gap-2">
+                    <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    Project Gallery ({vol.media.filter(m => m.type === "image").length})
+                  </span>
+                  <svg class="acc-chevron w-3.5 h-3.5 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+              </div>
+            )}
+
+            <!-- Accordion 3: Service Letter Toggle (Expends left-side mock letterhead document) -->
+            {vol.media && vol.media.some(m => m.type === "document") && (
+              <div class="acc-item border border-white/25 bg-white/10 hover:bg-white/20 hover:border-white/40 rounded-2xl overflow-hidden transition-all duration-300 shadow-sm backdrop-blur-md" id={`acc-letter-item-${vol.id}`}>
+                <button 
+                  class="vol-letter-toggle-btn w-full px-4 py-3 flex items-center justify-between text-xs font-semibold text-gray-755 hover:text-black cursor-pointer text-left font-san"
+                  data-vol-id={vol.id}
+                >
+                  <span class="flex items-center gap-2">
+                    <svg class="w-3.5 h-3.5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Service Letter (1)
+                  </span>
+                  <svg class="acc-chevron w-3.5 h-3.5 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+              </div>
+            )}
+            
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- View More / View All Nav Button (Only shown on index limit view) -->
+    {showViewMore && (
+      <div class="mt-12 text-center relative z-20 font-san">
+        <a
+          href="/volunteer"
+          class="inline-flex items-center gap-2 bg-white/20 hover:bg-white/35 text-gray-800 hover:text-black px-8 py-3.5 rounded-full text-xs sm:text-sm font-medium border border-white/35 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 active:scale-98 shadow-sm group backdrop-blur-md"
+          id="view-all-volunteer-btn"
+        >
+          View All Volunteer Work ({volunteerExperiences.length})
+          <svg class="w-4 h-4 text-gray-400 group-hover:text-black group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+    )}
+
+  </div>
+</div>
+
+<!-- Visual-Only Magnification Modal (Includes Left/Right Modal slider controls) -->
+<div
+  id="vol-preview-backdrop"
+  class="fixed inset-0 bg-black/75 backdrop-blur-md z-50 flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300 font-sans"
+>
+  <div class="relative w-full max-w-3xl flex items-center justify-center">
+    <!-- Close trigger -->
+    <button
+      id="vol-preview-close"
+      class="absolute -top-12 right-0 sm:-right-12 z-35 w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-all cursor-pointer border border-white/20 shadow-md hover:scale-105 active:scale-95"
+      aria-label="Close modal preview"
+    >
+      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <!-- Modal Left Navigation arrow -->
+    <button 
+      id="modal-prev-btn" 
+      class="absolute -left-4 sm:-left-16 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 text-white flex items-center justify-center backdrop-blur-md cursor-pointer transition-all hover:scale-105 active:scale-95 shadow-md"
+      aria-label="Previous magnified visual"
+    >
+      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+
+    <!-- Visual Magnified visual display frame -->
+    <div 
+      id="modal-preview-placeholder" 
+      class="w-full flex items-center justify-center overflow-hidden rounded-2xl transform scale-95 opacity-0 transition-all duration-300 select-none max-h-[80vh] relative z-20"
+    >
+      <!-- Visual slide graphic loaded here dynamically -->
+    </div>
+
+    <!-- Modal Right Navigation arrow -->
+    <button 
+      id="modal-next-btn" 
+      class="absolute -right-4 sm:-right-16 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 text-white flex items-center justify-center backdrop-blur-md cursor-pointer transition-all hover:scale-105 active:scale-95 shadow-md"
+      aria-label="Next magnified visual"
+    >
+      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<style>
+  /* Floating bubbles keyframe animations */
+  @keyframes float-bubble-1 {
+    0% { transform: translateY(0px) translateX(0px) scale(1); }
+    50% { transform: translateY(-40px) translateX(20px) scale(1.1); }
+    100% { transform: translateY(0px) translateX(0px) scale(1); }
+  }
+  @keyframes float-bubble-2 {
+    0% { transform: translateY(0px) translateX(0px) scale(1.05); }
+    50% { transform: translateY(-30px) translateX(-25px) scale(0.95); }
+    100% { transform: translateY(0px) translateX(0px) scale(1.05); }
+  }
+  @keyframes float-bubble-3 {
+    0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) translateX(15px) rotate(180deg); }
+    100% { transform: translateY(0px) translateX(0px) rotate(360deg); }
+  }
+  .animate-float-bubble-1 { animation: float-bubble-1 14s ease-in-out infinite; }
+  .animate-float-bubble-2 { animation: float-bubble-2 16s ease-in-out infinite; }
+  .animate-float-bubble-3 { animation: float-bubble-3 18s ease-in-out infinite; }
+
+  /* Expanded Visual Panels (Left Column) Classes for instant rendering and smooth heights */
+  .gallery-expanded-panel, .letter-expanded-panel {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, margin-top 0.4s ease;
+  }
+  .gallery-expanded-panel.expanded {
+    max-height: 500px;
+    opacity: 1;
+    margin-top: 1.25rem;
+  }
+  .letter-expanded-panel.expanded {
+    max-height: 700px;
+    opacity: 1;
+    margin-top: 1.25rem;
+  }
+
+  /* Smooth card state configurations */
+  .vol-horizontal-card {
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+  }
+  .vol-horizontal-card.card-filtered-out {
+    opacity: 0;
+    transform: scale(0.96) translateY(12px);
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    overflow: hidden;
+  }
+
+  /* Active states for glassmorphic tabs */
+  .vol-tab-btn {
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .vol-tab-btn.active-all {
+    background-color: rgba(255, 255, 255, 0.4);
+    color: #000000;
+    border-color: rgba(255, 255, 255, 0.65);
+    box-shadow: 0 4px 14px rgba(255, 255, 255, 0.15);
+  }
+  .vol-tab-btn.active-tab-blue {
+    background-color: rgba(66, 133, 244, 0.12);
+    color: #1a73e8;
+    border-color: rgba(66, 133, 244, 0.35);
+    box-shadow: 0 4px 14px rgba(66, 133, 244, 0.12);
+  }
+  .vol-tab-btn.active-tab-green {
+    background-color: rgba(52, 168, 83, 0.1);
+    color: #137333;
+    border-color: rgba(52, 168, 83, 0.3);
+    box-shadow: 0 4px 14px rgba(52, 168, 83, 0.1);
+  }
+  .vol-tab-btn.active-tab-amber {
+    background-color: rgba(251, 188, 5, 0.1);
+    color: #b06000;
+    border-color: rgba(251, 188, 5, 0.35);
+    box-shadow: 0 4px 14px rgba(251, 188, 5, 0.1);
+  }
+</style>
+
+<script define:vars={{ volunteerExperiences }}>
+  const initVolunteerScript = () => {
+    console.log("Volunteer script: Initializing... Total experiences:", volunteerExperiences.length);
+
+    // State indicators for Modal slide operations
+    let currentModalVolId = "";
+    let currentModalMediaIdx = 0;
+
+    // 1. Accordion Toggles (Scope Bullet Points inline on right side)
+    const toggles = document.querySelectorAll(".acc-toggle-btn");
+    console.log("Volunteer script: Found", toggles.length, "acc-toggle-btn elements");
+    toggles.forEach(toggle => {
+      toggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const item = toggle.closest(".acc-item");
+        const content = item.querySelector(".acc-content");
+        const chevron = toggle.querySelector(".acc-chevron");
+        const isOpen = content.style.maxHeight && content.style.maxHeight !== "0px";
+
+        console.log("Volunteer script: Clicked acc-toggle-btn. Is open before click:", isOpen);
+
+        const parentCard = toggle.closest(".vol-horizontal-card");
+
+        if (isOpen) {
+          content.style.maxHeight = "0px";
+          chevron.style.transform = "rotate(0deg)";
+          item.classList.remove("bg-white/30", "border-white/45");
+          item.classList.add("bg-white/10", "border-white/25");
+        } else {
+          // Close left visual panels
+          closeLeftPanels(parentCard);
+
+          // Close other inline accordions
+          const otherItems = parentCard.querySelectorAll(".acc-item");
+          otherItems.forEach(o => {
+            if (o !== item) {
+              const oContent = o.querySelector(".acc-content");
+              const oChevron = o.querySelector(".acc-chevron");
+              if (oContent) oContent.style.maxHeight = "0px";
+              if (oChevron) oChevron.style.transform = "rotate(0deg)";
+              o.classList.remove("bg-white/30", "border-white/45");
+              o.classList.add("bg-white/10", "border-white/25");
+            }
+          });
+
+          // Expand active accordion
+          content.style.maxHeight = content.scrollHeight + "px";
+          chevron.style.transform = "rotate(180deg)";
+          item.classList.remove("bg-white/10", "border-white/25");
+          item.classList.add("bg-white/30", "border-white/45");
+        }
+      });
+    });
+
+    // Helper: Close left visual panels and clear accordion active chevron state for media/letter
+    const closeLeftPanels = (parentCard) => {
+      console.log("Volunteer script: Closing left panels");
+      const gPanel = parentCard.querySelector(".gallery-expanded-panel");
+      const lPanel = parentCard.querySelector(".letter-expanded-panel");
+      
+      if (gPanel) gPanel.classList.remove("expanded");
+      if (lPanel) lPanel.classList.remove("expanded");
+
+      // Reset accordion items for gallery/letter triggers
+      const gAcc = parentCard.querySelector(".vol-gallery-toggle-btn");
+      const lAcc = parentCard.querySelector(".vol-letter-toggle-btn");
+
+      if (gAcc) {
+        gAcc.querySelector(".acc-chevron").style.transform = "rotate(0deg)";
+        gAcc.closest(".acc-item").classList.remove("bg-white/30", "border-white/45");
+        gAcc.closest(".acc-item").classList.add("bg-white/10", "border-white/25");
+      }
+      if (lAcc) {
+        lAcc.querySelector(".acc-chevron").style.transform = "rotate(0deg)";
+        lAcc.closest(".acc-item").classList.remove("bg-white/30", "border-white/45");
+        lAcc.closest(".acc-item").classList.add("bg-white/10", "border-white/25");
+      }
+    };
+
+    // 2. Project Gallery Toggles (Expands wide slideshow on the left)
+    const galleryToggles = document.querySelectorAll(".vol-gallery-toggle-btn");
+    console.log("Volunteer script: Found", galleryToggles.length, "vol-gallery-toggle-btn elements");
+    galleryToggles.forEach(toggle => {
+      toggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const volId = toggle.getAttribute("data-vol-id");
+        console.log("Volunteer script: Clicked vol-gallery-toggle-btn for volId:", volId);
+        const parentCard = toggle.closest(".vol-horizontal-card");
+        const panel = parentCard.querySelector(".gallery-expanded-panel");
+        if (!panel) {
+          console.error("Volunteer script: gallery-expanded-panel NOT found for card:", volId);
+          return;
+        }
+        const chevron = toggle.querySelector(".acc-chevron");
+        const item = toggle.closest(".acc-item");
+        
+        const isOpen = panel.classList.contains("expanded");
+        console.log("Volunteer script: Gallery panel was open before click:", isOpen);
+
+        if (isOpen) {
+          panel.classList.remove("expanded");
+          chevron.style.transform = "rotate(0deg)";
+          item.classList.remove("bg-white/30", "border-white/45");
+          item.classList.add("bg-white/10", "border-white/25");
+        } else {
+          // Close other panels and accordions
+          closeLeftPanels(parentCard);
+          const otherAccs = parentCard.querySelectorAll(".acc-toggle-btn");
+          otherAccs.forEach(o => {
+            const oContent = o.closest(".acc-item").querySelector(".acc-content");
+            const oChevron = o.querySelector(".acc-chevron");
+            if (oContent) oContent.style.maxHeight = "0px";
+            if (oChevron) oChevron.style.transform = "rotate(0deg)";
+            o.closest(".acc-item").classList.remove("bg-white/30", "border-white/45");
+            o.closest(".acc-item").classList.add("bg-white/10", "border-white/25");
+          });
+
+          // Expand slideshow panel on left
+          panel.classList.add("expanded");
+          chevron.style.transform = "rotate(180deg)";
+          item.classList.remove("bg-white/10", "border-white/25");
+          item.classList.add("bg-white/30", "border-white/45");
+        }
+      });
+    });
+
+    // 3. Service Letter Toggles (Expands mock letterhead document on the left)
+    const letterToggles = document.querySelectorAll(".vol-letter-toggle-btn");
+    console.log("Volunteer script: Found", letterToggles.length, "vol-letter-toggle-btn elements");
+    letterToggles.forEach(toggle => {
+      toggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const volId = toggle.getAttribute("data-vol-id");
+        console.log("Volunteer script: Clicked vol-letter-toggle-btn for volId:", volId);
+        const parentCard = toggle.closest(".vol-horizontal-card");
+        const panel = parentCard.querySelector(".letter-expanded-panel");
+        if (!panel) {
+          console.error("Volunteer script: letter-expanded-panel NOT found for card:", volId);
+          return;
+        }
+        const chevron = toggle.querySelector(".acc-chevron");
+        const item = toggle.closest(".acc-item");
+        
+        const isOpen = panel.classList.contains("expanded");
+        console.log("Volunteer script: Letter panel was open before click:", isOpen);
+
+        if (isOpen) {
+          panel.classList.remove("expanded");
+          chevron.style.transform = "rotate(0deg)";
+          item.classList.remove("bg-white/30", "border-white/45");
+          item.classList.add("bg-white/10", "border-white/25");
+        } else {
+          // Close other panels and accordions
+          closeLeftPanels(parentCard);
+          const otherAccs = parentCard.querySelectorAll(".acc-toggle-btn");
+          otherAccs.forEach(o => {
+            const oContent = o.closest(".acc-item").querySelector(".acc-content");
+            const oChevron = o.querySelector(".acc-chevron");
+            if (oContent) oContent.style.maxHeight = "0px";
+            if (oChevron) oChevron.style.transform = "rotate(0deg)";
+            o.closest(".acc-item").classList.remove("bg-white/30", "border-white/45");
+            o.closest(".acc-item").classList.add("bg-white/10", "border-white/25");
+          });
+
+          // Expand letter panel on left
+          panel.classList.add("expanded");
+          chevron.style.transform = "rotate(180deg)";
+          item.classList.remove("bg-white/10", "border-white/25");
+          item.classList.add("bg-white/30", "border-white/45");
+        }
+      });
+    });
+
+    // 4. Inline Slider Controls
+    const sliders = document.querySelectorAll("[id^='slider-']");
+    sliders.forEach(slider => {
+      const volId = slider.id.replace("slider-", "");
+      const prevBtn = slider.querySelector(".slider-prev");
+      const nextBtn = slider.querySelector(".slider-next");
+      const slides = slider.querySelectorAll(".slide-item");
+      const dots = slider.querySelectorAll("[data-dot-index]");
+      const caption = document.getElementById(`slider-caption-${volId}`);
+      
+      let currentIndex = 0;
+      const vol = volunteerExperiences.find(v => v.id === volId);
+
+      const updateSlider = (newIndex) => {
+        // Hide previous
+        slides[currentIndex].classList.remove("opacity-100", "z-10");
+        slides[currentIndex].classList.add("opacity-0", "z-0");
+        if (dots[currentIndex]) {
+          dots[currentIndex].className = "w-1.5 h-1.5 rounded-full transition-all duration-300 bg-white/40";
+        }
+
+        currentIndex = newIndex;
+
+        // Show next
+        slides[currentIndex].classList.remove("opacity-0", "z-0");
+        slides[currentIndex].classList.add("opacity-100", "z-10");
+        if (dots[currentIndex]) {
+          dots[currentIndex].className = "w-1.5 h-1.5 rounded-full transition-all duration-300 bg-white scale-125 px-1.5 rounded-sm";
+        }
+
+        // Update Caption
+        if (caption && vol && vol.media[currentIndex]) {
+          caption.textContent = vol.media[currentIndex].desc;
+        }
+      };
+
+      if (prevBtn) {
+        prevBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          let newIndex = currentIndex - 1;
+          if (newIndex < 0) newIndex = slides.length - 1;
+          updateSlider(newIndex);
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          let newIndex = currentIndex + 1;
+          if (newIndex >= slides.length) newIndex = 0;
+          updateSlider(newIndex);
+        });
+      }
+    });
+
+    // 5. Filtering Logic for Cards (Only on dedicated page)
+    const filterTabs = document.querySelectorAll(".vol-tab-btn");
+    const cards = document.querySelectorAll(".vol-horizontal-card");
+
+    if (filterTabs.length > 0) {
+      filterTabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+          const filter = tab.getAttribute("data-filter");
+
+          // Clear active styles (Glass tabs format)
+          filterTabs.forEach(t => {
+            t.className = "vol-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium border border-white/20 bg-white/10 text-gray-700 hover:bg-white/30 hover:border-white/40 hover:text-black shadow-sm backdrop-blur-md transition-all duration-300 cursor-pointer font-san";
+          });
+
+          // Add correct color classes
+          if (filter === "all") {
+            tab.classList.add("active-all");
+            tab.classList.remove("bg-white/10", "text-gray-700", "border-white/20");
+          } else if (filter === "science-tech") {
+            tab.classList.add("active-tab-blue");
+            tab.classList.remove("bg-white/10", "text-gray-700", "border-white/20");
+          } else if (filter === "education") {
+            tab.classList.add("active-tab-green");
+            tab.classList.remove("bg-white/10", "text-gray-700", "border-white/20");
+          } else if (filter === "social-services") {
+            tab.classList.add("active-tab-amber");
+            tab.classList.remove("bg-white/10", "text-gray-700", "border-white/20");
+          }
+
+          // Hide / Show cards
+          cards.forEach(card => {
+            const cardCat = card.getAttribute("data-category");
+            if (filter === "all" || cardCat === filter) {
+              card.classList.remove("card-filtered-out");
+              card.style.display = "flex";
+            } else {
+              card.classList.add("card-filtered-out");
+              setTimeout(() => {
+                if (card.classList.contains("card-filtered-out")) {
+                  card.style.display = "none";
+                }
+              }, 300);
+            }
+          });
+        });
+      });
+    }
+
+    // 6. Visual Magnification Modal Operations (With slide capability inside modal)
+    const modalBackdrop = document.getElementById("vol-preview-backdrop");
+    const modalBox = document.getElementById("modal-preview-placeholder");
+    const modalClose = document.getElementById("vol-preview-close");
+    const modalPrev = document.getElementById("modal-prev-btn");
+    const modalNext = document.getElementById("modal-next-btn");
+
+    // Modal populate content logic
+    const populateModal = () => {
+      const vol = volunteerExperiences.find(v => v.id === currentModalVolId);
+      if (!vol) return;
+      const item = vol.media[currentModalMediaIdx];
+      if (!item) return;
+
+      // Toggle display of arrows based on total items
+      if (vol.media.length > 1) {
+        modalPrev.style.display = "flex";
+        modalNext.style.display = "flex";
+      } else {
+        modalPrev.style.display = "none";
+        modalNext.style.display = "none";
+      }
+
+      modalBox.innerHTML = "";
+      if (item.type === "document") {
+        modalBox.innerHTML = `
+          <div class="w-full max-w-[420px] aspect-[1/1.414] bg-white border border-white/50 shadow-2xl p-8 flex flex-col justify-between text-gray-800 relative select-none rounded-2xl scale-100 font-sans mx-auto backdrop-blur-md shadow-[inset_0_1px_2px_rgba(255,255,255,0.7)]">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 via-blue-500 to-amber-500"></div>
+            
+            <div class="text-center border-b border-gray-150 pb-5">
+              <span class="block text-[11px] font-bold text-gray-900 tracking-wider uppercase font-san">${item.letterHeader}</span>
+              <span class="block text-[7.5px] text-gray-400 mt-1 tracking-widest font-medium uppercase">${item.letterSubHeader}</span>
+            </div>
+            
+            <div class="my-auto flex flex-col justify-center gap-4 py-4 font-sans">
+              <h5 class="text-center text-[12px] font-bold text-gray-900 tracking-widest border-b border-gray-100 pb-2 max-w-[85%] mx-auto font-san">${item.letterTitle}</h5>
+              <p class="text-[10px] text-gray-650 leading-relaxed text-justify font-light whitespace-normal">
+                ${item.letterBody}
+              </p>
+            </div>
+            
+            <div class="flex items-end justify-between border-t border-gray-150 pt-5 text-[8px] font-medium text-gray-500 font-sans">
+              <div>
+                <span class="block font-bold text-gray-900 whitespace-pre-line leading-tight text-[9px] font-san">${item.letterSignatory}</span>
+                <span class="block text-[6.5px] text-gray-400 mt-1 uppercase font-semibold">SLIIT City Campus Liaison</span>
+              </div>
+              
+              <div class="relative flex items-center justify-center w-14 h-14 border border-red-500/20 rounded-full text-red-500/40 text-[7px] font-bold rotate-12 select-none uppercase">
+                <div class="text-center scale-90">
+                  <span>ICPC</span>
+                  <span class="block text-[4px] font-semibold mt-0.5">OFFICIAL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        modalBox.innerHTML = `
+          <div class="w-[500px] max-w-full aspect-[4/3] rounded-2xl shadow-2xl flex flex-col justify-between p-8 text-white relative overflow-hidden select-none border border-white/20 font-sans" style="background: ${item.mockTheme}">
+            <div class="absolute -top-12 -right-12 w-44 h-44 bg-white/5 rounded-full pointer-events-none"></div>
+            <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-white/5 rounded-full pointer-events-none"></div>
+            
+            <div class="flex items-center justify-between z-10">
+              <span class="text-[10px] font-bold tracking-widest bg-white/15 px-3 py-1 rounded border border-white/10 uppercase font-san">${item.mockTitle}</span>
+              <span class="text-[9px] font-mono text-white/50">SLIIT SB</span>
+            </div>
+            
+            <div class="z-10 my-auto">
+              <h5 class="font-heading text-2xl font-bold tracking-tight text-white mb-2 drop-shadow-md leading-tight">${item.name}</h5>
+              <p class="text-xs text-white/85 font-light tracking-wide">${item.desc}</p>
+            </div>
+            
+            <div class="z-10 flex items-center justify-between border-t border-white/10 pt-4">
+              <span class="text-[9px] font-semibold text-white/70">ARCHIVED PORTFOLIO DESIGN</span>
+              <span class="text-[9px] font-mono text-white/40">SLIIT-PV-2026</span>
+            </div>
+          </div>
+        `;
+      }
+    };
+
+    // Modal popup triggers
+    const openMediaModal = (volId, mediaIdx) => {
+      currentModalVolId = volId;
+      currentModalMediaIdx = mediaIdx;
+
+      populateModal();
+
+      // Display Modal elements
+      modalBackdrop.classList.remove("pointer-events-none", "opacity-0");
+      modalBackdrop.classList.add("opacity-100");
+      modalBox.classList.remove("scale-95", "opacity-0");
+      modalBox.classList.add("scale-100", "opacity-100");
+      document.body.style.overflow = "hidden"; // disable scroll
+    };
+
+    const closeMediaModal = () => {
+      modalBackdrop.classList.remove("opacity-100");
+      modalBackdrop.classList.add("opacity-0", "pointer-events-none");
+      modalBox.classList.remove("scale-100", "opacity-100");
+      modalBox.classList.add("scale-95", "opacity-0");
+      document.body.style.overflow = ""; // enable scroll
+    };
+
+    // Modal Prev / Next visual slide click events
+    modalPrev.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const vol = volunteerExperiences.find(v => v.id === currentModalVolId);
+      if (!vol) return;
+      currentModalMediaIdx = currentModalMediaIdx - 1;
+      if (currentModalMediaIdx < 0) {
+        currentModalMediaIdx = vol.media.length - 1;
+      }
+      populateModal();
+    });
+
+    modalNext.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const vol = volunteerExperiences.find(v => v.id === currentModalVolId);
+      if (!vol) return;
+      currentModalMediaIdx = currentModalMediaIdx + 1;
+      if (currentModalMediaIdx >= vol.media.length) {
+        currentModalMediaIdx = 0;
+      }
+      populateModal();
+    });
+
+    // Attach click events to slider slide items
+    const slideItems = document.querySelectorAll(".slide-item");
+    slideItems.forEach(slide => {
+      slide.addEventListener("click", () => {
+        const volId = slide.getAttribute("data-vol-id");
+        const idx = parseInt(slide.getAttribute("data-slide-index"), 10);
+        openMediaModal(volId, idx);
+      });
+    });
+
+    // Attach click events to expanded document items
+    const docItems = document.querySelectorAll(".vol-document-item");
+    console.log("Volunteer script: Found", docItems.length, "vol-document-item elements to bind click zoom");
+    docItems.forEach(doc => {
+      doc.addEventListener("click", () => {
+        const volId = doc.getAttribute("data-vol-id");
+        const idx = parseInt(doc.getAttribute("data-media-index"), 10);
+        console.log("Volunteer script: Zooming document for volId:", volId, "index:", idx);
+        openMediaModal(volId, idx);
+      });
+    });
+
+    modalClose.addEventListener("click", closeMediaModal);
+
+    modalBackdrop.addEventListener("click", (e) => {
+      if (e.target === modalBackdrop) closeMediaModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !modalBackdrop.classList.contains("opacity-0")) {
+        closeMediaModal();
+      }
+      // Left/Right arrow modal navigation
+      if (!modalBackdrop.classList.contains("opacity-0")) {
+        if (e.key === "ArrowLeft") {
+          modalPrev.click();
+        } else if (e.key === "ArrowRight") {
+          modalNext.click();
+        }
+      }
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initVolunteerScript);
+  } else {
+    initVolunteerScript();
+  }
+</script>

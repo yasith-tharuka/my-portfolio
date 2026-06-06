@@ -1,0 +1,658 @@
+---
+// src/components/TimelineSection.astro
+
+interface Props {
+  limit?: number;
+  isHomePage?: boolean;
+}
+
+const { limit, isHomePage = false } = Astro.props;
+
+// Categories list
+const categories = [
+  { id: "all", name: "All Milestones", colorClass: "active-all" },
+  { id: "education", name: "Education & Tech", colorClass: "active-tab-blue" },
+  { id: "volunteer", name: "Volunteer & Community", colorClass: "active-tab-green" },
+  { id: "achievements", name: "Achievements & Exp", colorClass: "active-tab-amber" }
+];
+
+// Milestones dataset
+const milestones = [
+  {
+    id: "challenge-sphere",
+    year: "2026",
+    title: "Program Coordinator - IEEE Challenge Sphere 2026",
+    organization: "IEEE Sri Lanka Section",
+    date: "Apr 2026 - Present",
+    category: "volunteer",
+    description: "Serving on the national organizing committee for IEEE Challenge Sphere 2026, a flagship event by the IEEE Sri Lanka Section Student Activities Committee (SLSAC). Leading program planning and speaker alignments.",
+    skills: ["Leadership", "Program Planning", "Event Operations"],
+    color: "#4285F4" // Blue
+  },
+  {
+    id: "cloud-summit",
+    year: "2026",
+    title: "Remote Marketing & Design Volunteer",
+    organization: "IEEE Cloud Summit 2026 (Washington DC, USA)",
+    date: "May 2026 - Present",
+    category: "volunteer",
+    description: "Collaborating remotely with the IEEE Washington DC Section to design digital marketing banners, brochures, and speaker badges, and drafting international PR distributions.",
+    skills: ["Branding", "Digital Marketing", "Visual Design"],
+    color: "#8B5CF6" // Purple
+  },
+  {
+    id: "public-visibility",
+    year: "2026",
+    title: "Public Visibility Sub-Committee Team Member",
+    organization: "IEEE Student Branch of SLIIT",
+    date: "Mar 2026 - Present",
+    category: "volunteer",
+    description: "Designing visual graphics, YouTube thumbnails, and social media flyers while managing deck templates and typography systems for committee publications.",
+    skills: ["Graphic Design", "Brand Spacing", "Typography"],
+    color: "#4285F4" // Blue
+  },
+  {
+    id: "cs50",
+    year: "2026",
+    title: "Certificate in CS50's Introduction to Computer Science",
+    organization: "Harvard University",
+    date: "Issued Jan 2026",
+    category: "education",
+    description: "Completed Harvard's introductory course, gaining core skills in C, Python, SQL, web development, algorithms, and data structures.",
+    skills: ["C Programming", "Python", "SQL", "Algorithms"],
+    color: "#EA4335" // Red
+  },
+  {
+    id: "icpc-ambassador",
+    year: "2025",
+    title: "Student Branch Ambassador - ICPC Sri Lanka Regional",
+    organization: "ICPC - International Collegiate Programming Contest",
+    date: "Nov 2025 - Feb 2026",
+    category: "volunteer",
+    description: "Represented SLIIT City Uni as the primary point of contact, coordinating registration, team communications, and delegate check-ins for the regional contest.",
+    skills: ["Public Relations", "Team Coordination", "Logistics"],
+    color: "#FBBC05" // Amber
+  },
+  {
+    id: "publicity-member",
+    year: "2025",
+    title: "Publicity Team Member - LeadSpring '25, LaunchPad '25 & RevUp 1.0",
+    organization: "IEEE Student Branch of SLIIT",
+    date: "Oct 2025 - Dec 2025",
+    category: "volunteer",
+    description: "Coordinated digital visibility campaigns and designed promotional layouts for a series of local student tech events, boosting registrations.",
+    skills: ["Publicity", "Event Outreach", "Branding"],
+    color: "#4285F4" // Blue
+  },
+  {
+    id: "sliitxtreme-secretary",
+    year: "2025",
+    title: "Secretary Team Member - SLIITXtreme 4.0 Hackathon",
+    organization: "IEEE Computer Society of SLIIT",
+    date: "Sep 2025 - Oct 2025",
+    category: "volunteer",
+    description: "Supported registration desk logistics, attendee check-ins, and coding hall information flows for the computer society hackathon.",
+    skills: ["Logistics", "Operations", "Event Day Coordinator"],
+    color: "#8B5CF6" // Purple
+  },
+  {
+    id: "java-duke",
+    year: "2025",
+    title: "Java Programming Specialization",
+    organization: "Duke University",
+    date: "Issued July 2025",
+    category: "education",
+    description: "Demonstrated Java programming proficiency, object-oriented design principles, and problem-solving through hands-on software projects.",
+    skills: ["OOP", "Java", "Problem Solving"],
+    color: "#34A853" // Green
+  },
+  {
+    id: "photography-club",
+    year: "2025",
+    title: "Committee Member",
+    organization: "SCU Photography Club (SLIIT City UNI)",
+    date: "May 2025 - May 2026",
+    category: "volunteer",
+    description: "Assisted in club meeting logistics, photo walk operations, database archives, and provided high-resolution photography coverage for campus events.",
+    skills: ["Photography", "Event Coverage", "Database Archives"],
+    color: "#34A853" // Green
+  },
+  {
+    id: "election-2025",
+    year: "2025",
+    title: "Assistant to Presiding Officer - Local Government Election",
+    organization: "Election Commission of Sri Lanka",
+    date: "May 2025",
+    category: "achievements",
+    description: "Assisted the Presiding Officer in enforcing polling station protocols, handling ballot registration registries, and verifying security seals.",
+    skills: ["Protocol Compliance", "Accountability", "Electoral Law"],
+    color: "#FBBC05" // Amber
+  },
+  {
+    id: "election-2024",
+    year: "2024",
+    title: "Assistant to Presiding Officer - Parliamentary Election",
+    organization: "Election Commission of Sri Lanka",
+    date: "Nov 2024",
+    category: "achievements",
+    description: "Supported security verification and protocol adherence at the polling station, ensuring legal compliance and secure ballot box logistics.",
+    skills: ["Logistics Compliance", "Security", "Public Service"],
+    color: "#FBBC05" // Amber
+  },
+  {
+    id: "devfest-coordinator",
+    year: "2024",
+    title: "Community Organizer – GDG DevFest Sri Lanka",
+    organization: "Google Developer Group (GDG)",
+    date: "2024",
+    category: "volunteer",
+    description: "Supported session layouts, speaker alignments, and attendee registration pipelines for Sri Lanka's largest developer event.",
+    skills: ["Logistics Coordination", "Tech Outreach", "Event Operations"],
+    color: "#EA4335" // Red
+  },
+  {
+    id: "ieeextreme",
+    year: "2024",
+    title: "IEEEXTREME 18.0 Programming Contest – Participant",
+    organization: "IEEE",
+    date: "Oct 2024",
+    category: "achievements",
+    description: "Competed in the global 24-hour virtual programming challenge, solving high-difficulty logic problems under intense time constraints.",
+    skills: ["Competitive Programming", "Advanced Algorithms", "Dynamic Programming"],
+    color: "#4285F4" // Blue
+  },
+  {
+    id: "gcp-ace",
+    year: "2024",
+    title: "Google Cloud Certified – Associate Cloud Engineer",
+    organization: "Google Cloud",
+    date: "Issued Aug 2024",
+    category: "education",
+    description: "Demonstrated capacity to plan, configure, deploy, and secure cloud solutions, with active administration of GCP projects.",
+    skills: ["GCP Platform", "Kubernetes (GKE)", "IAM Roles", "Stackdriver"],
+    color: "#4285F4" // Blue
+  },
+  {
+    id: "deep-learning",
+    year: "2024",
+    title: "Deep Learning Specialization",
+    organization: "DeepLearning.AI (via Coursera)",
+    date: "Issued Jun 2024",
+    category: "education",
+    description: "Completed a 5-course specialization covering fundamental deep learning concepts, neural networks, convolutional networks (CV), and NLP.",
+    skills: ["Neural Networks", "TensorFlow", "Computer Vision", "NLP"],
+    color: "#8B5CF6" // Purple
+  },
+  {
+    id: "ieee-secretary",
+    year: "2024",
+    title: "IEEE Student Branch – Secretary & Committee Member",
+    organization: "IEEE University of Moratuwa Student Branch",
+    date: "2024 - Present",
+    category: "volunteer",
+    description: "Driving administrative operations, coordinating volunteers, and spearheading major university student activities and technical workshops.",
+    skills: ["Operations Management", "Strategic Planning", "Volunteer Leadership"],
+    color: "#4285F4" // Blue
+  },
+  {
+    id: "memberships-2023",
+    year: "2023",
+    title: "IEEE & ACM Student Member",
+    organization: "IEEE & ACM Societies",
+    date: "2023 - Present",
+    category: "volunteer",
+    description: "Active member in the world's largest professional technical organizations, participating in research, standard publications, and local workshops.",
+    skills: ["Global Networking", "Research Publications", "Computer Architecture"],
+    color: "#34A853" // Green
+  },
+  {
+    id: "national-hackathons",
+    year: "2023",
+    title: "National Hackathons – Top 10 Finisher",
+    organization: "Various (HackX, Mora Extreme)",
+    date: "2023 - 2024",
+    category: "achievements",
+    description: "Designed, engineered, and presented novel products in 24-hour hackathons, qualifying in the top tiers nationally.",
+    skills: ["Rapid Prototyping", "Pitching & Presentation", "Product Design"],
+    color: "#EA4335" // Red
+  },
+  {
+    id: "civicpulse",
+    year: "2023",
+    title: "Lead Volunteer & Full Stack Developer - CivicPulse",
+    organization: "University of Moratuwa",
+    date: "2023",
+    category: "volunteer",
+    description: "Led a software volunteer team to develop and launch CivicPulse, a web platform tracking and visualizing public civic benchmarks.",
+    skills: ["Full Stack Development", "Civic Technology", "Agile Management"],
+    color: "#34A853" // Green
+  },
+  {
+    id: "uni-entrance",
+    year: "2023",
+    title: "Entered University of Moratuwa (BSc Hons)",
+    organization: "University of Moratuwa",
+    date: "2023",
+    category: "education",
+    description: "Commenced undergraduate studies in Computer Science at the University of Moratuwa, Sri Lanka's leading engineering institution.",
+    skills: ["Computer Science", "Algorithms", "Mathematics"],
+    color: "#4285F4" // Blue
+  }
+];
+
+// Slice dataset depending on page state
+const displayedMilestones = limit ? milestones.slice(0, limit) : (isHomePage ? milestones.slice(0, 8) : milestones);
+---
+
+<div class="w-full relative overflow-hidden py-16 font-body border-t border-gray-150/40 bg-[#FAFAFC]">
+  <!-- Background magic water droplets -->
+  <div class="absolute top-10 left-5 w-60 h-60 rounded-full bg-blue-400/18 blur-3xl animate-float-bubble-1 pointer-events-none"></div>
+  <div class="absolute bottom-10 right-5 w-72 h-72 rounded-full bg-emerald-400/15 blur-3xl animate-float-bubble-2 pointer-events-none"></div>
+  <div class="absolute top-1/3 left-1/4 w-44 h-44 rounded-full bg-amber-400/10 blur-3xl animate-float-bubble-3 pointer-events-none"></div>
+  <div class="absolute bottom-1/3 right-1/4 w-48 h-48 rounded-full bg-purple-400/10 blur-3xl animate-float-bubble-2 pointer-events-none"></div>
+
+  <!-- Hero Section -->
+  <section class="max-w-7xl mx-auto px-6 mb-16 relative z-20">
+    <div class={`flex flex-col md:flex-row md:items-start justify-between gap-8 pb-10 border-b border-white/20 ${isHomePage ? 'md:flex-row-reverse text-right' : ''}`}>
+      <!-- Left/Right: Sleek, large heading & descriptive subtext -->
+      <div class={`max-w-3xl ${isHomePage ? 'md:text-right' : ''}`}>
+        <span class="text-xs font-semibold text-[#4285F4] uppercase tracking-widest block mb-3 font-san">
+          {isHomePage ? "Interactive Journey" : "Visual Journey"}
+        </span>
+        {isHomePage ? (
+          <h2 class="font-san text-4xl sm:text-5xl font-normal text-gray-900 tracking-tight leading-tight mb-4">
+            Interactive Timeline Tree
+          </h2>
+        ) : (
+          <h1 class="font-san text-4xl sm:text-5xl font-normal text-gray-900 tracking-tight leading-tight mb-4">
+            Interactive Timeline Tree
+          </h1>
+        )}
+        <p class="text-base sm:text-lg text-gray-505 leading-relaxed font-light">
+          A linear progression tracking my academic milestones, developer community leadership, and volunteering contributions over the years.
+        </p>
+      </div>
+      <!-- Right: Pill button (only on dedicated timeline page) -->
+      {!isHomePage && (
+        <div class="flex-shrink-0 mt-4 md:mt-2">
+          <a
+            href="/"
+            class="inline-flex items-center gap-2 bg-white/20 hover:bg-white/35 text-gray-900 hover:text-black px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 hover:-translate-y-0.5 font-san border border-white/30 hover:border-white/50 shadow-sm backdrop-blur-md"
+            id="back-home-button"
+          >
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+               <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Return to Home
+          </a>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Interactive Category Filter Tabs (Only on full timeline page) -->
+  {!isHomePage && (
+    <section class="max-w-7xl mx-auto px-6 mb-16 relative z-20">
+      <div class="flex flex-wrap gap-2.5 md:gap-3.5" id="filter-tabs-container">
+        {categories.map((cat, idx) => (
+          <button
+            data-filter={cat.id}
+            class={`filter-tab px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium border transition-all duration-300 cursor-pointer font-san ${
+              idx === 0
+                ? "bg-white/40 text-black border-white/50 shadow-sm backdrop-blur-md active-all"
+                : "bg-white/10 text-gray-700 border-white/20 hover:bg-white/30 hover:border-white/40 hover:text-black shadow-sm backdrop-blur-md"
+            }`}
+            id={`tab-btn-${cat.id}`}
+          >
+            {cat.name}
+          </button>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Timeline Tree Section -->
+  <section class="max-w-7xl mx-auto px-4 relative z-20">
+    <div class="relative py-12 w-full" id="timeline-tree-wrapper">
+      
+      <!-- Dynamic SVG Spine Canvas -->
+      <svg id="timeline-svg" class="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible">
+        <!-- Glow path -->
+        <path id="timeline-path-glow" fill="none" stroke="url(#spine-gradient)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" class="opacity-30 blur-md transition-all duration-300" />
+        <!-- Core path -->
+        <path id="timeline-path-core" fill="none" stroke="url(#spine-gradient)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" class="transition-all duration-300" />
+        
+        <defs>
+          <linearGradient id="spine-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#4285F4" />
+            <stop offset="30%" stop-color="#8B5CF6" />
+            <stop offset="60%" stop-color="#34A853" />
+            <stop offset="85%" stop-color="#FBBC05" />
+            <stop offset="100%" stop-color="#EA4335" />
+          </linearGradient>
+        </defs>
+      </svg>
+      
+      <!-- Grid wrapper for the milestones -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-16 relative z-20" id="timeline-grid" style="display: grid;">
+        {displayedMilestones.map((item, idx) => (
+          <div 
+            data-category={item.category}
+            class="timeline-node-cell flex flex-row md:flex-col items-center gap-4 md:gap-0 w-full relative transition-all duration-300 animate-fade-in"
+            id={`node-${item.id}`}
+          >
+            <!-- Dot Container -->
+            <div class="flex justify-center z-20 relative">
+              <div 
+                class="node-dot w-6 h-6 rounded-full bg-white border-2 flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-125 cursor-default"
+                style={`border-color: ${item.color};`}
+                data-dot-id={item.id}
+              >
+                <div class="w-2.5 h-2.5 rounded-full" style={`background-color: ${item.color};`}></div>
+              </div>
+            </div>
+            
+            <!-- Connector Dashed Line (Desktop: vertical between dot and card; Mobile: horizontal) -->
+            <div class="hidden md:block w-px h-8 border-l border-dashed border-gray-300 my-2 pointer-events-none"></div>
+            <div class="block md:hidden h-px w-6 border-t border-dashed border-gray-300 mx-1 pointer-events-none"></div>
+            
+            <!-- Capsule Card -->
+            <div 
+              class="timeline-card relative text-left bg-white/20 backdrop-blur-xl rounded-[1.8rem] border border-white/45 p-5 flex flex-col justify-between transition-all duration-300 hover:shadow-lg hover:border-white/60 hover:bg-white/30 group shadow-sm overflow-hidden shadow-[inset_0_1px_2px_rgba(255,255,255,0.65),0_8px_32px_rgba(0,0,0,0.02)] flex-1 md:w-full select-none"
+              data-id={item.id}
+              data-category={item.category}
+            >
+              <!-- Accent bubble glow overlay -->
+              <div 
+                class="absolute -top-6 -left-6 w-16 h-16 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl pointer-events-none"
+                style={`background-color: ${item.color}25`}
+              ></div>
+              
+              <div class="relative z-10 flex flex-col justify-between h-full">
+                <div>
+                  <div class="flex items-center justify-between gap-1 mb-1.5">
+                    <span class="text-[9px] font-bold tracking-wider px-2.5 py-0.5 rounded-full" style={`background-color: ${item.color}15; color: ${item.color}; border: 1px solid ${item.color}25;`}>
+                      {item.year}
+                    </span>
+                  </div>
+                  <h4 class="font-san text-xs font-semibold text-gray-900 leading-tight line-clamp-2">
+                    {item.title}
+                  </h4>
+                  <div class="text-[10px] text-gray-500 truncate mt-1">
+                    {item.organization}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom navigation wrapper (Only on Home Page) -->
+  {isHomePage && (
+    <div class="flex justify-center mt-12 relative z-30">
+      <a
+        href="/timeline"
+        class="inline-flex items-center gap-2 bg-white/30 hover:bg-white/55 text-gray-900 hover:text-black px-8 py-3.5 rounded-full text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 border border-white/40 hover:border-white/60 shadow-md backdrop-blur-md cursor-pointer font-san group"
+      >
+        Explore Full Journey
+        <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
+    </div>
+  )}
+</div>
+
+<style>
+  /* Floating bubbles keyframe animations */
+  @keyframes float-bubble-1 {
+    0% { transform: translateY(0px) translateX(0px) scale(1); }
+    50% { transform: translateY(-40px) translateX(20px) scale(1.1); }
+    100% { transform: translateY(0px) translateX(0px) scale(1); }
+  }
+  @keyframes float-bubble-2 {
+    0% { transform: translateY(0px) translateX(0px) scale(1.05); }
+    50% { transform: translateY(-30px) translateX(-25px) scale(0.95); }
+    100% { transform: translateY(0px) translateX(0px) scale(1.05); }
+  }
+  @keyframes float-bubble-3 {
+    0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) translateX(15px) rotate(180deg); }
+    100% { transform: translateY(0px) translateX(0px) rotate(360deg); }
+  }
+  .animate-float-bubble-1 { animation: float-bubble-1 14s ease-in-out infinite; }
+  .animate-float-bubble-2 { animation: float-bubble-2 16s ease-in-out infinite; }
+  .animate-float-bubble-3 { animation: float-bubble-3 18s ease-in-out infinite; }
+
+  /* Flowing neon gradient animation on spines */
+  @keyframes spine-glow {
+    0% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: -100; }
+  }
+  
+  #timeline-path-core {
+    stroke-dasharray: 12, 6;
+    animation: spine-glow 15s linear infinite;
+  }
+  
+  #timeline-path-glow {
+    stroke-dasharray: 12, 6;
+    animation: spine-glow 15s linear infinite;
+  }
+
+  /* Node filtering animations & dimming states */
+  .timeline-node-cell {
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .timeline-node-cell.node-inactive {
+    opacity: 0.12;
+    transform: scale(0.92);
+    pointer-events: none;
+  }
+
+  /* Active states for glassmorphic tabs */
+  .filter-tab {
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .filter-tab.active-all {
+    background-color: rgba(255, 255, 255, 0.4);
+    color: #000000;
+    border-color: rgba(255, 255, 255, 0.65);
+    box-shadow: 0 4px 14px rgba(255, 255, 255, 0.15);
+  }
+  .filter-tab.active-tab-blue {
+    background-color: rgba(66, 133, 244, 0.12);
+    color: #1a73e8;
+    border-color: rgba(66, 133, 244, 0.35);
+    box-shadow: 0 4px 14px rgba(66, 133, 244, 0.12);
+  }
+  .filter-tab.active-tab-green {
+    background-color: rgba(52, 168, 83, 0.1);
+    color: #137333;
+    border-color: rgba(52, 168, 83, 0.3);
+    box-shadow: 0 4px 14px rgba(52, 168, 83, 0.1);
+  }
+  .filter-tab.active-tab-amber {
+    background-color: rgba(251, 188, 5, 0.1);
+    color: #b06000;
+    border-color: rgba(251, 188, 5, 0.35);
+    box-shadow: 0 4px 14px rgba(251, 188, 5, 0.1);
+    border-color: rgba(251, 188, 5, 0.4);
+    box-shadow: 0 4px 14px rgba(251, 188, 5, 0.15);
+  }
+  .filter-tab.active-tab-purple {
+    background-color: rgba(139, 92, 246, 0.12);
+    color: #7c3aed;
+    border-color: rgba(139, 92, 246, 0.35);
+    box-shadow: 0 4px 14px rgba(139, 92, 246, 0.12);
+  }
+</style>
+
+<script>
+  const initTimeline = () => {
+    const tabs = document.querySelectorAll(".filter-tab");
+    const grid = document.getElementById("timeline-grid");
+    const cells = document.querySelectorAll(".timeline-node-cell");
+
+    // SVG Spine Elements
+    const wrapper = document.getElementById("timeline-tree-wrapper");
+    const pathGlow = document.getElementById("timeline-path-glow");
+    const pathCore = document.getElementById("timeline-path-core");
+
+    if (!grid) return;
+
+    // --- 1. S-Shape / Snake DOM Ordering Logic ---
+    const reorderGrid = () => {
+      const items = Array.from(grid.children);
+      
+      // Calculate active column count from computed styles
+      const computedCols = window.getComputedStyle(grid).gridTemplateColumns.split(" ").length;
+      
+      items.forEach((item, index) => {
+        if (computedCols > 1) {
+          const row = Math.floor(index / computedCols);
+          const col = index % computedCols;
+          let visualOrder;
+          
+          if (row % 2 === 0) {
+            // Left-to-right rows
+            visualOrder = row * computedCols + col;
+          } else {
+            // Right-to-left rows (reversed S-curve)
+            visualOrder = row * computedCols + (computedCols - 1 - col);
+          }
+          (item as HTMLElement).style.order = String(visualOrder);
+        } else {
+          // Single column fallback (standard vertical stack)
+          (item as HTMLElement).style.order = String(index);
+        }
+      });
+    };
+
+    // --- 2. Bezier path spine Drawing Logic (Clean S-Curve Transition matching design) ---
+    const drawSpine = () => {
+      if (!wrapper || !pathGlow || !pathCore) return;
+
+      // Select active dots (those not hidden/inactive by tabs filters)
+      const activeDots = Array.from(document.querySelectorAll(".timeline-node-cell:not(.node-inactive) .node-dot"));
+      if (activeDots.length === 0) {
+        pathGlow.setAttribute("d", "");
+        pathCore.setAttribute("d", "");
+        return;
+      }
+
+      const wrapperRect = wrapper.getBoundingClientRect();
+
+      // Measure coordinates of dots centers
+      const points = activeDots.map(dot => {
+        const rect = dot.getBoundingClientRect();
+        const cell = dot.closest(".timeline-node-cell");
+        const cellIndex = Array.from(grid.children).indexOf(cell!);
+        return {
+          x: rect.left - wrapperRect.left + rect.width / 2,
+          y: rect.top - wrapperRect.top + rect.height / 2,
+          cellIndex: cellIndex
+        };
+      });
+
+      if (points.length === 1) {
+        const d = `M ${points[0].x} ${points[0].y}`;
+        pathGlow.setAttribute("d", d);
+        pathCore.setAttribute("d", d);
+        return;
+      }
+
+      const computedCols = window.getComputedStyle(grid).gridTemplateColumns.split(" ").length;
+
+      let d = `M ${points[0].x} ${points[0].y}`;
+
+      for (let i = 0; i < points.length - 1; i++) {
+        const p1 = points[i];
+        const p2 = points[i + 1];
+
+        if (computedCols === 1) {
+          // Straight vertical line on mobile
+          d += ` L ${p2.x} ${p2.y}`;
+        } else if (Math.abs(p1.y - p2.y) < 30) {
+          // Straight horizontal line in same row
+          d += ` L ${p2.x} ${p2.y}`;
+        } else {
+          // Diagonal/vertical transition between rows (clean S-bend)
+          const row = Math.floor(p1.cellIndex / computedCols);
+          const isEvenRow = (row % 2 === 0);
+          const dir = isEvenRow ? 1 : -1;
+
+          // Offset control points: horizontal tangent at start row, vertical tangent at end row
+          const offset = Math.min(100, Math.abs(p2.x - p1.x) * 0.5 || 80);
+
+          const cp1x = p1.x + dir * offset;
+          const cp1y = p1.y;
+          const cp2x = p2.x;
+          const cp2y = p2.y - offset;
+
+          d += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p2.x} ${p2.y}`;
+        }
+      }
+
+      pathGlow.setAttribute("d", d);
+      pathCore.setAttribute("d", d);
+    };
+
+    // Initial setup and resize triggers
+    const refreshTimeline = () => {
+      reorderGrid();
+      // Wait a tick for DOM reflow to compute accurate positions
+      setTimeout(drawSpine, 50);
+    };
+
+    window.addEventListener("resize", refreshTimeline);
+    refreshTimeline();
+
+    // --- 3. Filtering Tab click interactions ---
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const filterValue = tab.getAttribute("data-filter");
+
+        tabs.forEach((t) => {
+          t.className = "filter-tab px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium border border-white/20 bg-white/10 text-gray-700 hover:bg-white/30 hover:border-white/40 hover:text-black shadow-sm backdrop-blur-md transition-all duration-300 cursor-pointer font-san";
+        });
+
+        if (filterValue === "all") {
+          tab.classList.add("active-all");
+          tab.classList.remove("bg-white/10", "text-gray-700", "border-white/20");
+        } else if (filterValue === "education") {
+          tab.classList.add("active-tab-blue");
+          tab.classList.remove("bg-white/10", "text-gray-700", "border-white/20");
+        } else if (filterValue === "volunteer") {
+          tab.classList.add("active-tab-green");
+          tab.classList.remove("bg-white/10", "text-gray-700", "border-white/20");
+        } else if (filterValue === "achievements") {
+          tab.classList.add("active-tab-amber");
+          tab.classList.remove("bg-white/10", "text-gray-700", "border-white/20");
+        }
+
+        // Add/remove inactive classes to trigger smooth fade filter
+        cells.forEach((cell) => {
+          const cellCategory = cell.getAttribute("data-category");
+          if (filterValue === "all" || cellCategory === filterValue) {
+            cell.classList.remove("node-inactive");
+          } else {
+            cell.classList.add("node-inactive");
+          }
+        });
+
+        // Trigger spine redraw to adapt smoothly to filtered active nodes
+        setTimeout(drawSpine, 200);
+      });
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initTimeline);
+  } else {
+    initTimeline();
+  }
+</script>

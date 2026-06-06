@@ -7,12 +7,12 @@ const description = "A showcase of professional certifications, technical creden
 
 // Categories list
 const categories = [
-  { id: "all", name: "All Credentials" },
-  { id: "cs-engineering", name: "CS & Engineering" },
-  { id: "cloud", name: "Cloud" },
-  { id: "leadership-impact", name: "Leadership & Impact" },
-  { id: "memberships", name: "Professional Memberships" },
-  { id: "extracurricular", name: "Extracurricular" }
+  { id: "all", name: "All Credentials", colorClass: "active-all" },
+  { id: "cs-engineering", name: "CS & Engineering", colorClass: "active-tab-blue" },
+  { id: "cloud", name: "Cloud", colorClass: "active-tab-purple" },
+  { id: "leadership-impact", name: "Leadership & Impact", colorClass: "active-tab-amber" },
+  { id: "memberships", name: "Professional Memberships", colorClass: "active-tab-green" },
+  { id: "extracurricular", name: "Extracurricular", colorClass: "active-tab-red" }
 ];
 
 // Curated certifications/credentials list
@@ -174,31 +174,37 @@ const certifications = [
 
 // SVG fallback emblem for credentials with no image proof
 const emblemBadge = `
-  <div class="flex flex-col items-center justify-center text-center p-6 bg-white rounded-2xl border border-gray-150 shadow-sm max-w-[280px]">
-    <div class="p-5 bg-blue-50/50 text-blue-600 rounded-full mb-4">
+  <div class="flex flex-col items-center justify-center text-center p-6 bg-white/40 border border-white/50 backdrop-blur-md rounded-[2.2rem] shadow-sm max-w-[280px]">
+    <div class="p-5 bg-blue-500/10 text-blue-600 rounded-full mb-4">
       <svg class="w-16 h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
       </svg>
     </div>
-    <h3 class="font-heading font-medium text-gray-900 text-base mb-1">Official Credential</h3>
-    <p class="text-xs text-gray-400 font-medium uppercase tracking-wider mb-2">Not Applicable</p>
-    <p class="text-[11px] text-gray-500 leading-normal">This membership or achievement has been officially logged and verified on the organization's member portal.</p>
+    <h3 class="font-san font-medium text-gray-900 text-base mb-1">Official Credential</h3>
+    <p class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-2">Not Applicable</p>
+    <p class="text-[11px] text-gray-650 leading-normal">This membership or achievement has been officially logged and verified on the organization's member portal.</p>
   </div>
 `;
 ---
 
 <Layout title={title}>
-  <main class="w-full min-h-screen bg-white pt-12 pb-24 font-body">
+  <main class="w-full min-h-screen bg-[#FAFAFC] relative overflow-hidden pt-12 pb-24 font-body">
+    <!-- Interactive Background "Water Bubble Magic" droplets for liquid refraction -->
+    <div class="absolute top-10 left-5 w-60 h-60 rounded-full bg-blue-400/18 blur-3xl animate-float-bubble-1 pointer-events-none"></div>
+    <div class="absolute bottom-10 right-5 w-72 h-72 rounded-full bg-emerald-400/15 blur-3xl animate-float-bubble-2 pointer-events-none"></div>
+    <div class="absolute top-1/3 left-1/4 w-44 h-44 rounded-full bg-amber-400/10 blur-3xl animate-float-bubble-3 pointer-events-none"></div>
+    <div class="absolute bottom-1/3 right-1/4 w-48 h-48 rounded-full bg-purple-400/10 blur-3xl animate-float-bubble-2 pointer-events-none"></div>
+
     <!-- Hero Section -->
-    <section class="max-w-7xl mx-auto px-6 mb-16">
-      <div class="flex flex-col md:flex-row md:items-start justify-between gap-8 pb-10 border-b border-gray-200">
+    <section class="max-w-7xl mx-auto px-6 mb-16 relative z-20">
+      <div class="flex flex-col md:flex-row md:items-start justify-between gap-8 pb-10 border-b border-white/20">
         <!-- Left: Sleek, large heading & descriptive subtext -->
         <div class="max-w-3xl">
-          <span class="text-xs font-semibold text-blue-600 uppercase tracking-widest block mb-3">Achievements</span>
-          <h1 class="font-heading text-4xl sm:text-5xl font-normal text-gray-900 tracking-tight leading-tight mb-4">
+          <span class="text-xs font-semibold text-[#4285F4] uppercase tracking-widest block mb-3 font-san">Achievements</span>
+          <h1 class="font-san text-4xl sm:text-5xl font-normal text-gray-900 tracking-tight leading-tight mb-4">
             Professional Credentials & Certifications
           </h1>
-          <p class="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">
+          <p class="text-base sm:text-lg text-gray-505 leading-relaxed font-light">
             A curated summary of technical certifications, leadership roles, professional memberships, and extracurricular achievements verifying my expertise and community involvement.
           </p>
         </div>
@@ -206,9 +212,12 @@ const emblemBadge = `
         <div class="flex-shrink-0 mt-4 md:mt-2">
           <a
             href="/"
-            class="inline-block bg-[#F1F3F4] text-gray-900 hover:bg-gray-200 px-6 py-3 rounded-full text-sm font-medium transition-all duration-200 hover:-translate-y-0.5"
+            class="inline-flex items-center gap-2 bg-white/20 hover:bg-white/35 text-gray-900 hover:text-black px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 hover:-translate-y-0.5 font-san border border-white/30 hover:border-white/50 shadow-sm backdrop-blur-md"
             id="back-home-button"
           >
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+               <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
             Return to Home
           </a>
         </div>
@@ -216,15 +225,15 @@ const emblemBadge = `
     </section>
 
     <!-- Interactive Category Filter Tabs -->
-    <section class="max-w-7xl mx-auto px-6 mb-12">
-      <div class="flex flex-wrap gap-2 md:gap-3" id="filter-tabs-container">
+    <section class="max-w-7xl mx-auto px-6 mb-12 relative z-20">
+      <div class="flex flex-wrap gap-2.5 md:gap-3.5" id="filter-tabs-container">
         {categories.map((cat, idx) => (
           <button
             data-filter={cat.id}
-            class={`filter-tab px-5 py-2.5 rounded-full text-sm font-medium border transition-all duration-200 cursor-pointer ${
+            class={`filter-tab px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium border transition-all duration-300 cursor-pointer font-san ${
               idx === 0
-                ? "bg-[#0F0F10] text-white border-[#0F0F10]"
-                : "bg-white text-gray-600 border-gray-200 hover:bg-gray-50 hover:text-black"
+                ? "bg-white/40 text-black border-white/50 shadow-sm backdrop-blur-md active-all"
+                : "bg-white/10 text-gray-700 border-white/20 hover:bg-white/30 hover:border-white/40 hover:text-black shadow-sm backdrop-blur-md"
             }`}
             id={`tab-btn-${cat.id}`}
           >
@@ -235,17 +244,29 @@ const emblemBadge = `
     </section>
 
     <!-- Certifications Grid -->
-    <section class="max-w-7xl mx-auto px-6">
+    <section class="max-w-7xl mx-auto px-6 relative z-20">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 transition-all duration-300" id="certs-grid">
         {certifications.map((cert, idx) => (
           <div
             data-category={cert.category}
             data-index={idx}
-            class="cert-card relative bg-[#F8F9FA] rounded-2xl border border-gray-150 p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-lg hover:border-gray-250 hover:-translate-y-1 cursor-pointer group"
+            class="cert-card relative bg-white/20 backdrop-blur-xl rounded-[2.2rem] border border-white/45 p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-lg hover:border-white/60 hover:-translate-y-1 hover:bg-white/30 group shadow-sm overflow-hidden shadow-[inset_0_1px_2px_rgba(255,255,255,0.65),0_8px_32px_rgba(0,0,0,0.02)] cursor-pointer"
             id={`cert-card-${idx}`}
           >
+            <!-- Accent bubble glow overlay -->
+            <div 
+              class="absolute -top-10 -left-10 w-24 h-24 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl pointer-events-none"
+              style={`background-color: ${
+                cert.category === "cs-engineering" ? "#4285F4" :
+                cert.category === "cloud" ? "#8B5CF6" :
+                cert.category === "leadership-impact" ? "#FBBC05" :
+                cert.category === "memberships" ? "#34A853" :
+                cert.category === "extracurricular" ? "#EA4335" : "#4285F4"
+              }25`}
+            ></div>
+
             <!-- Hover Arrow indicator -->
-            <span class="absolute top-6 right-6 text-gray-300 group-hover:text-gray-900 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none">
+            <span class="absolute top-6 right-6 text-gray-400 group-hover:text-gray-900 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none z-10">
               <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
@@ -253,8 +274,8 @@ const emblemBadge = `
 
             <div>
               <!-- Issuer Logo (Google/Harvard/etc.) in Top Header -->
-              <div class="mb-6 flex items-center justify-between">
-                <span class="w-12 h-12 flex items-center justify-start issuer-logo-wrapper overflow-hidden">
+              <div class="mb-6 flex items-center justify-between relative z-10">
+                <span class="w-12 h-12 flex items-center justify-center bg-white/50 border border-white/50 backdrop-blur-md rounded-2xl shadow-sm p-1.5 flex-shrink-0 transition-all duration-300 group-hover:rounded-[1.1rem] issuer-logo-wrapper overflow-hidden">
                   <img
                     src={`/certificates/Issuer_Logos/${cert.issuerLogo}`}
                     alt={`${cert.issuer} Logo`}
@@ -263,7 +284,7 @@ const emblemBadge = `
                   />
                 </span>
                 
-                <span class="text-xs font-semibold text-gray-400 uppercase tracking-widest mr-8">
+                <span class="text-xs font-semibold text-gray-500 uppercase tracking-widest mr-8">
                   {cert.category === "cs-engineering" && "Tech & CS"}
                   {cert.category === "cloud" && "Cloud"}
                   {cert.category === "leadership-impact" && "Leadership"}
@@ -273,26 +294,26 @@ const emblemBadge = `
               </div>
 
               <!-- Title & Organization -->
-              <h3 class="font-heading text-xl font-medium text-gray-900 leading-snug mb-2">
+              <h3 class="font-san text-xl font-medium text-gray-900 leading-snug mb-2 relative z-10">
                 {cert.title}
               </h3>
               
-              <div class="flex items-wrap items-center gap-2 mb-4">
+              <div class="flex items-wrap items-center gap-2 mb-4 relative z-10">
                 <span class="text-sm font-semibold text-gray-700">{cert.issuer}</span>
                 <span class="text-xs text-gray-400 font-bold">•</span>
                 <span class="text-xs font-medium text-gray-500">{cert.date}</span>
               </div>
 
               <!-- Description -->
-              <p class="text-sm text-gray-650 leading-relaxed mb-6 font-light">
+              <p class="text-sm text-gray-650 leading-relaxed mb-6 font-light relative z-10">
                 {cert.description}
               </p>
 
               {/* Skills Tags */}
               {cert.skills && cert.skills.length > 0 && (
-                <div class="flex flex-wrap gap-1.5 mb-6">
+                <div class="flex flex-wrap gap-1.5 mb-6 relative z-10">
                   {cert.skills.map((skill) => (
-                    <span class="bg-white text-gray-700 border border-gray-150 text-[11px] px-2.5 py-0.5 rounded-full font-medium shadow-sm">
+                    <span class="bg-white/40 text-gray-755 border border-white/50 text-[11px] px-2.5 py-0.5 rounded-full font-medium shadow-sm backdrop-blur-sm">
                       {skill}
                     </span>
                   ))}
@@ -301,9 +322,9 @@ const emblemBadge = `
             </div>
 
             <!-- Bottom Section (Verification / ID) -->
-            <div class="pt-4 border-t border-gray-150 flex items-center justify-between mt-auto">
+            <div class="pt-4 border-t border-white/20 flex items-center justify-between mt-auto relative z-10">
               {cert.credentialId ? (
-                <span class="text-xs font-mono text-gray-400">
+                <span class="text-xs font-mono text-gray-500">
                   {cert.credentialId}
                 </span>
               ) : (
@@ -327,17 +348,17 @@ const emblemBadge = `
     <!-- Detailed Modal Panel Overlay (Horizontal Split "Small Tab" Design) -->
     <div
       id="cert-modal-backdrop"
-      class="fixed inset-0 bg-black/40 backdrop-blur-md z-50 flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300"
+      class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300"
     >
       <!-- Modal Box: Details left, Cert image right -->
       <div
         id="cert-modal-box"
-        class="relative w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-2xl transform scale-95 opacity-0 transition-all duration-300 grid grid-cols-1 md:grid-cols-12 min-h-[400px] md:min-h-[500px]"
+        class="relative w-full max-w-4xl bg-white/80 backdrop-blur-2xl rounded-3xl overflow-hidden shadow-2xl transform scale-95 opacity-0 transition-all duration-300 grid grid-cols-1 md:grid-cols-12 min-h-[400px] md:min-h-[500px] border border-white/40"
       >
         <!-- Close button inside the modal box -->
         <button
           id="cert-modal-close"
-          class="absolute top-5 right-5 z-10 w-10 h-10 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-full flex items-center justify-center transition-colors cursor-pointer"
+          class="absolute top-5 right-5 z-10 w-10 h-10 bg-white/20 hover:bg-white/45 text-gray-800 rounded-full flex items-center justify-center transition-colors cursor-pointer border border-white/30 backdrop-blur-sm"
           aria-label="Close panel"
         >
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -346,11 +367,11 @@ const emblemBadge = `
         </button>
 
         <!-- Left Column: Details (7 cols out of 12) -->
-        <div class="col-span-12 md:col-span-7 p-8 md:p-10 flex flex-col justify-between">
+        <div class="col-span-12 md:col-span-7 p-8 md:p-10 flex flex-col justify-between relative z-10">
           <div>
             <!-- Issuer Logo Header -->
             <div class="flex items-center justify-between mb-6">
-              <div id="modal-logo-container" class="w-12 h-12 flex items-center justify-start overflow-hidden">
+              <div id="modal-logo-container" class="w-12 h-12 flex items-center justify-center bg-white/50 border border-white/50 backdrop-blur-md rounded-2xl shadow-sm p-1.5 overflow-hidden">
                 <!-- Dynamic img logo cloned here -->
               </div>
               <span id="modal-category-badge" class="text-xs font-semibold text-blue-600 uppercase tracking-widest mr-8">
@@ -359,25 +380,25 @@ const emblemBadge = `
             </div>
 
             <!-- Title -->
-            <h2 id="modal-title" class="font-heading text-2xl md:text-3xl font-medium text-gray-900 leading-snug mb-3">
+            <h2 id="modal-title" class="font-san text-2xl md:text-3xl font-medium text-gray-900 leading-snug mb-3">
               <!-- Title injected here -->
             </h2>
 
             <!-- Issuer & Date info -->
-            <div class="flex items-center gap-2.5 mb-6 text-sm text-gray-650 font-normal">
+            <div class="flex items-center gap-2.5 mb-6 text-sm text-gray-655 font-normal">
               <span id="modal-issuer" class="font-semibold text-gray-800"></span>
               <span class="text-gray-400 font-bold">•</span>
               <span id="modal-date" class="font-medium text-gray-500"></span>
             </div>
 
             <!-- Description -->
-            <p id="modal-description" class="text-sm md:text-base text-gray-650 leading-relaxed font-light mb-8">
+            <p id="modal-description" class="text-sm md:text-base text-gray-655 leading-relaxed font-light mb-8">
               <!-- Description injected here -->
             </p>
 
             <!-- Skills list tags -->
             <div class="mb-8">
-              <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Skills & Technologies</h4>
+              <h4 class="text-xs font-semibold text-gray-450 uppercase tracking-wider mb-3">Skills & Technologies</h4>
               <div id="modal-skills-container" class="flex flex-wrap gap-2">
                 <!-- Skills badges dynamically injected -->
               </div>
@@ -385,10 +406,10 @@ const emblemBadge = `
           </div>
 
           <!-- Footer section with credential ID & link -->
-          <div class="pt-6 border-t border-gray-150 flex items-center justify-between mt-auto">
+          <div class="pt-6 border-t border-white/20 flex items-center justify-between mt-auto">
             <div>
               <span class="block text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-0.5">Credential ID</span>
-              <span id="modal-credential-id" class="text-xs font-mono text-gray-600 font-medium"></span>
+              <span id="modal-credential-id" class="text-xs font-mono text-gray-655 font-medium"></span>
             </div>
 
             <a
@@ -396,7 +417,7 @@ const emblemBadge = `
               href="#"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 bg-[#0F0F10] text-white hover:bg-gray-800 px-6 py-3 rounded-full text-xs font-semibold transition-all duration-200 shadow-sm"
+              class="inline-flex items-center gap-2 bg-white/20 hover:bg-white/35 text-gray-900 hover:text-black border border-white/30 hover:border-white/50 px-6 py-3 rounded-full text-xs font-semibold transition-all duration-200 shadow-sm backdrop-blur-md"
             >
               Verify Credential
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -407,7 +428,7 @@ const emblemBadge = `
         </div>
 
         <!-- Right Column: Proof Image (5 cols out of 12) -->
-        <div id="modal-proof-column" class="col-span-12 md:col-span-5 bg-gray-50 border-t md:border-t-0 md:border-l border-gray-100 flex items-center justify-center p-6 md:p-8 min-h-[300px] md:min-h-0">
+        <div id="modal-proof-column" class="col-span-12 md:col-span-5 bg-white/40 backdrop-blur-md border-t md:border-t-0 md:border-l border-white/20 flex items-center justify-center p-6 md:p-8 min-h-[300px] md:min-h-0">
           <!-- Container for Certificate Image or Emblem Badge -->
           <div id="modal-proof-container" class="w-full h-full flex items-center justify-center">
             <!-- Dynamic Proof content injected here -->
@@ -420,13 +441,84 @@ const emblemBadge = `
 </Layout>
 
 <style>
-  /* Custom micro-animations for card filter transitions */
-  .cert-card {
-    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+  /* Floating bubbles keyframe animations */
+  @keyframes float-bubble-1 {
+    0% { transform: translateY(0px) translateX(0px) scale(1); }
+    50% { transform: translateY(-40px) translateX(20px) scale(1.1); }
+    100% { transform: translateY(0px) translateX(0px) scale(1); }
   }
-  .cert-card.opacity-0 {
+  @keyframes float-bubble-2 {
+    0% { transform: translateY(0px) translateX(0px) scale(1.05); }
+    50% { transform: translateY(-30px) translateX(-25px) scale(0.95); }
+    100% { transform: translateY(0px) translateX(0px) scale(1.05); }
+  }
+  @keyframes float-bubble-3 {
+    0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) translateX(15px) rotate(180deg); }
+    100% { transform: translateY(0px) translateX(0px) rotate(360deg); }
+  }
+  .animate-float-bubble-1 { animation: float-bubble-1 14s ease-in-out infinite; }
+  .animate-float-bubble-2 { animation: float-bubble-2 16s ease-in-out infinite; }
+  .animate-float-bubble-3 { animation: float-bubble-3 18s ease-in-out infinite; }
+
+  /* Smooth card state configurations */
+  .cert-card {
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+  }
+  .cert-card.card-filtered-out {
     opacity: 0;
-    transform: scale(0.95) translateY(10px);
+    transform: scale(0.96) translateY(12px);
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    overflow: hidden;
+  }
+
+  /* Active states for glassmorphic tabs */
+  .filter-tab {
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .filter-tab.active-all {
+    background-color: rgba(255, 255, 255, 0.4);
+    color: #000000;
+    border-color: rgba(255, 255, 255, 0.65);
+    box-shadow: 0 4px 14px rgba(255, 255, 255, 0.15);
+  }
+  .filter-tab.active-tab-blue {
+    background-color: rgba(66, 133, 244, 0.12);
+    color: #1a73e8;
+    border-color: rgba(66, 133, 244, 0.35);
+    box-shadow: 0 4px 14px rgba(66, 133, 244, 0.12);
+  }
+  .filter-tab.active-tab-purple {
+    background-color: rgba(139, 92, 246, 0.12);
+    color: #7c3aed;
+    border-color: rgba(139, 92, 246, 0.35);
+    box-shadow: 0 4px 14px rgba(139, 92, 246, 0.12);
+  }
+  .filter-tab.active-tab-green {
+    background-color: rgba(52, 168, 83, 0.1);
+    color: #137333;
+    border-color: rgba(52, 168, 83, 0.3);
+    box-shadow: 0 4px 14px rgba(52, 168, 83, 0.1);
+  }
+  .filter-tab.active-tab-amber {
+    background-color: rgba(251, 188, 5, 0.1);
+    color: #b06000;
+    border-color: rgba(251, 188, 5, 0.35);
+    box-shadow: 0 4px 14px rgba(251, 188, 5, 0.1);
+    border-color: rgba(251, 188, 5, 0.4);
+    box-shadow: 0 4px 14px rgba(251, 188, 5, 0.15);
+  }
+  .filter-tab.active-tab-red {
+    background-color: rgba(234, 67, 53, 0.2);
+    color: #c5221f;
+    border-color: rgba(234, 67, 53, 0.4);
+    box-shadow: 0 4px 14px rgba(234, 67, 53, 0.15);
   }
 </style>
 
@@ -465,37 +557,46 @@ const emblemBadge = `
       tab.addEventListener("click", () => {
         const filterValue = tab.getAttribute("data-filter");
 
-        // Update active states on tab buttons
+        // Clear active styles (Glass tabs format)
         tabs.forEach((t) => {
-          if (t === tab) {
-            t.classList.remove("bg-white", "text-gray-650", "border-gray-200", "hover:bg-gray-50", "hover:text-black");
-            t.classList.add("bg-[#0F0F10]", "text-white", "border-[#0F0F10]");
-          } else {
-            t.classList.add("bg-white", "text-gray-650", "border-gray-200", "hover:bg-gray-50", "hover:text-black");
-            t.classList.remove("bg-[#0F0F10]", "text-white", "border-[#0F0F10]");
-          }
+          t.className = "filter-tab px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium border border-white/20 bg-white/10 text-gray-700 hover:bg-white/30 hover:border-white/40 hover:text-black shadow-sm backdrop-blur-md transition-all duration-300 cursor-pointer font-sans";
         });
+
+        // Add correct color classes
+        if (filterValue === "all") {
+          tab.classList.add("active-all");
+          tab.classList.remove("bg-white/10", "text-gray-700", "border-white/20");
+        } else if (filterValue === "cs-engineering") {
+          tab.classList.add("active-tab-blue");
+          tab.classList.remove("bg-white/10", "text-gray-700", "border-white/20");
+        } else if (filterValue === "cloud") {
+          tab.classList.add("active-tab-purple");
+          tab.classList.remove("bg-white/10", "text-gray-700", "border-white/20");
+        } else if (filterValue === "leadership-impact") {
+          tab.classList.add("active-tab-amber");
+          tab.classList.remove("bg-white/10", "text-gray-700", "border-white/20");
+        } else if (filterValue === "memberships") {
+          tab.classList.add("active-tab-green");
+          tab.classList.remove("bg-white/10", "text-gray-700", "border-white/20");
+        } else if (filterValue === "extracurricular") {
+          tab.classList.add("active-tab-red");
+          tab.classList.remove("bg-white/10", "text-gray-700", "border-white/20");
+        }
 
         // Filter cards
         cards.forEach((card) => {
           const cardCategory = card.getAttribute("data-category");
           
           if (filterValue === "all" || cardCategory === filterValue) {
+            card.classList.remove("card-filtered-out");
             card.style.display = "flex";
-            void card.offsetHeight;
-            card.classList.remove("opacity-0", "scale-95", "hidden");
-            card.classList.add("opacity-100", "scale-100");
           } else {
-            card.classList.remove("opacity-100", "scale-100");
-            card.classList.add("opacity-0", "scale-95");
-            
-            const onTransitionEnd = (e) => {
-              if (e.propertyName === "opacity" && card.classList.contains("opacity-0")) {
+            card.classList.add("card-filtered-out");
+            setTimeout(() => {
+              if (card.classList.contains("card-filtered-out")) {
                 card.style.display = "none";
-                card.removeEventListener("transitionend", onTransitionEnd);
               }
-            };
-            card.addEventListener("transitionend", onTransitionEnd);
+            }, 300);
           }
         });
       });
@@ -529,9 +630,9 @@ const emblemBadge = `
         const cert = certifications[index];
 
         // Clone the logo from the card directly to the modal
-        const logoWrapper = card.querySelector(".issuer-logo-wrapper");
+        const logoWrapper = card.querySelector(".issuer-logo-wrapper img");
         if (logoWrapper && modalLogo) {
-          modalLogo.innerHTML = logoWrapper.innerHTML;
+          modalLogo.innerHTML = `<img src="${logoWrapper.getAttribute('src')}" alt="${logoWrapper.getAttribute('alt')}" class="w-full h-full object-contain" />`;
         }
 
         // Set text content
@@ -547,7 +648,7 @@ const emblemBadge = `
           if (cert.skills && cert.skills.length > 0) {
             cert.skills.forEach(skill => {
               const span = document.createElement("span");
-              span.className = "bg-gray-100 text-gray-700 border border-gray-150 text-[11px] px-2.5 py-0.5 rounded-full font-medium shadow-sm";
+              span.className = "bg-white/40 text-gray-750 border border-white/50 text-[11px] px-2.5 py-0.5 rounded-full font-medium shadow-sm backdrop-blur-sm";
               span.textContent = skill;
               modalSkills.appendChild(span);
             });
@@ -573,7 +674,7 @@ const emblemBadge = `
         if (modalProofContainer) {
           if (cert.proofImage) {
             modalProofContainer.innerHTML = `
-              <div class="relative w-full h-full flex items-center justify-center max-h-[300px] md:max-h-[380px] rounded-2xl overflow-hidden border border-gray-200 shadow-sm bg-gray-100 p-3">
+              <div class="relative w-full h-full flex items-center justify-center max-h-[300px] md:max-h-[380px] rounded-2xl overflow-hidden border border-white/30 bg-white/40 shadow-sm p-3 backdrop-blur-sm shadow-[inset_0_1px_2px_rgba(255,255,255,0.7)]">
                 <img 
                   src="${cert.proofImage}" 
                   alt="${cert.title} Proof" 

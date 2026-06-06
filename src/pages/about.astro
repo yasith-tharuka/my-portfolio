@@ -1,0 +1,413 @@
+---
+// src/pages/about.astro
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
+
+const title = "About Me | Yasith Tharuka";
+const description = "Explore my narrative, qualifications, download my curriculum vitae, and find direct touchpoints to collaborate.";
+
+const qualifications = {
+  minimum: [
+    { text: "Bachelor's degree in Computer Science or equivalent practical experience.", icon: "education" },
+    { text: "Experience in software development with Python, Java, C, and JavaScript.", icon: "code" },
+    { text: "Experience building full-stack web applications with React, Next.js, Node, and Astro.", icon: "web" }
+  ],
+  preferred: [
+    { text: "Active Cloud Administrator experience with Google Cloud Platform (GCP ACE Certified).", icon: "cloud" },
+    { text: "Solid foundation in Machine Learning, Deep Learning (Neural Networks, CV, NLP), and Scikit-learn.", icon: "brain" },
+    { text: "Demonstrated leadership record in active student tech communities (IEEE SB Secretary, GDG Organizer).", icon: "people" }
+  ]
+};
+
+const contacts = [
+  { name: "LinkedIn", url: "https://www.linkedin.com/in/yasith-tharuka/", icon: "linkedin", color: "#0077B5", bg: "hover:bg-[#0077B5]/10 hover:border-[#0077B5]/40 text-[#0077B5]" },
+  { name: "GitHub", url: "https://github.com/yasith-tharuka", icon: "github", color: "#24292e", bg: "hover:bg-[#24292e]/10 hover:border-[#24292e]/40 text-[#24292e]" },
+  { name: "Email", url: "mailto:yasiththaruka@outlook.com", icon: "email", color: "#EA4335", bg: "hover:bg-[#EA4335]/10 hover:border-[#EA4335]/40 text-[#EA4335]" },
+  { name: "Google Scholar", url: "https://scholar.google.com/citations?user=Sm5u3UAAAAAJ", icon: "scholar", color: "#4285F4", bg: "hover:bg-[#4285F4]/10 hover:border-[#4285F4]/40 text-[#4285F4]" },
+  { name: "Medium", url: "https://medium.com/@yasiththaruka", icon: "medium", color: "#12100e", bg: "hover:bg-[#12100e]/10 hover:border-[#12100e]/40 text-[#12100e]" },
+  { name: "ResearchGate", url: "https://www.researchgate.net/profile/Yasith-Tharuka-2", icon: "researchgate", color: "#00CCBB", bg: "hover:bg-[#00CCBB]/10 hover:border-[#00CCBB]/40 text-[#00CCBB]" },
+  { name: "ORCID", url: "https://orcid.org/0009-0007-7095-3201", icon: "orcid", color: "#A6CE39", bg: "hover:bg-[#A6CE39]/10 hover:border-[#A6CE39]/40 text-[#A6CE39]" }
+];
+---
+
+<Layout title={title}>
+  <main class="w-full min-h-screen bg-[#FAFAFC] relative overflow-hidden pt-12 pb-24 font-body">
+    <!-- Interactive Background Bubbles for Depth -->
+    <div class="absolute top-10 right-10 w-72 h-72 rounded-full bg-indigo-400/10 blur-3xl animate-float-bubble-1 pointer-events-none"></div>
+    <div class="absolute bottom-10 left-10 w-80 h-80 rounded-full bg-emerald-400/8 blur-3xl animate-float-bubble-2 pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/3 w-56 h-56 rounded-full bg-purple-400/8 blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto px-6 relative z-20">
+      
+      <!-- Custom Header with stable glass card and several small floating morphing liquid glass bubbles -->
+      <section class="pb-12 border-b border-gray-200/80 mb-16 relative">
+        <div class="relative w-full py-10 px-8 sm:px-12 text-center md:text-left overflow-hidden rounded-[2.2rem] bg-white/30 backdrop-blur-xl border border-white/50 shadow-[inset_0_2px_4px_rgba(255,255,255,0.75),0_8px_24px_rgba(0,0,0,0.03)]">
+          <!-- Ambient shadow glow layer -->
+          <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-emerald-500/5 blur-xl opacity-80 pointer-events-none"></div>
+          
+          <!-- Specular shine overlay for 3D glass look -->
+          <div class="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent pointer-events-none"></div>
+
+          <!-- Several small floating morphing liquid glass bubbles in background -->
+          <div class="absolute top-4 right-16 w-16 h-16 bg-gradient-to-br from-indigo-500/15 to-purple-500/10 border border-white/50 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.75),0_4px_12px_rgba(0,0,0,0.02)] animate-morph-liquid animate-float-bubble-1 opacity-75 pointer-events-none"></div>
+          <div class="absolute bottom-6 left-1/3 w-12 h-12 bg-gradient-to-br from-purple-500/15 to-emerald-500/10 border border-white/50 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.75),0_4px_12px_rgba(0,0,0,0.02)] animate-morph-liquid animate-float-bubble-2 opacity-65 pointer-events-none"></div>
+          <div class="absolute top-1/2 right-1/4 w-10 h-10 bg-gradient-to-br from-emerald-500/15 to-indigo-500/10 border border-white/50 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.75),0_4px_12px_rgba(0,0,0,0.02)] animate-morph-liquid animate-float-bubble-3 opacity-65 pointer-events-none"></div>
+          <div class="absolute top-6 left-16 w-8 h-8 bg-gradient-to-br from-blue-500/15 to-indigo-500/10 border border-white/50 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.75),0_4px_12px_rgba(0,0,0,0.02)] animate-morph-liquid animate-float-bubble-2 opacity-80 pointer-events-none"></div>
+          <div class="absolute top-1/3 left-1/4 w-14 h-14 bg-gradient-to-br from-amber-500/15 to-orange-500/10 border border-white/50 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.75),0_4px_12px_rgba(0,0,0,0.02)] animate-morph-liquid animate-float-bubble-1 opacity-70 pointer-events-none"></div>
+          <div class="absolute bottom-4 right-1/3 w-7 h-7 bg-gradient-to-br from-rose-500/15 to-pink-500/10 border border-white/50 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.75),0_4px_12px_rgba(0,0,0,0.02)] animate-morph-liquid animate-float-bubble-3 opacity-70 pointer-events-none"></div>
+          <div class="absolute top-8 right-1/2 w-11 h-11 bg-gradient-to-br from-teal-500/15 to-emerald-500/10 border border-white/50 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.75),0_4px_12px_rgba(0,0,0,0.02)] animate-morph-liquid animate-float-bubble-2 opacity-65 pointer-events-none"></div>
+          <div class="absolute bottom-8 right-8 w-9 h-9 bg-gradient-to-br from-cyan-500/15 to-blue-500/10 border border-white/50 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.75),0_4px_12px_rgba(0,0,0,0.02)] animate-morph-liquid animate-float-bubble-1 opacity-85 pointer-events-none"></div>
+
+          <!-- Content overlay -->
+          <div class="relative z-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-150/40 text-indigo-600 text-xs font-semibold uppercase tracking-wider mb-5 animate-fade-in">
+              <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
+              Curious Builder
+            </div>
+            <h1 class="font-san text-4xl sm:text-5xl font-normal text-gray-900 tracking-tight leading-tight mb-4">
+              Hi, I'm Yasith Tharuka.
+            </h1>
+            <p class="text-base sm:text-lg text-gray-500 leading-relaxed font-light max-w-3xl">
+              A Computer Science undergraduate bridging the gap between robust full-stack software architectures and scalable machine learning frameworks.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3 Sections Split Layout Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        
+        <!-- SECTION 1: ABOUT ME (Narrative & Qualifications) - Width: 7 Columns -->
+        <section class="lg:col-span-7 flex flex-col gap-8">
+          
+          <!-- Narrative Bio Card -->
+          <div class="liquid-about-card p-6 sm:p-8 relative">
+            <h2 class="font-san text-xl sm:text-2xl font-normal text-gray-900 mb-5 flex items-center gap-2">
+              <svg class="w-5.5 h-5.5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              My Story
+            </h2>
+            <p class="text-sm sm:text-base text-gray-650 leading-relaxed font-light text-justify">
+              I am a Computer Science undergraduate passionate about building high-fidelity software products and deploying deep learning solutions. From crafting responsive, pixel-perfect user interfaces to designing secure cloud environments, I thrive on solving complex technical challenges. Driven by community contributions and continuous learning, I share my journey actively through open-source projects and developer circles.
+            </p>
+          </div>
+
+          <!-- Qualifications Grid -->
+          <div class="liquid-about-card p-6 sm:p-8 relative">
+            <h2 class="font-san text-xl sm:text-2xl font-normal text-gray-900 mb-6 flex items-center gap-2">
+              <svg class="w-5.5 h-5.5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Core Dossier & Qualifications
+            </h2>
+
+            <div class="space-y-6">
+              <!-- Minimum Qualifications -->
+              <div>
+                <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest block mb-3.5">Academic & Software Core</span>
+                <ul class="space-y-3.5">
+                  {qualifications.minimum.map((q) => (
+                    <li class="flex items-start gap-3">
+                      <span class="w-5 h-5 rounded-full bg-blue-50/70 border border-blue-150/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-blue-500">
+                        {q.icon === 'education' ? (
+                          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                          </svg>
+                        ) : q.icon === 'code' ? (
+                          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                          </svg>
+                        ) : (
+                          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                          </svg>
+                        )}
+                      </span>
+                      <p class="text-xs sm:text-sm text-gray-650 font-light leading-relaxed">{q.text}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <!-- Preferred Qualifications -->
+              <div class="border-t border-gray-200/40 pt-5">
+                <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest block mb-3.5">Cloud & Community Leadership</span>
+                <ul class="space-y-3.5">
+                  {qualifications.preferred.map((q) => (
+                    <li class="flex items-start gap-3">
+                      <span class="w-5 h-5 rounded-full bg-emerald-50/70 border border-emerald-150/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-emerald-500">
+                        {q.icon === 'cloud' ? (
+                          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                          </svg>
+                        ) : q.icon === 'brain' ? (
+                          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                          </svg>
+                        ) : (
+                          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                          </svg>
+                        )}
+                      </span>
+                      <p class="text-xs sm:text-sm text-gray-650 font-light leading-relaxed">{q.text}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 2 & 3: DOWNLOAD CV & CONTACT INFO - Width: 5 Columns -->
+        <div class="lg:col-span-5 flex flex-col gap-8">
+          
+          <!-- SECTION 2: DOWNLOAD CV CARD (With simulated click animation) -->
+          <div class="liquid-about-card p-6 sm:p-8 relative overflow-hidden" id="cv-card-container">
+            <h2 class="font-san text-xl sm:text-2xl font-normal text-gray-900 mb-5 flex items-center gap-2">
+              <svg class="w-5.5 h-5.5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Curriculum Vitae
+            </h2>
+            
+            <div class="flex items-center gap-4 bg-white/40 border border-white/50 rounded-2xl p-4 mb-6 shadow-[inset_0_1px_2px_rgba(255,255,255,0.7)] backdrop-blur-sm">
+              <span class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center border border-red-100 flex-shrink-0 text-red-500">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </span>
+              <div class="overflow-hidden">
+                <h3 class="text-xs font-semibold text-gray-800 truncate">Yasith_Tharuka_CV.pdf</h3>
+                <span class="text-[10px] text-gray-400 font-mono block tracking-wide uppercase">PDF Document • 156 KB</span>
+              </div>
+            </div>
+
+            <!-- Dynamic CV Download trigger button -->
+            <button 
+              id="cv-download-btn"
+              class="w-full relative py-3.5 bg-gray-900 text-white rounded-full text-xs font-semibold hover:bg-gray-800 transition-all duration-300 shadow-sm cursor-pointer overflow-hidden flex items-center justify-center gap-2 group"
+            >
+              <!-- Progress filling container -->
+              <div id="cv-progress-bar" class="absolute left-0 top-0 bottom-0 bg-emerald-500/20 w-0 transition-all duration-75"></div>
+              
+              <svg class="w-4 h-4 z-10 transition-transform group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              <span id="cv-btn-text" class="z-10">Download CV</span>
+            </button>
+          </div>
+
+          <!-- SECTION 3: CONTACT INFO CARD -->
+          <div class="liquid-about-card p-6 sm:p-8 relative">
+            <h2 class="font-san text-xl sm:text-2xl font-normal text-gray-900 mb-5 flex items-center gap-2">
+              <svg class="w-5.5 h-5.5 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Contact Info
+            </h2>
+
+            <p class="text-xs text-gray-500 font-light mb-6">
+              Connect with me through official social networks and scholarly research directories.
+            </p>
+
+            <div class="grid grid-cols-2 gap-3.5" id="contacts-grid">
+              {contacts.map((c) => (
+                <a 
+                  href={c.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class={`contact-node flex items-center gap-3 p-3.5 rounded-2xl bg-white/40 border border-white/50 shadow-sm backdrop-blur-sm transition-all duration-300 hover:scale-[1.03] cursor-pointer ${c.bg}`}
+                  style={`--brand-color: ${c.color}`}
+                >
+                  <!-- Custom Brand Icons -->
+                  {c.icon === 'linkedin' && (
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                  )}
+                  {c.icon === 'github' && (
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                  )}
+                  {c.icon === 'email' && (
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  )}
+                  {c.icon === 'scholar' && (
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l12 9.5 9-7.125V17h3V9.5L12 0z"/>
+                    </svg>
+                  )}
+                  {c.icon === 'medium' && (
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M0 0v24h24v-24h-24zm10.005 17.844c-2.48 0-4.49-2.01-4.49-4.49s2.01-4.49 4.49-4.49 4.49 2.01 4.49 4.49-2.01 4.49-4.49 4.49zm8.487-1.127c-.89 0-1.611-.722-1.611-1.612s.721-1.612 1.611-1.612 1.612.722 1.612 1.612-.722 1.612-1.612 1.612zm-3.834.721c-1.46 0-2.645-1.185-2.645-2.645s1.185-2.645 2.645-2.645 2.645 1.185 2.645 2.645-1.185 2.645-2.645 2.645z"/>
+                    </svg>
+                  )}
+                  {c.icon === 'researchgate' && (
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19.5 0h-15c-2.48 0-4.5 2.02-4.5 4.5v15c0 2.48 2.02 4.5 4.5 4.5h15c2.48 0 4.5-2.02 4.5-4.5v-15c0-2.48-2.02-4.5-4.5-4.5zm-8.86 16.5h-1.67v-3.79c.67.01 1.14-.15 1.41-.48.27-.32.41-.83.41-1.53v-.33c0-.66-.13-1.16-.4-1.47-.27-.32-.73-.47-1.38-.47H8.97v8.07H7.3v-9.68h3.37c1.17 0 2.03.26 2.58.78.55.52.82 1.3.82 2.34v.37c0 .92-.22 1.64-.67 2.14-.45.5-1.1.79-1.95.86l2.19 3.19h-1.88l-1.94-2.82zm3.32-9.68h1.67v9.68h-1.67V6.82z"/>
+                    </svg>
+                  )}
+                  {c.icon === 'orcid' && (
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 .002C5.373.002 0 5.374 0 12c0 6.627 5.373 12 12 12 6.627 0 12-5.373 12-12 0-6.626-5.373-11.998-12-11.998zm-.714 18.067H9.728V6.837h1.558v11.232zm-.779-12.441a.959.959 0 0 1-.958-.958c0-.528.43-.959.958-.959s.959.431.959.959a.96.96 0 0 1-.959.958zm8.272 12.441h-2.054c-.161-.634-.783-2.062-1.325-2.923-1.047.88-2.056.88-2.73.88h-1.282V6.837h1.654c1.994 0 3.321 1.258 3.321 3.232 0 1.283-.604 2.298-1.57 2.766 1.077 1.488 1.838 3.513 1.986 5.234zm-3.21-8.15c0-1.233-.873-1.85-2.03-1.85h-.779v3.665h.779c1.157-.001 2.03-.591 2.03-1.815z"/>
+                    </svg>
+                  )}
+                  <span class="text-xs font-semibold text-gray-800 tracking-tight">{c.name}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  /* Asymmetric background float animations */
+  @keyframes float-bubble-1 {
+    0% { transform: translateY(0px) translateX(0px) scale(1); }
+    50% { transform: translateY(-30px) translateX(15px) scale(1.08); }
+    100% { transform: translateY(0px) translateX(0px) scale(1); }
+  }
+  @keyframes float-bubble-2 {
+    0% { transform: translateY(0px) translateX(0px) scale(1.05); }
+    50% { transform: translateY(-25px) translateX(-20px) scale(0.95); }
+    100% { transform: translateY(0px) translateX(0px) scale(1.05); }
+  }
+  @keyframes float-bubble-3 {
+    0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) translateX(10px) rotate(180deg); }
+    100% { transform: translateY(0px) translateX(0px) rotate(360deg); }
+  }
+  .animate-float-bubble-1 { animation: float-bubble-1 12s ease-in-out infinite; }
+  .animate-float-bubble-2 { animation: float-bubble-2 15s ease-in-out infinite; }
+  .animate-float-bubble-3 { animation: float-bubble-3 16s ease-in-out infinite; }
+
+  /* Morphing Liquid Monogram Keyframes */
+  @keyframes morph-liquid {
+    0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    50% { border-radius: 30% 60% 70% 30% / 50% 60% 30% 50%; }
+    100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  }
+  .animate-morph-liquid {
+    animation: morph-liquid 8s ease-in-out infinite;
+  }
+
+  .liquid-monogram {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.1) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Liquid Glass cards inside About page */
+  .liquid-about-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.15) 100%);
+    backdrop-filter: blur(24px) saturate(190%);
+    -webkit-backdrop-filter: blur(24px) saturate(190%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 
+      inset 0 1.5px 0 rgba(255, 255, 255, 0.75), 
+      inset 0 -1.5px 0 rgba(0, 0, 0, 0.05),
+      0 8px 28px -8px rgba(0, 0, 0, 0.03),
+      0 1px 3px rgba(0, 0, 0, 0.01);
+    border-radius: 2.2rem;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .liquid-about-card:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.2) 100%);
+    border-color: rgba(255, 255, 255, 0.65);
+    box-shadow: 
+      inset 0 2px 0 rgba(255, 255, 255, 0.85), 
+      inset 0 -1px 0 rgba(0, 0, 0, 0.05),
+      0 18px 36px -12px rgba(0, 0, 0, 0.08),
+      0 2px 6px rgba(0, 0, 0, 0.03);
+    transform: translateY(-2px);
+  }
+
+  /* Soft gloss glare line on top of elements */
+  .liquid-about-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+    border-radius: 2.2rem 2.2rem 50% 50% / 2.2rem 2.2rem 20% 20%;
+    pointer-events: none;
+  }
+
+  /* Contact node branding hover transition effects */
+  .contact-node {
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .contact-node:hover {
+    color: var(--brand-color);
+    box-shadow: 
+      0 8px 24px -8px var(--brand-color)25,
+      inset 0 1px 1px rgba(255, 255, 255, 0.8);
+    transform: translateY(-3px) scale(1.02);
+  }
+</style>
+
+<script>
+  // Simulated Interactive CV Download progress bar animation
+  const downloadBtn = document.getElementById("cv-download-btn");
+  const progressBar = document.getElementById("cv-progress-bar");
+  const btnText = document.getElementById("cv-btn-text");
+
+  if (downloadBtn && progressBar && btnText) {
+    let isDownloading = false;
+
+    downloadBtn.addEventListener("click", () => {
+      if (isDownloading) return;
+      isDownloading = true;
+
+      // Disable pointer events during download
+      downloadBtn.style.pointerEvents = "none";
+      progressBar.style.width = "0%";
+      progressBar.style.backgroundColor = "rgba(16, 185, 129, 0.25)"; // green tint
+
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 12) + 5; // increment progress randomly
+        if (progress >= 100) {
+          progress = 100;
+          progressBar.style.width = "100%";
+          btnText.textContent = "Complete!";
+          clearInterval(interval);
+
+          // Trigger actual file download download after short delay
+          setTimeout(() => {
+            const tempLink = document.createElement("a");
+            tempLink.href = "/Yasith_Tharuka_CV.pdf";
+            tempLink.download = "Yasith_Tharuka_CV.pdf";
+            tempLink.target = "_blank";
+            document.body.appendChild(tempLink);
+            tempLink.click();
+            document.body.removeChild(tempLink);
+
+            // Reset button state
+            setTimeout(() => {
+              progressBar.style.width = "0%";
+              btnText.textContent = "Download CV";
+              downloadBtn.style.pointerEvents = "auto";
+              isDownloading = false;
+            }, 1500);
+          }, 400); // Wait 400ms before starting download
+        } else {
+          progressBar.style.width = `${progress}%`;
+          btnText.textContent = `Downloading (${progress}%)...`;
+        }
+      }, 120); // ticks every 120ms
+    });
+  }
+</script>

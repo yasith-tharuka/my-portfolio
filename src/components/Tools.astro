@@ -1,0 +1,242 @@
+---
+// src/components/Tools.astro
+import { toolsData } from "../data/toolsData";
+
+const { accent, heading, description, categories, tools } = toolsData;
+---
+
+<div class="w-full bg-[#FAFAFC] border-t border-gray-150 py-20 relative overflow-hidden font-body">
+    <!-- Ambient liquid glass bubbles in background for depth -->
+    <div class="absolute top-10 left-5 w-64 h-64 rounded-full bg-blue-400/15 blur-3xl animate-float-bubble-1 pointer-events-none"></div>
+    <div class="absolute bottom-10 right-5 w-72 h-72 rounded-full bg-emerald-400/12 blur-3xl animate-float-bubble-2 pointer-events-none"></div>
+    <div class="absolute top-1/3 left-1/4 w-48 h-48 rounded-full bg-purple-400/10 blur-3xl animate-float-bubble-3 pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto px-6 relative z-10">
+        
+        <!-- Section Header (Left-aligned matching Volunteer and Education sections) -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div class="max-w-2xl">
+                <span class="text-xs font-semibold text-[#4285F4] uppercase tracking-widest block mb-2 font-san">{accent}</span>
+                <h2 class="font-san text-3xl sm:text-4xl md:text-5xl font-normal text-gray-900 leading-[1.15] tracking-tight" set:html={heading}>
+                </h2>
+                <p class="text-sm sm:text-base text-gray-500 leading-relaxed mt-3 font-light">
+                    {description}
+                </p>
+            </div>
+
+            <!-- Filter tabs on the right side on desktop, left on mobile -->
+            <div class="flex flex-wrap gap-1.5 p-1 rounded-full bg-white/40 border border-white/50 backdrop-blur-md shadow-[inset_0_1px_2px_rgba(255,255,255,0.6)] self-start md:self-auto">
+                {categories.map((cat, idx) => (
+                    <button
+                        data-filter={cat.id}
+                        class={`filter-tab-btn px-4 py-1.5 rounded-full text-[11px] font-semibold tracking-wide cursor-pointer transition-all duration-300 ${
+                            idx === 0
+                                ? "bg-gray-900 text-white shadow-sm"
+                                : "text-gray-650 hover:bg-white/60 hover:text-black"
+                        }`}
+                    >
+                        {cat.label}
+                    </button>
+                ))}
+            </div>
+        </div>
+
+        <!-- Tools Responsive Grid (Smaller cards, 6 columns on desktop) -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3" id="tools-cards-grid">
+            {tools.map((t) => (
+                <div
+                    data-category={t.category}
+                    class={`tool-card group relative flex flex-col items-center justify-center p-3.5 rounded-2xl border transition-all duration-400 hover:scale-[1.04] hover:-translate-y-0.5 hover:shadow-sm cursor-default
+                        ${t.category === 'languages' ? 'bg-blue-500/5 hover:bg-blue-500/10 border-blue-500/15 hover:border-blue-500/35 text-blue-600' : ''}
+                        ${t.category === 'frontend' ? 'bg-emerald-500/5 hover:bg-emerald-500/10 border-emerald-500/15 hover:border-emerald-500/35 text-emerald-600' : ''}
+                        ${t.category === 'backend' ? 'bg-purple-500/5 hover:bg-purple-500/10 border-purple-500/15 hover:border-purple-500/35 text-purple-600' : ''}
+                        ${t.category === 'ai-ml' ? 'bg-rose-500/5 hover:bg-rose-500/10 border-rose-500/15 hover:border-rose-500/35 text-rose-600' : ''}
+                    `}
+                    style={`--brand-color: ${t.color}`}
+                >
+                    <!-- Specular glare shine -->
+                    <div class="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent pointer-events-none rounded-t-2xl"></div>
+
+                    <!-- Glowing brand backdrop reflection -->
+                    <div class="absolute inset-0 bg-[var(--brand-color)]/0 group-hover:bg-[var(--brand-color)]/[0.015] rounded-2xl transition-all duration-300 pointer-events-none"></div>
+
+                    <!-- Icon Container (Smaller sized: w-10 h-10) -->
+                    <div class="w-10 h-10 rounded-xl bg-white/60 border border-white/70 shadow-inner flex items-center justify-center mb-2.5 text-gray-700 transition-all duration-300 group-hover:scale-105 group-hover:shadow-sm">
+                        {t.icon === "python" && (
+                            <svg class="w-5 h-5 text-[#3776AB]" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M11.97 0C5.352 0 5.483 2.87 5.483 2.87v2.247h6.53v.922H5.483S2.636 5.86 2.636 12.02c0 6.16 2.455 5.897 2.455 5.897v2.246s-.111 2.87 6.507 2.87c6.618 0 6.386-2.525 6.386-2.525v-2.57h-6.155v-.921h6.155c4.767 0 5.02-3.896 5.02-5.748 0-1.854-.537-6.22-5.02-6.22V2.87S18.59 0 11.97 0zm-3.327 2.76c.454 0 .823.37.823.824a.824.824 0 1 1-1.647 0c0-.455.37-.824.824-.824zm6.654 15.65c.454 0 .824.37.824.824a.824.824 0 1 1-1.648 0c0-.455.37-.824.824-.824z"/>
+                            </svg>
+                        )}
+                        {t.icon === "java" && (
+                            <svg class="w-5 h-5 text-[#007396]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2M12 18v2M5 5l1.5 1.5M16.5 16.5L18 18M2 12h2M18 12h2M6.5 16.5L5 18M18 5l-1.5 1.5" />
+                                <circle cy="12" cx="12" r="3.5" stroke="currentColor" />
+                            </svg>
+                        )}
+                        {t.icon === "c" && (
+                            <span class="text-xs font-bold tracking-tight text-[#A8B9CC]">C</span>
+                        )}
+                        {t.icon === "csharp" && (
+                            <span class="text-xs font-bold tracking-tight text-[#239120]">C#</span>
+                        )}
+                        {t.icon === "typescript" && (
+                            <span class="text-xs font-bold tracking-tight text-[#3178C6]">TS</span>
+                        )}
+                        {t.icon === "javascript" && (
+                            <span class="text-xs font-bold tracking-tight text-[#F7DF1E]">JS</span>
+                        )}
+                        {t.icon === "react" && (
+                            <svg class="w-5 h-5 text-[#61DAFB] animate-[spin_20s_linear_infinite]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <ellipse rx="9" ry="3.5" cx="12" cy="12" transform="rotate(0 12 12)" />
+                                <ellipse rx="9" ry="3.5" cx="12" cy="12" transform="rotate(60 12 12)" />
+                                <ellipse rx="9" ry="3.5" cx="12" cy="12" transform="rotate(120 12 12)" />
+                                <circle cy="12" cx="12" r="1.2" fill="currentColor" />
+                            </svg>
+                        )}
+                        {t.icon === "nextjs" && (
+                            <span class="text-xs font-bold tracking-tight text-black">N</span>
+                        )}
+                        {t.icon === "astro" && (
+                            <svg class="w-5 h-5 text-[#FF5D01]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        )}
+                        {t.icon === "tailwind" && (
+                            <svg class="w-5 h-5 text-[#06B6D4]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                            </svg>
+                        )}
+                        {t.icon === "uiux" && (
+                            <svg class="w-5 h-5 text-[#F24E1E]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        )}
+                        {t.icon === "nodejs" && (
+                            <svg class="w-5 h-5 text-[#339933]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                        )}
+                        {t.icon === "sql" && (
+                            <svg class="w-5 h-5 text-[#4479A1]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                            </svg>
+                        )}
+                        {t.icon === "gcp" && (
+                            <svg class="w-5 h-5 text-[#4285F4]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                            </svg>
+                        )}
+                        {t.icon === "git" && (
+                            <svg class="w-5 h-5 text-[#F05032]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7v8a3 3 0 003 3h4m0 0a3 3 0 003-3V7m-3 11V4" />
+                            </svg>
+                        )}
+                        {t.icon === "scikit" && (
+                            <svg class="w-5 h-5 text-[#F7931E]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+                            </svg>
+                        )}
+                        {t.icon === "deeplearning" && (
+                            <svg class="w-5 h-5 text-[#9B51E0]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 9.172V5L8 4z" />
+                            </svg>
+                        )}
+                        {t.icon === "neuralnet" && (
+                            <svg class="w-5 h-5 text-[#2D9CDB]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        )}
+                    </div>
+
+                    <!-- Tech Title (Smaller font text-xs) -->
+                    <span class="text-xs font-semibold text-gray-800 tracking-tight group-hover:text-black transition-colors">{t.name}</span>
+                </div>
+            ))}
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Float animations for background liquid bubbles */
+    @keyframes float-bubble-1 {
+        0% { transform: translateY(0px) translateX(0px) scale(1); }
+        50% { transform: translateY(-30px) translateX(15px) scale(1.08); }
+        100% { transform: translateY(0px) translateX(0px) scale(1); }
+    }
+    @keyframes float-bubble-2 {
+        0% { transform: translateY(0px) translateX(0px) scale(1.05); }
+        50% { transform: translateY(-25px) translateX(-20px) scale(0.95); }
+        100% { transform: translateY(0px) translateX(0px) scale(1.05); }
+    }
+    .animate-float-bubble-1 { animation: float-bubble-1 12s ease-in-out infinite; }
+    .animate-float-bubble-2 { animation: float-bubble-2 15s ease-in-out infinite; }
+
+    /* Custom layout styling for items scaling & hiding in filter */
+    .tool-card {
+        transform-origin: center center;
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        transition: 
+            opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+            transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+            scale 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+            box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+            background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+            border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .tool-card.hidden-filter {
+        opacity: 0;
+        transform: scale(0.8) translateY(12px);
+        pointer-events: none;
+        position: absolute;
+        width: 0;
+        height: 0;
+        padding: 0;
+        margin: 0;
+        border-width: 0;
+        overflow: hidden;
+    }
+
+    .tool-card:hover {
+        border-color: var(--brand-color)35;
+        box-shadow: 
+            0 8px 20px -8px var(--brand-color)20,
+            inset 0 1px 1px rgba(255, 255, 255, 0.8);
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const tabBtns = document.querySelectorAll(".filter-tab-btn");
+        const cards = document.querySelectorAll(".tool-card");
+
+        tabBtns.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const category = btn.getAttribute("data-filter");
+                if (!category) return;
+
+                // Update active tab buttons styles
+                tabBtns.forEach((b) => {
+                    b.classList.remove("bg-gray-900", "text-white", "shadow-sm");
+                    b.classList.add("text-gray-650", "hover:bg-white/60", "hover:text-black");
+                });
+                btn.classList.add("bg-gray-900", "text-white", "shadow-sm");
+                btn.classList.remove("text-gray-650", "hover:bg-white/60", "hover:text-black");
+
+                // Filter cards with animations
+                cards.forEach((card) => {
+                    const cardCategory = card.getAttribute("data-category");
+                    const isMatched = category === "all" || cardCategory === category;
+
+                    if (isMatched) {
+                        card.classList.remove("hidden-filter");
+                    } else {
+                        card.classList.add("hidden-filter");
+                    }
+                });
+            });
+        });
+    });
+</script>

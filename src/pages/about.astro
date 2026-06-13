@@ -2,114 +2,81 @@
 // src/pages/about.astro
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
+import { aboutData } from "../data/aboutData";
 
-const title = "About Me | Yasith Tharuka";
-const description = "Explore my narrative, qualifications, download my curriculum vitae, and find direct touchpoints to collaborate.";
-
-const qualifications = {
-  minimum: [
-    { text: "Bachelor's degree in Computer Science or equivalent practical experience.", icon: "education" },
-    { text: "Experience in software development with Python, Java, C, and JavaScript.", icon: "code" },
-    { text: "Experience building full-stack web applications with React, Next.js, Node, and Astro.", icon: "web" }
-  ],
-  preferred: [
-    { text: "Active Cloud Administrator experience with Google Cloud Platform (GCP ACE Certified).", icon: "cloud" },
-    { text: "Solid foundation in Machine Learning, Deep Learning (Neural Networks, CV, NLP), and Scikit-learn.", icon: "brain" },
-    { text: "Demonstrated leadership record in active student tech communities (IEEE SB Secretary, GDG Organizer).", icon: "people" }
-  ]
-};
-
-const contacts = [
-  { name: "LinkedIn", url: "https://www.linkedin.com/in/yasith-tharuka/", icon: "linkedin", color: "#0077B5", bg: "hover:bg-[#0077B5]/10 hover:border-[#0077B5]/40 text-[#0077B5]" },
-  { name: "GitHub", url: "https://github.com/yasith-tharuka", icon: "github", color: "#24292e", bg: "hover:bg-[#24292e]/10 hover:border-[#24292e]/40 text-[#24292e]" },
-  { name: "Email", url: "mailto:yasiththaruka@outlook.com", icon: "email", color: "#EA4335", bg: "hover:bg-[#EA4335]/10 hover:border-[#EA4335]/40 text-[#EA4335]" },
-  { name: "Google Scholar", url: "https://scholar.google.com/citations?user=Sm5u3UAAAAAJ", icon: "scholar", color: "#4285F4", bg: "hover:bg-[#4285F4]/10 hover:border-[#4285F4]/40 text-[#4285F4]" },
-  { name: "Medium", url: "https://medium.com/@yasiththaruka", icon: "medium", color: "#12100e", bg: "hover:bg-[#12100e]/10 hover:border-[#12100e]/40 text-[#12100e]" },
-  { name: "ResearchGate", url: "https://www.researchgate.net/profile/Yasith-Tharuka-2", icon: "researchgate", color: "#00CCBB", bg: "hover:bg-[#00CCBB]/10 hover:border-[#00CCBB]/40 text-[#00CCBB]" },
-  { name: "ORCID", url: "https://orcid.org/0009-0007-7095-3201", icon: "orcid", color: "#A6CE39", bg: "hover:bg-[#A6CE39]/10 hover:border-[#A6CE39]/40 text-[#A6CE39]" }
-];
+const { title, description, qualifications, contacts } = aboutData;
 ---
 
 <Layout title={title}>
-  <main class="w-full min-h-screen bg-[#FAFAFC] relative overflow-hidden pt-12 pb-24 font-body">
-    <!-- Interactive Background Bubbles for Depth -->
-    <div class="absolute top-10 right-10 w-72 h-72 rounded-full bg-indigo-400/10 blur-3xl animate-float-bubble-1 pointer-events-none"></div>
-    <div class="absolute bottom-10 left-10 w-80 h-80 rounded-full bg-emerald-400/8 blur-3xl animate-float-bubble-2 pointer-events-none"></div>
-    <div class="absolute top-1/2 left-1/3 w-56 h-56 rounded-full bg-purple-400/8 blur-3xl pointer-events-none"></div>
+  <main class="w-full min-h-screen bg-[#F8F9FA] relative overflow-hidden pt-12 pb-24 font-body">
+    <!-- Ambient liquid glass bubbles in background for depth -->
+    <div class="absolute top-48 left-10 w-72 h-72 rounded-full bg-blue-500/8 blur-3xl animate-float-bubble-1 pointer-events-none z-10"></div>
+    <div class="absolute bottom-24 right-10 w-96 h-96 rounded-full bg-emerald-500/6 blur-3xl animate-float-bubble-2 pointer-events-none z-10"></div>
+    <div class="absolute top-1/2 left-1/3 w-64 h-64 rounded-full bg-purple-500/6 blur-3xl animate-float-bubble-3 pointer-events-none z-10"></div>
+    <div class="absolute top-24 right-1/4 w-80 h-80 rounded-full bg-amber-400/7 blur-3xl animate-float-bubble-4 pointer-events-none z-10"></div>
 
-    <div class="max-w-6xl mx-auto px-6 relative z-20">
+    <div class="max-w-6xl mx-auto px-6 relative z-20 pt-20">
       
-      <!-- Custom Header with stable glass card and several small floating morphing liquid glass bubbles -->
-      <section class="pb-12 border-b border-gray-200/80 mb-16 relative">
-        <div class="relative w-full py-10 px-8 sm:px-12 text-center md:text-left overflow-hidden rounded-[2.2rem] bg-white/30 backdrop-blur-xl border border-white/50 shadow-[inset_0_2px_4px_rgba(255,255,255,0.75),0_8px_24px_rgba(0,0,0,0.03)]">
-          <!-- Ambient shadow glow layer -->
-          <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-emerald-500/5 blur-xl opacity-80 pointer-events-none"></div>
-          
-          <!-- Specular shine overlay for 3D glass look -->
-          <div class="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent pointer-events-none"></div>
-
-          <!-- Several small floating morphing liquid glass bubbles in background -->
-          <div class="absolute top-4 right-16 w-16 h-16 bg-gradient-to-br from-indigo-500/15 to-purple-500/10 border border-white/50 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.75),0_4px_12px_rgba(0,0,0,0.02)] animate-morph-liquid animate-float-bubble-1 opacity-75 pointer-events-none"></div>
-          <div class="absolute bottom-6 left-1/3 w-12 h-12 bg-gradient-to-br from-purple-500/15 to-emerald-500/10 border border-white/50 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.75),0_4px_12px_rgba(0,0,0,0.02)] animate-morph-liquid animate-float-bubble-2 opacity-65 pointer-events-none"></div>
-          <div class="absolute top-1/2 right-1/4 w-10 h-10 bg-gradient-to-br from-emerald-500/15 to-indigo-500/10 border border-white/50 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.75),0_4px_12px_rgba(0,0,0,0.02)] animate-morph-liquid animate-float-bubble-3 opacity-65 pointer-events-none"></div>
-          <div class="absolute top-6 left-16 w-8 h-8 bg-gradient-to-br from-blue-500/15 to-indigo-500/10 border border-white/50 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.75),0_4px_12px_rgba(0,0,0,0.02)] animate-morph-liquid animate-float-bubble-2 opacity-80 pointer-events-none"></div>
-          <div class="absolute top-1/3 left-1/4 w-14 h-14 bg-gradient-to-br from-amber-500/15 to-orange-500/10 border border-white/50 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.75),0_4px_12px_rgba(0,0,0,0.02)] animate-morph-liquid animate-float-bubble-1 opacity-70 pointer-events-none"></div>
-          <div class="absolute bottom-4 right-1/3 w-7 h-7 bg-gradient-to-br from-rose-500/15 to-pink-500/10 border border-white/50 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.75),0_4px_12px_rgba(0,0,0,0.02)] animate-morph-liquid animate-float-bubble-3 opacity-70 pointer-events-none"></div>
-          <div class="absolute top-8 right-1/2 w-11 h-11 bg-gradient-to-br from-teal-500/15 to-emerald-500/10 border border-white/50 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.75),0_4px_12px_rgba(0,0,0,0.02)] animate-morph-liquid animate-float-bubble-2 opacity-65 pointer-events-none"></div>
-          <div class="absolute bottom-8 right-8 w-9 h-9 bg-gradient-to-br from-cyan-500/15 to-blue-500/10 border border-white/50 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.75),0_4px_12px_rgba(0,0,0,0.02)] animate-morph-liquid animate-float-bubble-1 opacity-85 pointer-events-none"></div>
+      <!-- Google Professional Header Card -->
+      <section class="pb-4 mb-5 relative">
+        <div class="relative w-full py-10 px-8 sm:px-12 text-center md:text-left overflow-hidden rounded-[2rem] bg-white border border-gray-200 shadow-sm">
+          <!-- Left border vertical strips representing Google branding colors -->
+          <div class="absolute left-0 top-0 bottom-0 w-1.5 flex flex-col">
+            <div class="flex-1 bg-[#4285F4]"></div>
+            <div class="flex-1 bg-[#EA4335]"></div>
+            <div class="flex-1 bg-[#FBBC05]"></div>
+            <div class="flex-1 bg-[#34A853]"></div>
+          </div>
 
           <!-- Content overlay -->
-          <div class="relative z-10">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-150/40 text-indigo-600 text-xs font-semibold uppercase tracking-wider mb-5 animate-fade-in">
-              <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
-              Curious Builder
+          <div class="relative z-10 pl-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs font-semibold uppercase tracking-wider mb-5 animate-fade-in">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#4285F4] animate-pulse"></span>
+              {aboutData.badgeText}
             </div>
-            <h1 class="font-san text-4xl sm:text-5xl font-normal text-gray-900 tracking-tight leading-tight mb-4">
-              Hi, I'm Yasith Tharuka.
+            <h1 class="font-san text-4xl sm:text-5xl font-normal text-gray-900 tracking-tight leading-tight mb-4 min-h-[1.2em] flex items-center md:justify-start justify-center">
+              <span id="about-hero-title"></span><span id="about-title-cursor" class="inline-block text-gray-900 cursor-blink ml-1 select-none">|</span>
             </h1>
-            <p class="text-base sm:text-lg text-gray-500 leading-relaxed font-light max-w-3xl">
-              A Computer Science undergraduate bridging the gap between robust full-stack software architectures and scalable machine learning frameworks.
+            <p class="text-base sm:text-lg text-gray-600 leading-relaxed font-light max-w-3xl min-h-[1.2em] flex items-center md:justify-start justify-center">
+              <span id="about-hero-sub"></span><span id="about-sub-cursor" class="inline-block text-gray-400 cursor-blink hidden ml-1 select-none">|</span>
             </p>
           </div>
         </div>
       </section>
 
       <!-- 3 Sections Split Layout Grid -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
         
         <!-- SECTION 1: ABOUT ME (Narrative & Qualifications) - Width: 7 Columns -->
-        <section class="lg:col-span-7 flex flex-col gap-8">
+        <section class="lg:col-span-7 flex flex-col gap-4">
           
-          <!-- Narrative Bio Card -->
+          <!-- Narrative Bio Card (Liquid Glass) -->
           <div class="liquid-about-card p-6 sm:p-8 relative">
             <h2 class="font-san text-xl sm:text-2xl font-normal text-gray-900 mb-5 flex items-center gap-2">
-              <svg class="w-5.5 h-5.5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
-              My Story
+              {aboutData.storyTitle}
             </h2>
-            <p class="text-sm sm:text-base text-gray-650 leading-relaxed font-light text-justify">
-              I am a Computer Science undergraduate passionate about building high-fidelity software products and deploying deep learning solutions. From crafting responsive, pixel-perfect user interfaces to designing secure cloud environments, I thrive on solving complex technical challenges. Driven by community contributions and continuous learning, I share my journey actively through open-source projects and developer circles.
+            <p id="about-story-text" class="text-sm sm:text-base text-gray-650 leading-relaxed font-light text-justify select-all">
+              {aboutData.storyText}
             </p>
           </div>
 
-          <!-- Qualifications Grid -->
+          <!-- Qualifications Grid (Liquid Glass) -->
           <div class="liquid-about-card p-6 sm:p-8 relative">
             <h2 class="font-san text-xl sm:text-2xl font-normal text-gray-900 mb-6 flex items-center gap-2">
-              <svg class="w-5.5 h-5.5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <svg class="w-5.5 h-5.5 text-[#34A853]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              Core Dossier & Qualifications
+              {aboutData.qualificationsTitle}
             </h2>
 
             <div class="space-y-6">
               <!-- Minimum Qualifications -->
               <div>
-                <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest block mb-3.5">Academic & Software Core</span>
+                <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest block mb-3.5">{aboutData.qualificationsHeaderAcademic}</span>
                 <ul class="space-y-3.5">
-                  {qualifications.minimum.map((q) => (
-                    <li class="flex items-start gap-3">
-                      <span class="w-5 h-5 rounded-full bg-blue-50/70 border border-blue-150/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-blue-500">
+                  {qualifications.minimum.map((q, idx) => (
+                    <li class="flex items-start gap-3 fade-in-item">
+                      <span class="w-5 h-5 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5 text-blue-500">
                         {q.icon === 'education' ? (
                           <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
@@ -124,7 +91,7 @@ const contacts = [
                           </svg>
                         )}
                       </span>
-                      <p class="text-xs sm:text-sm text-gray-650 font-light leading-relaxed">{q.text}</p>
+                      <p id={`about-min-q${idx}`} class="text-xs sm:text-sm text-gray-650 font-light leading-relaxed"></p>
                     </li>
                   ))}
                 </ul>
@@ -132,11 +99,11 @@ const contacts = [
 
               <!-- Preferred Qualifications -->
               <div class="border-t border-gray-200/40 pt-5">
-                <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest block mb-3.5">Cloud & Community Leadership</span>
+                <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest block mb-3.5">{aboutData.qualificationsHeaderCloud}</span>
                 <ul class="space-y-3.5">
-                  {qualifications.preferred.map((q) => (
-                    <li class="flex items-start gap-3">
-                      <span class="w-5 h-5 rounded-full bg-emerald-50/70 border border-emerald-150/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-emerald-500">
+                  {qualifications.preferred.map((q, idx) => (
+                    <li class="flex items-start gap-3 fade-in-item">
+                      <span class="w-5 h-5 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center flex-shrink-0 mt-0.5 text-emerald-500">
                         {q.icon === 'cloud' ? (
                           <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
@@ -151,7 +118,7 @@ const contacts = [
                           </svg>
                         )}
                       </span>
-                      <p class="text-xs sm:text-sm text-gray-650 font-light leading-relaxed">{q.text}</p>
+                      <p id={`about-pref-q${idx}`} class="text-xs sm:text-sm text-gray-650 font-light leading-relaxed"></p>
                     </li>
                   ))}
                 </ul>
@@ -161,15 +128,12 @@ const contacts = [
         </section>
 
         <!-- SECTION 2 & 3: DOWNLOAD CV & CONTACT INFO - Width: 5 Columns -->
-        <div class="lg:col-span-5 flex flex-col gap-8">
+        <div class="lg:col-span-5 flex flex-col gap-4">
           
-          <!-- SECTION 2: DOWNLOAD CV CARD (With simulated click animation) -->
+          <!-- SECTION 2: DOWNLOAD CV CARD (Liquid Glass) -->
           <div class="liquid-about-card p-6 sm:p-8 relative overflow-hidden" id="cv-card-container">
             <h2 class="font-san text-xl sm:text-2xl font-normal text-gray-900 mb-5 flex items-center gap-2">
-              <svg class="w-5.5 h-5.5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              Curriculum Vitae
+              {aboutData.cvTitle}
             </h2>
             
             <div class="flex items-center gap-4 bg-white/40 border border-white/50 rounded-2xl p-4 mb-6 shadow-[inset_0_1px_2px_rgba(255,255,255,0.7)] backdrop-blur-sm">
@@ -179,8 +143,8 @@ const contacts = [
                 </svg>
               </span>
               <div class="overflow-hidden">
-                <h3 class="text-xs font-semibold text-gray-800 truncate">Yasith_Tharuka_CV.pdf</h3>
-                <span class="text-[10px] text-gray-400 font-mono block tracking-wide uppercase">PDF Document • 156 KB</span>
+                <h3 class="text-xs font-semibold text-gray-800 truncate">{aboutData.cvFileName}</h3>
+                <span class="text-[10px] text-gray-400 font-mono block tracking-wide uppercase">{aboutData.cvFileMeta}</span>
               </div>
             </div>
 
@@ -190,29 +154,29 @@ const contacts = [
               class="w-full relative py-3.5 bg-gray-900 text-white rounded-full text-xs font-semibold hover:bg-gray-800 transition-all duration-300 shadow-sm cursor-pointer overflow-hidden flex items-center justify-center gap-2 group"
             >
               <!-- Progress filling container -->
-              <div id="cv-progress-bar" class="absolute left-0 top-0 bottom-0 bg-emerald-500/20 w-0 transition-all duration-75"></div>
+              <div id="cv-progress-bar" class="absolute left-0 top-0 bottom-0 bg-[#EA4335]/15 w-0 transition-all duration-75"></div>
               
               <svg class="w-4 h-4 z-10 transition-transform group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
               </svg>
-              <span id="cv-btn-text" class="z-10">Download CV</span>
+              <span id="cv-btn-text" class="z-10">{aboutData.cvDownloadBtnText}</span>
             </button>
           </div>
 
-          <!-- SECTION 3: CONTACT INFO CARD -->
+          <!-- SECTION 3: CONTACT INFO CARD (Liquid Glass) -->
           <div class="liquid-about-card p-6 sm:p-8 relative">
             <h2 class="font-san text-xl sm:text-2xl font-normal text-gray-900 mb-5 flex items-center gap-2">
               <svg class="w-5.5 h-5.5 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              Contact Info
+              {aboutData.contactTitle}
             </h2>
 
             <p class="text-xs text-gray-500 font-light mb-6">
-              Connect with me through official social networks and scholarly research directories.
+              {aboutData.contactSub}
             </p>
 
-            <div class="grid grid-cols-2 gap-3.5" id="contacts-grid">
+            <div class="grid grid-cols-2 gap-3" id="contacts-grid">
               {contacts.map((c) => (
                 <a 
                   href={c.url}
@@ -270,65 +234,29 @@ const contacts = [
 </Layout>
 
 <style>
-  /* Asymmetric background float animations */
-  @keyframes float-bubble-1 {
-    0% { transform: translateY(0px) translateX(0px) scale(1); }
-    50% { transform: translateY(-30px) translateX(15px) scale(1.08); }
-    100% { transform: translateY(0px) translateX(0px) scale(1); }
-  }
-  @keyframes float-bubble-2 {
-    0% { transform: translateY(0px) translateX(0px) scale(1.05); }
-    50% { transform: translateY(-25px) translateX(-20px) scale(0.95); }
-    100% { transform: translateY(0px) translateX(0px) scale(1.05); }
-  }
-  @keyframes float-bubble-3 {
-    0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-    50% { transform: translateY(-15px) translateX(10px) rotate(180deg); }
-    100% { transform: translateY(0px) translateX(0px) rotate(360deg); }
-  }
-  .animate-float-bubble-1 { animation: float-bubble-1 12s ease-in-out infinite; }
-  .animate-float-bubble-2 { animation: float-bubble-2 15s ease-in-out infinite; }
-  .animate-float-bubble-3 { animation: float-bubble-3 16s ease-in-out infinite; }
-
-  /* Morphing Liquid Monogram Keyframes */
-  @keyframes morph-liquid {
-    0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-    50% { border-radius: 30% 60% 70% 30% / 50% 60% 30% 50%; }
-    100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-  }
-  .animate-morph-liquid {
-    animation: morph-liquid 8s ease-in-out infinite;
-  }
-
-  .liquid-monogram {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.1) 100%);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-  }
-
   /* Liquid Glass cards inside About page */
   .liquid-about-card {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.15) 100%);
-    backdrop-filter: blur(24px) saturate(190%);
-    -webkit-backdrop-filter: blur(24px) saturate(190%);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.55) 0%, rgba(240, 245, 255, 0.3) 100%);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
     box-shadow: 
       inset 0 1.5px 0 rgba(255, 255, 255, 0.75), 
-      inset 0 -1.5px 0 rgba(0, 0, 0, 0.05),
+      inset 0 -1.5px 0 rgba(0, 0, 0, 0.03),
       0 8px 28px -8px rgba(0, 0, 0, 0.03),
       0 1px 3px rgba(0, 0, 0, 0.01);
-    border-radius: 2.2rem;
+    border-radius: 1.5rem;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .liquid-about-card:hover {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.2) 100%);
-    border-color: rgba(255, 255, 255, 0.65);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(240, 245, 255, 0.4) 100%);
+    border-color: rgba(255, 255, 255, 0.75);
     box-shadow: 
       inset 0 2px 0 rgba(255, 255, 255, 0.85), 
-      inset 0 -1px 0 rgba(0, 0, 0, 0.05),
-      0 18px 36px -12px rgba(0, 0, 0, 0.08),
-      0 2px 6px rgba(0, 0, 0, 0.03);
+      inset 0 -1px 0 rgba(0, 0, 0, 0.04),
+      0 16px 36px -12px rgba(0, 0, 0, 0.05),
+      0 2px 6px rgba(0, 0, 0, 0.02);
     transform: translateY(-2px);
   }
 
@@ -340,8 +268,8 @@ const contacts = [
     left: 0;
     right: 0;
     height: 40%;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
-    border-radius: 2.2rem 2.2rem 50% 50% / 2.2rem 2.2rem 20% 20%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 100%);
+    border-radius: 1.5rem 1.5rem 50% 50% / 1.5rem 1.5rem 20% 20%;
     pointer-events: none;
   }
 
@@ -352,13 +280,174 @@ const contacts = [
   .contact-node:hover {
     color: var(--brand-color);
     box-shadow: 
-      0 8px 24px -8px var(--brand-color)25,
+      0 8px 20px -8px var(--brand-color)25,
       inset 0 1px 1px rgba(255, 255, 255, 0.8);
     transform: translateY(-3px) scale(1.02);
   }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  .cursor-blink {
+    animation: blink 0.8s step-end infinite;
+  }
+
+  /* Float animations for background liquid bubbles */
+  @keyframes float-bubble-1 {
+    0% { transform: translateY(0px) translateX(0px) scale(1); }
+    50% { transform: translateY(-35px) translateX(20px) scale(1.08); }
+    100% { transform: translateY(0px) translateX(0px) scale(1); }
+  }
+  @keyframes float-bubble-2 {
+    0% { transform: translateY(0px) translateX(0px) scale(1.05); }
+    50% { transform: translateY(-25px) translateX(-30px) scale(0.95); }
+    100% { transform: translateY(0px) translateX(0px) scale(1.05); }
+  }
+  @keyframes float-bubble-3 {
+    0% { transform: translateY(0px) translateX(0px) scale(0.95); }
+    50% { transform: translateY(30px) translateX(15px) scale(1.05); }
+    100% { transform: translateY(0px) translateX(0px) scale(0.95); }
+  }
+  @keyframes float-bubble-4 {
+    0% { transform: translateY(0px) translateX(0px) scale(1.02); }
+    50% { transform: translateY(30px) translateX(-20px) scale(0.93); }
+    100% { transform: translateY(0px) translateX(0px) scale(1.02); }
+  }
+  .animate-float-bubble-1 { animation: float-bubble-1 12s ease-in-out infinite; }
+  .animate-float-bubble-2 { animation: float-bubble-2 15s ease-in-out infinite; }
+  .animate-float-bubble-3 { animation: float-bubble-3 18s ease-in-out infinite; }
+  .animate-float-bubble-4 { animation: float-bubble-4 14s ease-in-out infinite; }
 </style>
 
 <script>
+  import { aboutData } from "../data/aboutData";
+
+  const qualifications = aboutData.qualifications;
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // 1. Hero Section Typing (Sequential within Hero, parallel with others)
+    const heroTitleEl = document.getElementById("about-hero-title");
+    const heroSubEl = document.getElementById("about-hero-sub");
+    const titleCursor = document.getElementById("about-title-cursor");
+    const subCursor = document.getElementById("about-sub-cursor");
+
+    const heroTitleText = aboutData.nameHeader;
+    const heroSubText = aboutData.subHeader;
+
+    if (heroTitleEl) heroTitleEl.textContent = "";
+    if (heroSubEl) heroSubEl.textContent = "";
+
+    function typeHeroTitle() {
+      let i = 0;
+      function type() {
+        if (heroTitleEl && i < heroTitleText.length) {
+          heroTitleEl.textContent += heroTitleText.charAt(i);
+          i++;
+          setTimeout(type, 30); // 30ms character typing speed
+        } else {
+          if (titleCursor) titleCursor.classList.add("hidden");
+          if (subCursor) subCursor.classList.remove("hidden");
+          setTimeout(typeHeroSub, 120);
+        }
+      }
+      type();
+    }
+    setTimeout(typeHeroTitle, 100);
+
+    function typeHeroSub() {
+      let i = 0;
+      function type() {
+        if (heroSubEl && i < heroSubText.length) {
+          heroSubEl.textContent += heroSubText.charAt(i);
+          i++;
+          setTimeout(type, 15); // 15ms character typing speed
+        } else {
+          if (subCursor) subCursor.classList.add("hidden");
+        }
+      }
+      type();
+    }
+
+    // 2. Story Text Typing (Parallel track, loads at the same time as hero section)
+    const storyEl = document.getElementById("about-story-text");
+    const storyText = aboutData.storyText;
+    if (storyEl) {
+      storyEl.textContent = "";
+      setTimeout(() => {
+        let i = 0;
+        const chunkSize = 4;
+        function type() {
+          if (storyEl && i < storyText.length) {
+            storyEl.textContent += storyText.slice(i, i + chunkSize);
+            i += chunkSize;
+            setTimeout(type, 6);
+          }
+        }
+        type();
+      }, 150);
+    }
+
+    // 3. Qualifications Typing (Parallel track, loads at the same time as hero section)
+    const minQElements = qualifications.minimum.map((_, idx) => ({
+      id: `about-min-q${idx}`,
+      text: qualifications.minimum[idx].text,
+      chunkSize: 3,
+      speed: 7
+    }));
+
+    const prefQElements = qualifications.preferred.map((_, idx) => ({
+      id: `about-pref-q${idx}`,
+      text: qualifications.preferred[idx].text,
+      chunkSize: 3,
+      speed: 7
+    }));
+
+    const qElements = [...minQElements, ...prefQElements];
+
+    qElements.forEach(item => {
+      const el = document.getElementById(item.id);
+      if (el) {
+        el.textContent = "";
+        const parent = el.closest(".fade-in-item") || el;
+        parent.classList.add("opacity-0", "transition-opacity", "duration-500");
+      }
+    });
+
+    setTimeout(() => {
+      let currentIdx = 0;
+      function typeNextQ() {
+        if (currentIdx >= qElements.length) return;
+        const item = qElements[currentIdx];
+        const el = document.getElementById(item.id);
+        if (!el) {
+          currentIdx++;
+          typeNextQ();
+          return;
+        }
+
+        const parent = el.closest(".fade-in-item") || el;
+        parent.classList.remove("opacity-0");
+        parent.classList.add("opacity-100");
+
+        let i = 0;
+        function type() {
+          if (i < item.text.length) {
+            el.textContent += item.text.slice(i, i + item.chunkSize);
+            i += item.chunkSize;
+            setTimeout(type, item.speed);
+          } else {
+            currentIdx++;
+            setTimeout(typeNextQ, 100);
+          }
+        }
+        type();
+      }
+      typeNextQ();
+    }, 200);
+  });
+
   // Simulated Interactive CV Download progress bar animation
   const downloadBtn = document.getElementById("cv-download-btn");
   const progressBar = document.getElementById("cv-progress-bar");
@@ -374,7 +463,7 @@ const contacts = [
       // Disable pointer events during download
       downloadBtn.style.pointerEvents = "none";
       progressBar.style.width = "0%";
-      progressBar.style.backgroundColor = "rgba(16, 185, 129, 0.25)"; // green tint
+      progressBar.style.backgroundColor = "rgba(234, 67, 53, 0.15)"; // Red progress tint
 
       let progress = 0;
       const interval = setInterval(() => {
@@ -382,14 +471,14 @@ const contacts = [
         if (progress >= 100) {
           progress = 100;
           progressBar.style.width = "100%";
-          btnText.textContent = "Complete!";
+          btnText.textContent = aboutData.cvDownloadCompleteText;
           clearInterval(interval);
 
-          // Trigger actual file download download after short delay
+          // Trigger actual file download after short delay
           setTimeout(() => {
             const tempLink = document.createElement("a");
-            tempLink.href = "/Yasith_Tharuka_CV.pdf";
-            tempLink.download = "Yasith_Tharuka_CV.pdf";
+            tempLink.href = aboutData.cvUrl;
+            tempLink.download = aboutData.cvFileName;
             tempLink.target = "_blank";
             document.body.appendChild(tempLink);
             tempLink.click();
@@ -398,16 +487,16 @@ const contacts = [
             // Reset button state
             setTimeout(() => {
               progressBar.style.width = "0%";
-              btnText.textContent = "Download CV";
+              btnText.textContent = aboutData.cvDownloadBtnText;
               downloadBtn.style.pointerEvents = "auto";
               isDownloading = false;
             }, 1500);
-          }, 400); // Wait 400ms before starting download
+          }, 400);
         } else {
           progressBar.style.width = `${progress}%`;
-          btnText.textContent = `Downloading (${progress}%)...`;
+          btnText.textContent = aboutData.cvDownloadProgressText.replace("{progress}", String(progress));
         }
-      }, 120); // ticks every 120ms
+      }, 120);
     });
   }
 </script>

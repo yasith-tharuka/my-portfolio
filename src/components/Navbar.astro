@@ -1,5 +1,22 @@
 ---
 // src/components/Navbar.astro
+import { navbarData } from "../data/navbarData";
+import { aboutData } from "../data/aboutData";
+
+const {
+  logoFirstName,
+  logoLastName,
+  contactBtnText,
+  contactBtnUrl,
+  backgroundMenu,
+  resourcesMenu,
+  flatLinks
+} = navbarData;
+
+const { contacts } = aboutData;
+const otherContacts = contacts.filter(c => c.icon !== 'email');
+const emailContact = contacts.find(c => c.icon === 'email');
+const emailAddress = emailContact ? emailContact.url.replace('mailto:', '') : 'yasiththaruka@outlook.com';
 ---
 
 <header class="w-full border-b border-gray-200 bg-white sticky top-0 z-50">
@@ -16,10 +33,10 @@
                     class="font-heading font-medium text-lg text-gray-900 tracking-tight flex items-center"
                 >
                     <span class="font-semibold text-gray-900 tracking-tight"
-                        >Yasith</span
+                        >{logoFirstName}</span
                     >
                     <span class="font-medium text-gray-600 ml-1 tracking-tight"
-                        >Tharuka</span
+                        >{logoLastName}</span
                     >
                 </span>
             </a>
@@ -30,9 +47,9 @@
             class="hidden md:flex items-center gap-2 text-[15px] text-gray-650 font-medium"
         >
             <a
-                href="/#projects"
+                href={flatLinks[0].url}
                 class="hover:bg-[#F1F3F4] hover:text-black px-4 py-1.5 rounded-full transition-colors text-gray-600 cursor-pointer"
-                >Projects</a
+                >{flatLinks[0].name}</a
             >
 
             <!-- Background Dropdown Button -->
@@ -43,7 +60,7 @@
          transition-colors flex items-center gap-1.5
          focus:outline-none font-medium cursor-pointer"
             >
-                Background
+                {backgroundMenu.label}
                 <svg
                     class="w-2.5 h-2.5 text-gray-700 transition-transform duration-250"
                     id="background-arrow"
@@ -60,14 +77,14 @@
             </button>
 
             <a
-                href="/certifications"
+                href={flatLinks[1].url}
                 class="hover:bg-[#F1F3F4] hover:text-black px-4 py-1.5 rounded-full transition-colors text-gray-600 cursor-pointer"
-                >Certificates</a
+                >{flatLinks[1].name}</a
             >
             <a
-                href="/#blog"
+                href={flatLinks[2].url}
                 class="hover:bg-[#F1F3F4] hover:text-black px-4 py-1.5 rounded-full transition-colors text-gray-600 cursor-pointer"
-                >Blog</a
+                >{flatLinks[2].name}</a
             >
 
             <!-- Resources Dropdown Button -->
@@ -78,7 +95,7 @@
          transition-colors flex items-center gap-1.5
          focus:outline-none font-medium cursor-pointer"
             >
-                Resources
+                {resourcesMenu.label}
                 <svg
                     class="w-2.5 h-2.5 text-gray-700 transition-transform duration-250"
                     id="resources-arrow"
@@ -98,10 +115,11 @@
         <!-- Right: Download / Mobile Toggles -->
         <div class="flex items-center gap-3">
             <a
-                href="#download"
+                href={contactBtnUrl}
                 class="hidden md:flex bg-[#0F0F10] text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors items-center gap-2"
+                id="desktop-header-contact-btn"
             >
-                Contact
+                {contactBtnText}
             </a>
 
             <!-- Mobile Hamburger Toggle -->
@@ -157,9 +175,8 @@
                 <div class="col-span-12 md:col-span-4 pr-6">
                     <h3
                         class="font-heading text-2xl font-normal text-gray-400 leading-tight"
+                        set:html={backgroundMenu.desc}
                     >
-                        Exploring my academic journey, <br />volunteer roles,
-                        and personal milestones.
                     </h3>
                 </div>
 
@@ -174,110 +191,84 @@
                     <span
                         class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-5"
                     >
-                        Background
+                        {backgroundMenu.label}
                     </span>
 
                     <ul class="space-y-4">
-                        <li>
-                            <a
-                                href="/#education"
-                                class="flex items-center gap-3.5 group text-base font-medium text-gray-900 hover:text-[#4285F4] transition-colors"
-                            >
-                                <div
-                                    class="w-6 h-6 flex items-center justify-center"
+                        {backgroundMenu.links.map(link => (
+                            <li>
+                                <a
+                                    href={link.url}
+                                    class="flex items-center gap-3.5 group text-base font-medium text-gray-900 hover:text-[#4285F4] transition-colors"
                                 >
-                                    <svg
-                                        class="w-5 h-5 text-gray-500 group-hover:text-[#4285F4] transition-colors"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                        stroke-width="2"
+                                    <div
+                                        class="w-6 h-6 flex items-center justify-center"
                                     >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                                        ></path>
-                                    </svg>
-                                </div>
-                                Education
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="/volunteer"
-                                class="flex items-center gap-3.5 group text-base font-medium text-gray-900 hover:text-[#4285F4] transition-colors"
-                            >
-                                <div
-                                    class="w-6 h-6 flex items-center justify-center"
-                                >
-                                    <svg
-                                        class="w-5 h-5 text-gray-500 group-hover:text-[#4285F4] transition-colors"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
-                                        ></path>
-                                    </svg>
-                                </div>
-                                Volunteer Experience
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="/#recommendations"
-                                class="flex items-center gap-3.5 group text-base font-medium text-gray-900 hover:text-[#4285F4] transition-colors"
-                            >
-                                <div
-                                    class="w-6 h-6 flex items-center justify-center"
-                                >
-                                    <svg
-                                        class="w-5 h-5 text-gray-500 group-hover:text-[#4285F4] transition-colors"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                                        ></path>
-                                    </svg>
-                                </div>
-                                Recommendations
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="/timeline"
-                                class="flex items-center gap-3.5 group text-base font-medium text-gray-900 hover:text-[#4285F4] transition-colors"
-                            >
-                                <div
-                                    class="w-6 h-6 flex items-center justify-center"
-                                >
-                                    <svg
-                                        class="w-5 h-5 text-gray-500 group-hover:text-[#4285F4] transition-colors"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                        ></path>
-                                    </svg>
-                                </div>
-                                Timeline Tree
-                            </a>
-                        </li>
+                                        {link.icon === "education" && (
+                                            <svg
+                                                class="w-5 h-5 text-gray-500 group-hover:text-[#4285F4] transition-colors"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                                ></path>
+                                            </svg>
+                                        )}
+                                        {link.icon === "volunteer" && (
+                                            <svg
+                                                class="w-5 h-5 text-gray-500 group-hover:text-[#4285F4] transition-colors"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+                                                ></path>
+                                            </svg>
+                                        )}
+                                        {link.icon === "recommendations" && (
+                                            <svg
+                                                class="w-5 h-5 text-gray-500 group-hover:text-[#4285F4] transition-colors"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                                                ></path>
+                                            </svg>
+                                        )}
+                                        {link.icon === "timeline" && (
+                                            <svg
+                                                class="w-5 h-5 text-gray-500 group-hover:text-[#4285F4] transition-colors"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                                ></path>
+                                            </svg>
+                                        )}
+                                    </div>
+                                    {link.name}
+                                </a>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>
@@ -295,9 +286,8 @@
                 <div class="col-span-12 md:col-span-4 pr-6">
                     <h3
                         class="font-heading text-2xl font-normal text-gray-400 leading-tight"
+                        set:html={resourcesMenu.desc}
                     >
-                        My story, professional credentials, <br />and
-                        touchpoints to collaborate.
                     </h3>
                 </div>
 
@@ -312,116 +302,91 @@
                     <span
                         class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-5"
                     >
-                        Resources
+                        {resourcesMenu.label}
                     </span>
 
                     <ul class="space-y-4">
-                        <li>
-                            <a
-                                href="/about"
-                                class="flex items-center gap-3.5 group text-base font-medium text-gray-900 hover:text-[#4285F4] transition-colors"
-                            >
-                                <div
-                                    class="w-6 h-6 flex items-center justify-center"
+                        {resourcesMenu.links.map(link => (
+                            <li>
+                                <a
+                                    href={link.url}
+                                    target={link.icon === "download" ? "_blank" : undefined}
+                                    class="flex items-center gap-3.5 group text-base font-medium text-gray-900 hover:text-[#4285F4] transition-colors"
+                                    id={link.icon === "contact" ? "desktop-nav-contact-trigger" : undefined}
                                 >
-                                    <svg
-                                        class="w-5 h-5 text-gray-500 group-hover:text-[#4285F4] transition-colors"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                        stroke-width="2"
+                                    <div
+                                        class="w-6 h-6 flex items-center justify-center"
                                     >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                                        ></path>
-                                    </svg>
-                                </div>
-                                About Me
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="/Yasith_Tharuka_CV.pdf"
-                                target="_blank"
-                                class="flex items-center gap-3.5 group text-base font-medium text-gray-900 hover:text-[#4285F4] transition-colors"
-                            >
-                                <div
-                                    class="w-6 h-6 flex items-center justify-center"
-                                >
-                                    <svg
-                                        class="w-5 h-5 text-gray-500 group-hover:text-[#4285F4] transition-colors"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                                        ></path>
-                                    </svg>
-                                </div>
-                                Download CV
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="/#contact"
-                                class="flex items-center gap-3.5 group text-base font-medium text-gray-900 hover:text-[#4285F4] transition-colors"
-                            >
-                                <div
-                                    class="w-6 h-6 flex items-center justify-center"
-                                >
-                                    <svg
-                                        class="w-5 h-5 text-gray-500 group-hover:text-[#4285F4] transition-colors"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                                        ></path>
-                                    </svg>
-                                </div>
-                                Contact Info
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="/#tools"
-                                class="flex items-center gap-3.5 group text-base font-medium text-gray-900 hover:text-[#4285F4] transition-colors"
-                            >
-                                <div
-                                    class="w-6 h-6 flex items-center justify-center"
-                                >
-                                    <svg
-                                        class="w-5 h-5 text-gray-500 group-hover:text-[#4285F4] transition-colors"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                                        ></path>
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                                        ></path>
-                                    </svg>
-                                </div>
-                                Tools & Tech Stack
-                            </a>
-                        </li>
+                                        {link.icon === "about" && (
+                                            <svg
+                                                class="w-5 h-5 text-gray-500 group-hover:text-[#4285F4] transition-colors"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                                                ></path>
+                                            </svg>
+                                        )}
+                                        {link.icon === "download" && (
+                                            <svg
+                                                class="w-5 h-5 text-gray-500 group-hover:text-[#4285F4] transition-colors"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                                                ></path>
+                                            </svg>
+                                        )}
+                                        {link.icon === "contact" && (
+                                            <svg
+                                                class="w-5 h-5 text-gray-500 group-hover:text-[#4285F4] transition-colors"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                                ></path>
+                                            </svg>
+                                        )}
+                                        {link.icon === "tools" && (
+                                            <svg
+                                                class="w-5 h-5 text-gray-500 group-hover:text-[#4285F4] transition-colors"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                                                ></path>
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                                ></path>
+                                            </svg>
+                                        )}
+                                    </div>
+                                    {link.name}
+                                </a>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>
@@ -436,10 +401,10 @@
                 <!-- Projects Mobile Item -->
                 <div class="border-b border-gray-100 py-3.5">
                     <a
-                        href="/#projects"
+                        href={flatLinks[0].url}
                         class="block text-2xl font-normal text-gray-900 py-2 mobile-menu-link"
                     >
-                        Projects
+                        {flatLinks[0].name}
                     </a>
                 </div>
 
@@ -449,7 +414,7 @@
                         class="w-full flex items-center justify-between text-2xl font-normal text-gray-900 py-2 focus:outline-none cursor-pointer mobile-accordion-toggle"
                         data-target="mobile-background-submenu"
                     >
-                        Background
+                        {backgroundMenu.label}
                         <svg
                             class="w-4 h-4 text-gray-500 transition-transform duration-250 mobile-arrow"
                             fill="none"
@@ -467,46 +432,34 @@
                         id="mobile-background-submenu"
                         class="overflow-hidden transition-all duration-300 max-h-0 pl-4 mt-2 space-y-2.5 hidden"
                     >
-                        <a
-                            href="/#education"
-                            class="block py-2 text-gray-600 hover:text-[#4285F4] text-lg font-medium mobile-menu-link"
-                            >Education</a
-                        >
-                        <a
-                            href="/volunteer"
-                            class="block py-2 text-gray-600 hover:text-[#4285F4] text-lg font-medium mobile-menu-link"
-                            >Volunteer Experience</a
-                        >
-                        <a
-                            href="/#recommendations"
-                            class="block py-2 text-gray-600 hover:text-[#4285F4] text-lg font-medium mobile-menu-link"
-                            >Recommendations</a
-                        >
-                        <a
-                            href="/timeline"
-                            class="block py-2 text-gray-600 hover:text-[#4285F4] text-lg font-medium mobile-menu-link"
-                            >Timeline Tree</a
-                        >
+                        {backgroundMenu.links.map(link => (
+                            <a
+                                href={link.url}
+                                class="block py-2 text-gray-600 hover:text-[#4285F4] text-lg font-medium mobile-menu-link"
+                            >
+                                {link.name}
+                            </a>
+                        ))}
                     </div>
                 </div>
 
                 <!-- Certificates Mobile Item -->
                 <div class="border-b border-gray-100 py-3.5">
                     <a
-                        href="/certifications"
+                        href={flatLinks[1].url}
                         class="block text-2xl font-normal text-gray-900 py-2 mobile-menu-link"
                     >
-                        Certificates
+                        {flatLinks[1].name}
                     </a>
                 </div>
 
                 <!-- Blog Mobile Item -->
                 <div class="border-b border-gray-100 py-3.5">
                     <a
-                        href="/#blog"
+                        href={flatLinks[2].url}
                         class="block text-2xl font-normal text-gray-900 py-2 mobile-menu-link"
                     >
-                        Blog
+                        {flatLinks[2].name}
                     </a>
                 </div>
 
@@ -516,7 +469,7 @@
                         class="w-full flex items-center justify-between text-2xl font-normal text-gray-900 py-2 focus:outline-none cursor-pointer mobile-accordion-toggle"
                         data-target="mobile-resources-submenu"
                     >
-                        Resources
+                        {resourcesMenu.label}
                         <svg
                             class="w-4 h-4 text-gray-500 transition-transform duration-250 mobile-arrow"
                             fill="none"
@@ -534,33 +487,205 @@
                         id="mobile-resources-submenu"
                         class="overflow-hidden transition-all duration-300 max-h-0 pl-4 mt-2 space-y-2.5 hidden"
                     >
-                        <a
-                            href="/about"
-                            class="block py-2 text-gray-600 hover:text-[#4285F4] text-lg font-medium mobile-menu-link"
-                            >About Me</a
-                        >
-                        <a
-                            href="/Yasith_Tharuka_CV.pdf"
-                            target="_blank"
-                            class="block py-2 text-gray-600 hover:text-[#4285F4] text-lg font-medium mobile-menu-link"
-                            >Download CV</a
-                        >
-                        <a
-                            href="/#contact"
-                            class="block py-2 text-gray-600 hover:text-[#4285F4] text-lg font-medium mobile-menu-link"
-                            >Contact Info</a
-                        >
-                        <a
-                            href="/#tools"
-                            class="block py-2 text-gray-600 hover:text-[#4285F4] text-lg font-medium mobile-menu-link"
-                            >Tools & Tech Stack</a
-                        >
+                        {resourcesMenu.links.map(link => (
+                            <a
+                                href={link.url}
+                                target={link.icon === "download" ? "_blank" : undefined}
+                                class="block py-2 text-gray-600 hover:text-[#4285F4] text-lg font-medium mobile-menu-link"
+                                id={link.icon === "contact" ? "mobile-nav-contact-trigger" : undefined}
+                            >
+                                {link.name}
+                            </a>
+                        ))}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </header>
+
+<!-- Contact Info Modal (Liquid Glass Theme) -->
+<div
+    id="contact-modal"
+    class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-10 hidden opacity-0 transition-all duration-300"
+>
+    <!-- Blur Overlay Backdrop -->
+    <div
+        id="contact-modal-backdrop"
+        class="absolute inset-0 bg-[#0F172A]/40 backdrop-blur-2xl transition-opacity duration-300"
+    ></div>
+
+    <!-- Ambient glowing fluid blobs in background -->
+    <div class="absolute top-1/4 left-1/4 w-80 h-80 rounded-full bg-indigo-500/15 blur-3xl animate-modal-float-1 pointer-events-none z-0"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-purple-500/15 blur-3xl animate-modal-float-2 pointer-events-none z-0"></div>
+
+    <!-- Modal Card Container -->
+    <div
+        id="contact-modal-card"
+        class="relative w-full max-w-xl bg-white/25 backdrop-blur-3xl border border-white/60 shadow-[inset_0_2px_4px_rgba(255,255,255,0.7),0_24px_56px_-16px_rgba(0,0,0,0.12)] rounded-[2.5rem] p-6 sm:p-8 z-10 transform scale-95 opacity-0 transition-all duration-300 overflow-hidden"
+    >
+        <!-- Top glare specular highlights for 3D glass look -->
+        <div class="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/35 to-transparent pointer-events-none rounded-t-[2.5rem]"></div>
+
+        <!-- Floating liquid glass bubble components inside the modal card -->
+        <div class="absolute -top-12 -left-12 w-24 h-24 bg-gradient-to-br from-indigo-500/15 to-purple-500/10 border border-white/40 shadow-inner rounded-full animate-modal-morph animate-modal-float-1 opacity-70 pointer-events-none"></div>
+        <div class="absolute -bottom-16 -right-16 w-32 h-32 bg-gradient-to-br from-purple-500/15 to-emerald-500/10 border border-white/40 shadow-inner rounded-full animate-modal-morph animate-modal-float-2 opacity-60 pointer-events-none"></div>
+
+        <!-- Modal Header -->
+        <div class="relative z-10 flex items-start justify-between mb-6">
+            <div>
+                <h2 class="font-san text-2xl font-semibold text-gray-900 tracking-tight">Contact Info</h2>
+                <p class="text-xs text-gray-500 font-light mt-1 max-w-xs sm:max-w-sm">Connect with me through official social networks and scholarly research directories.</p>
+            </div>
+
+            <!-- Premium close button -->
+            <button
+                id="contact-modal-close"
+                class="w-10 h-10 flex items-center justify-center bg-white/40 hover:bg-white/75 border border-white/50 text-gray-700 rounded-full shadow-sm cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95 group focus:outline-none"
+                aria-label="Close dialog"
+            >
+                <svg
+                    class="w-4 h-4 transition-transform duration-300 group-hover:rotate-90"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Modal Body Content -->
+        <div class="relative z-10 space-y-4">
+            <!-- Email Display Block (Top Item) -->
+            <div class="relative group flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-3xl bg-white/40 border border-white/60 shadow-sm backdrop-blur-md transition-all duration-300 hover:bg-white/55 hover:border-white/75 hover:scale-[1.01]">
+                <div class="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent pointer-events-none rounded-t-3xl"></div>
+                
+                <div class="flex items-center gap-3.5 relative z-10">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-[#EA4335]/10 to-orange-500/10 border border-[#EA4335]/20 flex items-center justify-center text-[#EA4335]">
+                        <svg class="w-5.5 h-5.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="text-[9px] font-bold text-gray-400 uppercase tracking-wider block">Official Email</span>
+                        <a href={`mailto:${emailAddress}`} class="text-sm sm:text-base font-semibold text-gray-800 hover:text-[#EA4335] transition-colors tracking-tight select-all">
+                            {emailAddress}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2 relative z-10">
+                    <button
+                        id="copy-email-btn"
+                        class="flex-1 sm:flex-none h-10 px-4 flex items-center justify-center gap-2 bg-white/60 hover:bg-white border border-white/80 text-gray-700 hover:text-black rounded-full text-xs font-semibold cursor-pointer transition-all duration-300 shadow-sm hover:shadow active:scale-95 group"
+                        data-email={emailAddress}
+                    >
+                        <svg class="w-3.5 h-3.5 text-gray-500 group-hover:text-black transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                        </svg>
+                        <span class="btn-text">Copy</span>
+                    </button>
+                    
+                    <a
+                        href={`mailto:${emailAddress}`}
+                        class="flex-1 sm:flex-none h-10 px-4 flex items-center justify-center gap-1.5 bg-gray-900 hover:bg-gray-800 text-white rounded-full text-xs font-semibold cursor-pointer transition-all duration-300 shadow-sm active:scale-95"
+                    >
+                        Send Mail
+                    </a>
+                </div>
+            </div>
+
+            <!-- Social/Scholarly Contacts Grid -->
+            <div class="grid grid-cols-2 gap-3" id="modal-contacts-grid">
+                {otherContacts.map((c) => (
+                    <a 
+                        href={c.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class={`contact-node flex items-center gap-3 p-3.5 rounded-2xl bg-white/40 border border-white/50 shadow-sm backdrop-blur-sm transition-all duration-300 hover:scale-[1.03] cursor-pointer ${c.bg}`}
+                        style={`--brand-color: ${c.color}`}
+                    >
+                        {c.icon === 'linkedin' && (
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        )}
+                        {c.icon === 'github' && (
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        )}
+                        {c.icon === 'scholar' && (
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l12 9.5 9-7.125V17h3V9.5L12 0z"/>
+                            </svg>
+                        )}
+                        {c.icon === 'medium' && (
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M0 0v24h24v-24h-24zm10.005 17.844c-2.48 0-4.49-2.01-4.49-4.49s2.01-4.49 4.49-4.49 4.49 2.01 4.49 4.49-2.01 4.49-4.49 4.49zm8.487-1.127c-.89 0-1.611-.722-1.611-1.612s.721-1.612 1.611-1.612 1.612.722 1.612 1.612-.722 1.612-1.612 1.612zm-3.834.721c-1.46 0-2.645-1.185-2.645-2.645s1.185-2.645 2.645-2.645 2.645 1.185 2.645 2.645-1.185 2.645-2.645 2.645z"/>
+                            </svg>
+                        )}
+                        {c.icon === 'researchgate' && (
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19.5 0h-15c-2.48 0-4.5 2.02-4.5 4.5v15c0 2.48 2.02 4.5 4.5 4.5h15c2.48 0 4.5-2.02 4.5-4.5v-15c0-2.48-2.02-4.5-4.5-4.5zm-8.86 16.5h-1.67v-3.79c.67.01 1.14-.15 1.41-.48.27-.32.41-.83.41-1.53v-.33c0-.66-.13-1.16-.4-1.47-.27-.32-.73-.47-1.38-.47H8.97v8.07H7.3v-9.68h3.37c1.17 0 2.03.26 2.58.78.55.52.82 1.3.82 2.34v.37c0 .92-.22 1.64-.67 2.14-.45.5-1.1.79-1.95.86l2.19 3.19h-1.88l-1.94-2.82zm3.32-9.68h1.67v9.68h-1.67V6.82z"/>
+                            </svg>
+                        )}
+                        {c.icon === 'orcid' && (
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 .002C5.373.002 0 5.374 0 12c0 6.627 5.373 12 12 12 6.627 0 12-5.373 12-12 0-6.626-5.373-11.998-12-11.998zm-.714 18.067H9.728V6.837h1.558v11.232zm-.779-12.441a.959.959 0 0 1-.958-.958c0-.528.43-.959.958-.959s.959.431.959.959a.96.96 0 0 1-.959.958zm8.272 12.441h-2.054c-.161-.634-.783-2.062-1.325-2.923-1.047.88-2.056.88-2.73.88h-1.282V6.837h1.654c1.994 0 3.321 1.258 3.321 3.232 0 1.283-.604 2.298-1.57 2.766 1.077 1.488 1.838 3.513 1.986 5.234zm-3.21-8.15c0-1.233-.873-1.85-2.03-1.85h-.779v3.665h.779c1.157-.001 2.03-.591 2.03-1.815z"/>
+                            </svg>
+                        )}
+                        <span class="text-xs font-semibold text-gray-800 tracking-tight">{c.name}</span>
+                    </a>
+                ))}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Float animations for background liquid blobs */
+    @keyframes modal-bubble-float-1 {
+        0% { transform: translateY(0px) translateX(0px) scale(1); }
+        50% { transform: translateY(-24px) translateX(12px) scale(1.06); }
+        100% { transform: translateY(0px) translateX(0px) scale(1); }
+    }
+    @keyframes modal-bubble-float-2 {
+        0% { transform: translateY(0px) translateX(0px) scale(1.04); }
+        50% { transform: translateY(-18px) translateX(-14px) scale(0.96); }
+        100% { transform: translateY(0px) translateX(0px) scale(1.04); }
+    }
+    .animate-modal-float-1 {
+        animation: modal-bubble-float-1 11s ease-in-out infinite;
+    }
+    .animate-modal-float-2 {
+        animation: modal-bubble-float-2 13s ease-in-out infinite;
+    }
+
+    /* Morphing Liquid Monogram Keyframes */
+    @keyframes modal-bubble-morph {
+        0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+        50% { border-radius: 30% 60% 70% 30% / 50% 60% 30% 50%; }
+        100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    }
+    .animate-modal-morph {
+        animation: modal-bubble-morph 8s ease-in-out infinite;
+    }
+
+    /* Contact grid nodes interactive effects */
+    .contact-node {
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .contact-node:hover {
+        color: var(--brand-color);
+        box-shadow: 
+            0 8px 24px -8px var(--brand-color)25,
+            inset 0 1px 1px rgba(255, 255, 255, 0.8);
+        transform: translateY(-3px) scale(1.02);
+    }
+</style>
 
 <script>
     console.log("Navbar JS executing...");
@@ -667,13 +792,6 @@
         }, 150);
     }
 
-    function cancelHide() {
-        if (hideTimeout) {
-            clearTimeout(hideTimeout);
-            hideTimeout = null;
-        }
-    }
-
     // Set up listeners for all dropdown configs
     dropdownConfigs.forEach(({ btnId, menuId }) => {
         const btn = document.getElementById(btnId);
@@ -690,7 +808,7 @@
 
             // Mega menu hover events
             menu.addEventListener("mouseenter", () => {
-                cancelHide();
+                if (hideTimeout) clearTimeout(hideTimeout);
                 openMenu(menuId);
             });
             menu.addEventListener("mouseleave", () => {
@@ -818,4 +936,127 @@
             }
         });
     });
+
+    // --- Contact Modal JavaScript Logic ---
+    const contactModal = document.getElementById("contact-modal");
+    const contactModalCard = document.getElementById("contact-modal-card");
+    const contactModalClose = document.getElementById("contact-modal-close");
+    const contactModalBackdrop = document.getElementById("contact-modal-backdrop");
+    
+    const contactTriggers = [
+        document.getElementById("desktop-header-contact-btn"),
+        document.getElementById("desktop-nav-contact-trigger"),
+        document.getElementById("mobile-nav-contact-trigger")
+    ];
+
+    function openContactModal() {
+        if (!contactModal || !contactModalCard) return;
+
+        // Close mobile menu overlay first if it's open
+        if (mobileMenuOverlay && !mobileMenuOverlay.classList.contains("hidden")) {
+            closeMobileMenu();
+        }
+
+        // Close any active desktop mega menus
+        closeActiveMenu();
+
+        // Display modal
+        contactModal.classList.remove("hidden");
+        // Force reflow
+        contactModal.offsetHeight;
+        
+        // Lock background scroll
+        document.body.style.overflow = "hidden";
+
+        // Transition states
+        contactModal.classList.remove("opacity-0");
+        contactModal.classList.add("opacity-100");
+        
+        contactModalCard.classList.remove("scale-95", "opacity-0");
+        contactModalCard.classList.add("scale-100", "opacity-100");
+    }
+
+    function closeContactModal() {
+        if (!contactModal || !contactModalCard) return;
+
+        // Start transitions
+        contactModal.classList.remove("opacity-100");
+        contactModal.classList.add("opacity-0");
+
+        contactModalCard.classList.remove("scale-100", "opacity-100");
+        contactModalCard.classList.add("scale-95", "opacity-0");
+
+        // Unlock scroll
+        document.body.style.overflow = "";
+
+        // Wait for transitions to finish before hiding elements completely
+        setTimeout(() => {
+            if (contactModal.classList.contains("opacity-0")) {
+                contactModal.classList.add("hidden");
+            }
+        }, 300);
+    }
+
+    contactTriggers.forEach((trigger) => {
+        if (trigger) {
+            trigger.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                openContactModal();
+            });
+        }
+    });
+
+    if (contactModalClose) {
+        contactModalClose.addEventListener("click", (e) => {
+            e.preventDefault();
+            closeContactModal();
+        });
+    }
+
+    if (contactModalBackdrop) {
+        contactModalBackdrop.addEventListener("click", (e) => {
+            e.preventDefault();
+            closeContactModal();
+        });
+    }
+
+    // Dismiss on Escape key
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && contactModal && !contactModal.classList.contains("hidden")) {
+            closeContactModal();
+        }
+    });
+
+    // Copy to clipboard logic with visual feedback
+    const copyEmailBtn = document.getElementById("copy-email-btn");
+    if (copyEmailBtn) {
+        const emailToCopy = copyEmailBtn.getAttribute("data-email") || "yasiththaruka@outlook.com";
+        const btnText = copyEmailBtn.querySelector(".btn-text");
+        let isCopying = false;
+
+        copyEmailBtn.addEventListener("click", async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (isCopying) return;
+            isCopying = true;
+
+            try {
+                await navigator.clipboard.writeText(emailToCopy);
+                
+                // Visual feedback
+                if (btnText) btnText.textContent = "Copied!";
+                copyEmailBtn.classList.add("bg-emerald-500/20", "border-emerald-400/50", "text-emerald-700");
+                
+                setTimeout(() => {
+                    if (btnText) btnText.textContent = "Copy";
+                    copyEmailBtn.classList.remove("bg-emerald-500/20", "border-emerald-400/50", "text-emerald-700");
+                    isCopying = false;
+                }, 2000);
+            } catch (err) {
+                console.error("Failed to copy text: ", err);
+                isCopying = false;
+            }
+        });
+    }
 </script>

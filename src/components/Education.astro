@@ -1,204 +1,8 @@
 ---
 // src/components/Education.astro
+import { educationData as educationContent } from "../data/educationData";
 
-const educationData = [
-  {
-    id: "sliit-hdip",
-    degree: "Higher Diploma in Information Technology (Software Engineering)",
-    shortDegree: "Higher Diploma in IT (SE)",
-    institution: "SLIIT City UNI",
-    awardingBody: "Awarded by SLIIT City Uni (Subsidiary of SLIIT)",
-    period: "Jul 2025 – Jul 2027",
-    grade: "Expected",
-    gradeLabel: "Current Standing",
-    gradeValue: "In Progress / Expected",
-    gradeSub: "Expected Graduation: Jul 2027",
-    gradeColor: "text-blue-600 bg-blue-50/70 border-blue-150/40",
-    progressPercent: 35,
-    progressLabel: "Degree Progress",
-    activities: [
-      {
-        role: "IEEE SB Public Visibility Sub‑Committee Member",
-        desc: "Leading visual communications, graphics design guidelines, and branding layouts across the student branch events."
-      },
-      {
-        role: "ICPC 2026 Student Branch Ambassador",
-        desc: "Coordinating team registrations, regional communication channels, and logistics for local participants."
-      },
-      {
-        role: "SESC Member",
-        desc: "Software Engineering Student Community active participant, collaborating on code sessions and peer workshops."
-      }
-    ],
-    skills: [
-      "Academic English",
-      "Software Development",
-      "Object-Oriented Programming (OOP)",
-      "Data Structures & Algorithms",
-      "Web Technologies",
-      "Git & Collaborative Workflow"
-    ],
-    logoType: "sliit",
-    logo: "/certificates/Issuer_Logos/sliit_logo.jpg",
-    accentColor: "#4285F4", // Blue
-    bgGrad: "from-blue-500/10 to-indigo-500/5",
-    documents: []
-  },
-  {
-    id: "sliit-fcit",
-    degree: "Foundation Certificate in Information Technology (FCIT)",
-    shortDegree: "Foundation Cert in IT",
-    field: "Information Technology",
-    institution: "SLIIT City UNI",
-    awardingBody: "Awarded by SLIIT City Uni (Subsidiary of SLIIT)",
-    period: "Jul 2024 – Jul 2025",
-    grade: "GPA: 3.21",
-    gradeLabel: "Academic Performance",
-    gradeValue: "3.21 GPA",
-    gradeSub: "Scale: 4.00",
-    gradeColor: "text-emerald-600 bg-emerald-50/70 border-emerald-150/40",
-    progressPercent: 100,
-    progressLabel: "Completed",
-    activities: [
-      {
-        role: "IEEE Student Member",
-        desc: "Engaged in professional development, technical seminars, and student hackathon operations."
-      },
-      {
-        role: "Photography Club Committee Member",
-        desc: "Assisted in club meeting logistics, photo walk operations, and high-resolution event coverage."
-      }
-    ],
-    skills: [
-      "C# Programming",
-      "Project Management",
-      "Database Systems (SQL)",
-      "UI/UX Design Fundamentals",
-      "Computer Networking",
-      "Problem Solving",
-      "Academic Communication"
-    ],
-    logoType: "sliit",
-    logo: "/certificates/Issuer_Logos/sliit_logo.jpg",
-    accentColor: "#34A853", // Green
-    bgGrad: "from-emerald-500/10 to-teal-500/5",
-    documents: [
-      {
-        name: "FCIT Certificate File",
-        filename: "FCIT_Certificate.jpg",
-        type: "image",
-        url: "/certificates/FCIT_Certificate.jpg",
-        thumbnail: "/certificates/FCIT_Certificate.jpg",
-        description: "Official Foundation Certificate in IT transcript and credentials."
-      }
-    ]
-  },
-  {
-    id: "othm-spoken-english",
-    degree: "International Diploma in Spoken English (Level 3)",
-    shortDegree: "Diploma in Spoken English",
-    field: "Spoken English",
-    institution: "OTHM Qualifications",
-    awardingBody: "Completed through ICBT Campus, Sri Lanka – an approved teaching center for OTHM Qualifications. EQF Level 4.",
-    period: "Oct 2024 – Apr 2025",
-    grade: "Pass",
-    gradeLabel: "Evaluation Status",
-    gradeValue: "Pass",
-    gradeSub: "European Qualification Framework (EQF) Level 4",
-    gradeColor: "text-purple-600 bg-purple-50/70 border-purple-150/40",
-    progressPercent: 100,
-    progressLabel: "Completed",
-    activities: [
-      {
-        role: "Completed through ICBT Campus",
-        desc: "Attended intensive sessions on public speaking guidelines and oral diagnostics at ICBT Colombo."
-      },
-      {
-        role: "EQF Level 4 Framework Verification",
-        desc: "Validated standardized credits aligned with international language competency scales."
-      }
-    ],
-    skills: [
-      "Presentation Skills",
-      "Public Speaking",
-      "Verbal Communication",
-      "Professional English",
-      "Interpersonal Skills"
-    ],
-    logoType: "othm",
-    logo: "", // Render custom SVG/CSS OTHM logo
-    accentColor: "#8B5CF6", // Purple
-    bgGrad: "from-purple-500/10 to-pink-500/5",
-    documents: [
-      {
-        name: "Official OTHM Certificate",
-        filename: "spoken_english_certificate.pdf",
-        type: "pdf",
-        url: "/certificates/spoken_english_certificate.pdf",
-        thumbnail: "/certificates/spoken_english_certificate.pdf",
-        description: "Level 3 International Diploma Certificate issued by OTHM Qualifications."
-      },
-      {
-        name: "Academic CQF Transcript",
-        filename: "spoken_english_transcript.pdf",
-        type: "pdf",
-        url: "/certificates/spoken_english_transcript.pdf",
-        thumbnail: "/certificates/spoken_english_transcript.pdf",
-        description: "Official credit transcript documenting modular speaking scores."
-      }
-    ]
-  },
-  {
-    id: "thelijjawila-secondary",
-    degree: "Secondary School Education (GCE Ordinary Level)",
-    shortDegree: "Ordinary Level (Secondary)",
-    field: "Formal subjects",
-    institution: "Thelijjawila Central College",
-    awardingBody: "Thelijjawila Central College, Sri Lanka",
-    period: "Feb 2019 – Nov 2023",
-    grade: "3 A’s, 3 B’s, 3 C’s",
-    gradeLabel: "GCE O/L Results (2021)",
-    gradeValue: "3 A's, 3 B's, 3 C's",
-    gradeSub: "Credential ID: CL‑CK1339",
-    gradeColor: "text-amber-600 bg-amber-50/70 border-amber-150/40",
-    progressPercent: 100,
-    progressLabel: "Completed",
-    activities: [
-      {
-        role: "Founder & Leader – School Stamp Society (2022–2024)",
-        desc: "Initiated the formal stamp society, organized school exhibitions, and managed weekly newsletters."
-      },
-      {
-        role: "Participant – SLIC “Sahasak Nimavum” (2020 & 2021)",
-        desc: "Competed in the national invention competition, presenting prototype mechanics."
-      },
-      {
-        role: "Prize Winner – “Brain Busters” Quiz (SLIIT)",
-        desc: "Won regional team positions in the national school quiz competition organized by SLIIT."
-      }
-    ],
-    skills: [
-      "Critical Thinking",
-      "Teamwork",
-      "Leadership & Organization",
-      "Creative Innovation"
-    ],
-    logoType: "school",
-    logo: "", // Render custom SVG/CSS school logo
-    accentColor: "#FBBC05", // Amber
-    bgGrad: "from-amber-500/10 to-orange-500/5",
-    documents: [
-      {
-        name: "Verification Link",
-        filename: "certificate.doenets.lk",
-        type: "link",
-        url: "https://certificate.doenets.lk",
-        thumbnail: "",
-        description: "Official results verification portal via the Department of Examinations, Sri Lanka. Credential ID: CL-CK1339"
-      }
-    ]
-  }
-];
+const { educationList: educationData, accent, heading, description, keyActivitiesTitle, verifiedCredentialsTitle, gradArtifactsExpectedText, academicRegistryText } = educationContent;
 ---
 
 <div class="relative overflow-hidden w-full bg-[#FAFAFC] border-t border-gray-150 py-20 font-body">
@@ -214,12 +18,11 @@ const educationData = [
     <!-- Section Header -->
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
       <div class="max-w-2xl">
-        <span class="text-xs font-semibold text-[#4285F4] uppercase tracking-widest block mb-2 font-san">Academic dossier</span>
-        <h2 class="font-san text-3xl sm:text-4xl md:text-5xl font-normal text-gray-900 leading-[1.15] tracking-tight">
-          Education &<br class="hidden sm:inline" /> academic journey
+        <span class="text-xs font-semibold text-[#4285F4] uppercase tracking-widest block mb-2 font-san">{accent}</span>
+        <h2 class="font-san text-3xl sm:text-4xl md:text-5xl font-normal text-gray-900 leading-[1.15] tracking-tight" set:html={heading}>
         </h2>
         <p class="text-sm sm:text-base text-gray-500 leading-relaxed mt-3 font-light">
-          A verified chronicle of my academic degrees, GPA standings, leadership roles, and transcripts.
+          {description}
         </p>
       </div>
     </div>
@@ -300,7 +103,7 @@ const educationData = [
 
             <!-- Activities list (Compact bullet list) -->
             <div class="mt-6 border-t border-gray-200/40 pt-4">
-              <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest block mb-2.5">Key Activities & Roles</span>
+              <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest block mb-2.5">{keyActivitiesTitle}</span>
               <ul class="space-y-2.5 text-xs text-gray-550 leading-relaxed font-light font-sans">
                 {edu.activities.map((act) => (
                   <li class="flex items-start gap-2.5 group/item">
@@ -323,7 +126,7 @@ const educationData = [
           <div class="mt-6 border-t border-gray-200/40 pt-4 flex flex-col gap-3">
             {edu.documents.length > 0 ? (
               <div>
-                <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest block mb-2">Verified Credentials</span>
+                <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest block mb-2">{verifiedCredentialsTitle}</span>
                 <div class="flex flex-wrap gap-2.5">
                   {edu.documents.map((doc) => (
                     <button 
@@ -355,7 +158,7 @@ const educationData = [
             ) : (
               <div class="flex items-center gap-2 text-[10px] text-gray-400 font-light font-sans bg-white/20 border border-white/20 p-2.5 rounded-xl">
                 <span class="w-1.5 h-1.5 rounded-full bg-blue-500/60 animate-pulse"></span>
-                <span>{edu.id === 'sliit-hdip' ? "Graduation artifacts expected modular release 2027" : "Academic registry verified entry"}</span>
+                <span>{edu.id === 'sliit-hdip' ? gradArtifactsExpectedText : academicRegistryText}</span>
               </div>
             )}
           </div>
@@ -372,8 +175,8 @@ const educationData = [
       <!-- Header Panel -->
       <div class="px-6 py-4 border-b border-gray-150 flex items-center justify-between bg-white relative z-10">
         <div>
-          <h3 class="font-san font-semibold text-gray-900 text-base" id="edu-lightbox-title">Document Viewer</h3>
-          <p class="text-[11px] text-gray-500 font-light truncate max-w-md sm:max-w-xl" id="edu-lightbox-desc">Document verification details...</p>
+          <h3 class="font-san font-semibold text-gray-900 text-base" id="edu-lightbox-title">{educationContent.lightboxDefaultTitle}</h3>
+          <p class="text-[11px] text-gray-500 font-light truncate max-w-md sm:max-w-xl" id="edu-lightbox-desc">{educationContent.lightboxDefaultDesc}</p>
         </div>
 
         <div class="flex items-center gap-2">
@@ -491,6 +294,8 @@ const educationData = [
 </style>
 
 <script>
+  import { educationData } from "../data/educationData";
+
   // Lightbox Media Viewer Modal Dialog logic
   const docPreviewCards = document.querySelectorAll(".document-preview-card");
   const lightboxModal = document.getElementById("edu-lightbox");
@@ -534,12 +339,12 @@ const educationData = [
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
           </svg>
         </div>
-        <h3 class="font-san font-semibold text-gray-900 text-lg mb-2">Verified Result Portal</h3>
+        <h3 class="font-san font-semibold text-gray-900 text-lg mb-2">${educationData.verifiedResultPortalTitle}</h3>
         <p class="text-xs text-gray-500 font-light leading-relaxed mb-6">
-          This secondary credential is authenticated through the Ministry of Education results portal. Click below to verify manually.
+          ${educationData.verifiedResultPortalDesc}
         </p>
         <a href="${url}" target="_blank" class="px-6 py-2.5 bg-gray-900 hover:bg-gray-800 text-white rounded-full text-xs font-semibold transition-all inline-flex items-center gap-2">
-          Open External Portal
+          ${educationData.openExternalPortalText}
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>

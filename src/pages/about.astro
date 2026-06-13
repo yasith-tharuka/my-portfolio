@@ -431,10 +431,11 @@ const { title, description, qualifications, contacts } = aboutData;
         parent.classList.remove("opacity-0");
         parent.classList.add("opacity-100");
 
+        const target = el;
         let i = 0;
         function type() {
           if (i < item.text.length) {
-            el.textContent += item.text.slice(i, i + item.chunkSize);
+            target.textContent += item.text.slice(i, i + item.chunkSize);
             i += item.chunkSize;
             setTimeout(type, item.speed);
           } else {

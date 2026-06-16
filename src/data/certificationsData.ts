@@ -7,7 +7,7 @@ export const certificationsData = {
   heroTitle: "Professional Credentials & Certifications",
   heroDescription: "A curated summary of technical certifications, leadership roles, professional memberships, and extracurricular achievements verifying my expertise and community involvement.",
   returnHomeText: "Return to Home",
-  
+
   categories: [
     { id: "all", name: "All Credentials", colorClass: "active-all" },
     { id: "cs-engineering", name: "CS & Engineering", colorClass: "active-tab-blue" },
@@ -19,17 +19,19 @@ export const certificationsData = {
 
   certifications: [
     {
+      //Finalized
       title: "Certificate in CS50’s Introduction to Computer Science",
       issuer: "Harvard",
       date: "Issued Jan 2026",
       category: "cs-engineering",
       issuerLogo: "harvard.jpg",
-      skills: ["C Programming", "Python","Flask", "SQL & Database Design", "Algorithms"],
+      skills: ["C Programming", "Python", "Flask", "SQL & Database Design", "Algorithms"],
       verifyUrl: "https://certificates.cs50.io/d4495557-78e6-48a8-993c-69ff057b07d3.pdf?size=letter",
       proofImage: "/certificates/cs50x_certificate.png",
       description: "A comprehensive introduction to computer science and programming fundamentals, emphasizing data structures, algorithms, and web development principles."
     },
     {
+      //finalized
       title: "Java Programming: Solving Problems with Software",
       issuer: "Duke University",
       date: "Issued July 2025",
@@ -42,38 +44,65 @@ export const certificationsData = {
       description: "Demonstrated Java programming proficiency, problem‑solving ability, and object‑oriented design skills through hands‑on projects."
     },
     {
-      title: "Community Organizer – GDG DevFest Sri Lanka",
-      issuer: "Google Developer Group (GDG)",
-      date: "2024",
-      category: "leadership-impact",
-      issuerLogo: "google_logo.jpg",
-      skills: ["Logistics Coordinator", "Tech Outreach", "Event Operations"],
-      proofImage: "/certificates/devfest_volunteer.png",
-      verifyUrl: "https://gdg.community.dev/gdg-sri-lanka/",
-      description: "Collaborated in organizing Sri Lanka's largest developer event. Managed session layouts, speaker alignments, and logistics."
+      //finalized
+      title: "Neo4j Certified Professional",
+      issuer: "Neo4j",
+      date: "Issued July 6 2025",
+      category: "cs-engineering",
+      issuerLogo: "neo4j_logo.jpg",
+      credentialId: "27bbb640-ddec-46b7-b28e-17c1c460ba41",
+      skills: ["Graph Databases"],
+      proofImage: "certificates/neo4J_certificate.png",
+      verifyUrl: "https://graphacademy.neo4j.com/c/27bbb640-ddec-46b7-b28e-17c1c460ba41/",
+      description: "Earned the Neo4j Certified Professional credential, validating my foundational skills in graph data modeling, and working with Neo4j as a beginner in graph database technologies"
     },
     {
-      title: "IEEEXTREME 18.0 Programming Contest – Participant",
-      issuer: "IEEE",
-      date: "Oct 2024",
-      category: "extracurricular",
-      issuerLogo: "IEEE_UCSC.jpg",
-      skills: ["Competitive Programming", "Advanced Algorithms", "Dynamic Programming"],
-      proofImage: "/certificates/ieeextreme_score.png",
-      verifyUrl: "https://ieeextreme.org",
-      description: "Competed in the global 24-hour virtual programming challenge, solving high-difficulty logic problems under intense time constraints."
+      //finalized
+      title: "Postman API Fundamentals Student Expert",
+      issuer: "Postman",
+      date: "July 2025",
+      category: "cs-engineering",
+      issuerLogo: "postman_logo.jpg",
+      credentialId: "68679576fdf8e1196c7da6f5",
+      skills: ["Postman API"],
+      proofImage: "/certificates/postman_student_expert_badge.png",
+      verifyUrl: "https://badges.parchment.com/public/assertions/4KyuG7h7TGu8JkxO97gXzw",
+      description: "A hands‑on beginner certification covering the basics of working with APIs using Postman, including making requests, handling parameters and headers, using API keys, and integrating APIs into simple applications."
     },
     {
-      title: "Google Cloud Certified – Associate Cloud Engineer",
-      issuer: "Google Cloud",
-      date: "Issued Aug 2024",
+      title: "IEEE Student Member",
+      issuer: "Institute of Electrical and Electronics Engineers (IEEE)",
+      date: "May 2025 – Present",
+      category: "memberships",
+      issuerLogo: "ieee_logo.jpg",
+      skills: ["Professional Networking", "Technical Community Engagement", "Engineering Ethics"],
+      proofImage: "/certificates/ieee_membershipID_2026.png",
+      verifyUrl: "https://www.ieee.org/membership",
+      description: "Active IEEE Student Member, participating in technical communities, workshops, and student branch activities as part of my early professional development."
+    },
+    {
+      title: "CSSL Student Member",
+      issuer: "Computer Society of Sri Lanka (CSSL)",
+      date: "May 2025 – Present",
+      category: "memberships",
+      issuerLogo: "cssl_logo.jpg",
+      skills: ["Professional Recognition", "IT Community Engagement", "National ICT Standards Awareness"],
+      proofImage: "/certificates/cssl_membership_2026.png",
+      verifyUrl: "https://cssl.lk/membership/verify/S19834",
+      description: "Recognized as a CSSL Student Member, demonstrating early commitment to Sri Lanka’s national ICT professional body and participation in the local tech community."
+    }
+    ,
+    {
+      //Finalized
+      title: "Certificate of Participation – GitHub Actions 101 & Azure ML Workshop",
+      issuer: "Microsoft Learn Student Ambassadors - Sri Lanka",
+      date: "Issued Jan 2026",
       category: "cloud",
-      issuerLogo: "google_cloud_logo.jpg",
-      credentialId: "GCP-ACE-9821",
-      skills: ["GCP Platform", "Kubernetes (GKE)", "IAM Roles", "Stackdriver"],
-      verifyUrl: "https://google.acredly.com/verification",
-      proofImage: "/certificates/google_certified.png",
-      description: "Demonstrated capacity to plan, configure, deploy, and secure cloud solutions, with active administration of GCP projects."
+      issuerLogo: "Microsoft_Student_Ambassodors_logo.jpg",
+      credentialId: "MSC2026013106",
+      skills: ["GitHub", "Microsoft Azure"],
+      proofImage: "/certificates/Microsoft_SA_Certificate_01.jpg",
+      description: "Hands‑on workshop on GitHub Actions and Azure ML by MLSA Sri Lanka"
     },
     {
       title: "Deep Learning Specialization",

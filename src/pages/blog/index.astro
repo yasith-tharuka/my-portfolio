@@ -1,0 +1,106 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+
+// Fetch and sort blog posts by date
+const posts = (await getCollection("blog")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<Layout title="Blog | Insights & Thoughts">
+    <main class="min-h-screen bg-[#0a0a0a] text-white pt-24 pb-16 selection:bg-purple-500/30">
+        <!-- Hero Section -->
+        <section class="max-w-6xl mx-auto px-6 mb-20">
+            <div class="relative z-10">
+                <h1 class="text-5xl md:text-7xl font-bold font-heading tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-500">
+                    Insights <br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500">
+                        & Thoughts.
+                    </span>
+                </h1>
+                <p class="text-gray-400 text-lg md:text-xl max-w-2xl font-body leading-relaxed">
+                    A collection of thoughts on web development, design, and the ever-evolving landscape of technology.
+                </p>
+            </div>
+            
+            <!-- Decorative background elements -->
+            <div class="absolute top-20 left-10 w-72 h-72 bg-purple-600/20 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+            <div class="absolute top-40 right-20 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+        </section>
+
+        <!-- Blog Grid -->
+        <section class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {posts.map((post) => (
+                    <a href={`/blog/${post.id}`} class="group relative block h-full">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-blue-500 rounded-[2rem] opacity-0 group-hover:opacity-100 transition duration-500 blur-sm pointer-events-none"></div>
+                        <article class="relative flex flex-col h-full bg-[#111111] border border-gray-800/50 rounded-[2rem] overflow-hidden transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-2xl group-hover:shadow-purple-500/10">
+                            
+                            {/* Image Container */}
+                            <div class="relative h-56 overflow-hidden">
+                                {post.data.heroImage ? (
+                                    typeof post.data.heroImage === 'string' ? (
+                                        <img 
+                                            src={post.data.heroImage} 
+                                            alt={post.data.title}
+                                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                        />
+                                    ) : (
+                                        <Image 
+                                            src={post.data.heroImage} 
+                                            alt={post.data.title}
+                                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                        />
+                                    )
+                                ) : (
+                                    <div class="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                                        <span class="text-gray-600 font-heading">No Image</span>
+                                    </div>
+                                )}
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#111111] to-transparent opacity-80"></div>
+                            </div>
+
+                            {/* Content */}
+                            <div class="relative p-8 flex flex-col flex-grow z-10">
+                                {/* Meta info */}
+                                <div class="flex items-center gap-3 mb-4 text-sm font-body text-gray-400">
+                                    <time datetime={post.data.pubDate.toISOString()}>
+                                        {post.data.pubDate.toLocaleDateString('en-us', {
+                                            year: 'numeric',
+                                            month: 'short',
+                                            day: 'numeric',
+                                        })}
+                                    </time>
+                                    {post.data.tags && post.data.tags.length > 0 && (
+                                        <>
+                                            <span class="w-1 h-1 rounded-full bg-gray-600"></span>
+                                            <span class="text-purple-400">{post.data.tags[0]}</span>
+                                        </>
+                                    )}
+                                </div>
+
+                                <h2 class="text-2xl font-bold font-heading text-gray-100 mb-3 leading-tight group-hover:text-purple-400 transition-colors duration-300">
+                                    {post.data.title}
+                                </h2>
+                                
+                                <p class="text-gray-400 font-body leading-relaxed line-clamp-3 mb-6 flex-grow">
+                                    {post.data.description}
+                                </p>
+
+                                {/* Read More Link */}
+                                <div class="mt-auto flex items-center text-sm font-medium text-white group-hover:text-blue-400 transition-colors duration-300">
+                                    Read Article 
+                                    <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </article>
+                    </a>
+                ))}
+            </div>
+        </section>
+    </main>
+</Layout>

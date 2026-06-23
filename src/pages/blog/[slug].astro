@@ -1,0 +1,125 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+
+// 1. Generate a new path for every collection entry
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+// 2. For your template, you can get the entry directly from the prop
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={`${post.data.title} | Blog`}>
+    <main class="min-h-screen bg-[#0a0a0a] text-gray-300 pt-32 pb-16 selection:bg-purple-500/30">
+        <article class="max-w-3xl mx-auto px-6">
+            {/* Header */}
+            <header class="mb-12 text-center">
+                <div class="flex items-center justify-center gap-3 mb-6 text-sm font-body text-purple-400">
+                    <time datetime={post.data.pubDate.toISOString()}>
+                        {post.data.pubDate.toLocaleDateString('en-us', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                        })}
+                    </time>
+                    {post.data.tags && post.data.tags.length > 0 && (
+                        <>
+                            <span class="w-1 h-1 rounded-full bg-gray-600"></span>
+                            <span>{post.data.tags[0]}</span>
+                        </>
+                    )}
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-white tracking-tight mb-8 leading-tight">
+                    {post.data.title}
+                </h1>
+                
+                {post.data.heroImage && (
+                    <div class="relative w-full h-[400px] md:h-[500px] rounded-3xl overflow-hidden mt-10 shadow-2xl shadow-purple-500/10">
+                        {typeof post.data.heroImage === 'string' ? (
+                            <img 
+                                src={post.data.heroImage} 
+                                alt={post.data.title}
+                                class="w-full h-full object-cover"
+                            />
+                        ) : (
+                            <Image 
+                                src={post.data.heroImage} 
+                                alt={post.data.title}
+                                class="w-full h-full object-cover"
+                            />
+                        )}
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-60"></div>
+                    </div>
+                )}
+            </header>
+
+            {/* Markdown Content */}
+            <div class="prose prose-invert prose-lg max-w-none font-body prose-headings:font-heading prose-headings:text-gray-100 prose-a:text-purple-400 hover:prose-a:text-blue-400 prose-img:rounded-2xl">
+                <Content />
+            </div>
+
+            {/* Back to Blog */}
+            <div class="mt-16 pt-8 border-t border-gray-800">
+                <a href="/blog" class="inline-flex items-center text-gray-400 hover:text-white transition-colors duration-300 font-body">
+                    <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+                    </svg>
+                    Back to all insights
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <style is:global>
+        /* Custom typography styles for the markdown content */
+        .prose h1, .prose h2, .prose h3, .prose h4 {
+            color: #f3f4f6;
+            margin-top: 2em;
+            margin-bottom: 1em;
+            line-height: 1.3;
+        }
+        .prose h1 { font-size: 2.25rem; font-weight: 700; }
+        .prose h2 { font-size: 1.875rem; font-weight: 600; }
+        .prose h3 { font-size: 1.5rem; font-weight: 600; }
+        
+        .prose p {
+            margin-bottom: 1.5em;
+            line-height: 1.8;
+            color: #d1d5db;
+        }
+        
+        .prose ul, .prose ol {
+            margin-bottom: 1.5em;
+            padding-left: 1.5em;
+        }
+        
+        .prose li {
+            margin-bottom: 0.5em;
+            color: #d1d5db;
+        }
+        
+        .prose blockquote {
+            border-left: 4px solid #a855f7;
+            padding-left: 1.5em;
+            font-style: italic;
+            color: #9ca3af;
+            background: linear-gradient(to right, rgba(168,85,247,0.1), transparent);
+            padding: 1em 1.5em;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin: 2em 0;
+        }
+        
+        .prose strong {
+            color: #f3f4f6;
+            font-weight: 600;
+        }
+    </style>
+</Layout>

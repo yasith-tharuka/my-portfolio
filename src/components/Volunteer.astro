@@ -81,7 +81,7 @@ const showFilters = !limit; // Hide filters completely on the homepage
             data-filter={cat.id}
             class={`vol-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium border transition-all duration-300 cursor-pointer font-san ${
               idx === 0
-                ? "bg-white/40 text-black border-white/50 shadow-sm backdrop-blur-md active-all"
+                ? "bg-gray-900 text-black border-white/50 shadow-sm backdrop-blur-md active-all"
                 : "bg-white/10 text-gray-700 border-white/20 hover:bg-white/30 hover:border-white/40 hover:text-black shadow-sm backdrop-blur-md"
             }`}
             id={`vol-tab-${cat.id}`}
@@ -92,27 +92,24 @@ const showFilters = !limit; // Hide filters completely on the homepage
       </div>
     )}
 
-    <!-- List Layout of Horizontal Cards -->
-    <div class="flex flex-col gap-6" id="vol-cards-wrapper">
+    <!-- Grid Layout of Box Cards -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" id="vol-cards-wrapper">
       {displayedExperiences.map((vol, idx) => (
         <div
           data-category={vol.category}
           data-index={idx}
-          class="vol-horizontal-card relative bg-white/20 backdrop-blur-xl rounded-[2.2rem] border border-white/45 p-6 md:p-8 flex flex-col md:flex-row md:items-start justify-between transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white/30 hover:border-white/60 group shadow-sm overflow-hidden shadow-[inset_0_1px_2px_rgba(255,255,255,0.65),0_8px_32px_rgba(0,0,0,0.02)] animate-fade-in"
+          class="vol-box-card relative rounded-3xl border border-gray-100 bg-gradient-to-b from-white to-[#f8f9fa] p-5 md:p-6 flex flex-col transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:border-gray-200 hover:-translate-y-1 group animate-fade-in overflow-hidden z-10"
           id={`vol-card-item-${vol.id}`}
         >
-          <!-- Accent bubble glow overlay -->
-          <div 
-            class="absolute -top-10 -left-10 w-24 h-24 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl pointer-events-none"
-            style={`background-color: ${vol.color}25`}
-          ></div>
+          <!-- Subtle top highlight for depth -->
+          <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-50 z-0"></div>
 
           <!-- Left Column (Expanded slider and document live under description here) -->
-          <div class="flex-1 md:pr-8 flex flex-col justify-between">
+          <div class="flex-1 flex flex-col relative z-10">
             <div>
               <div class="flex items-start gap-4 mb-4">
                 <!-- Bubble styled Logo container -->
-                <span class="w-12 h-12 flex items-center justify-center bg-white/50 border border-white/50 backdrop-blur-md rounded-2xl shadow-sm p-1.5 flex-shrink-0 transition-all duration-300 group-hover:rounded-[1.1rem]">
+                <span class="w-12 h-12 flex items-center justify-center bg-white border border-gray-200 rounded-xl shadow-sm p-2 flex-shrink-0 transition-all duration-300 group-hover:shadow-md group-hover:border-blue-100">
                   {vol.logo === "election_commission" ? (
                     <svg class="w-7 h-7 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -156,7 +153,7 @@ const showFilters = !limit; // Hide filters completely on the homepage
                   id={`gallery-panel-${vol.id}`}
                 >
                   <!-- Visual-Only Slider with Explicit Min-Heights -->
-                  <div class="relative w-full aspect-[2.1/1] min-h-[200px] sm:min-h-[250px] md:min-h-[290px] rounded-2xl overflow-hidden border border-white/25 bg-white/5 shadow-sm backdrop-blur-md" id={`slider-${vol.id}`}>
+                  <div class="relative w-full aspect-[2.1/1] min-h-[200px] sm:min-h-[250px] md:min-h-[290px] rounded-2xl overflow-hidden border border-gray-200 bg-gray-50 shadow-sm" id={`slider-${vol.id}`}>
                     {vol.media.filter(m => m.type === "image").map((item, mIdx) => (
                       <div 
                         class={`slide-item absolute inset-0 transition-opacity duration-300 flex flex-col justify-center select-none cursor-pointer ${
@@ -205,7 +202,7 @@ const showFilters = !limit; // Hide filters completely on the homepage
                     {vol.media.length > 1 && (
                       <>
                         <button 
-                          class="slider-prev absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/50 hover:bg-white/75 border border-white/40 flex items-center justify-center text-gray-800 hover:text-black cursor-pointer shadow-md hover:scale-105 active:scale-95 transition-all backdrop-blur-sm"
+                          class="slider-prev absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white hover:bg-gray-50 border border-gray-200 flex items-center justify-center text-gray-600 hover:text-gray-900 cursor-pointer shadow-sm hover:shadow active:scale-95 transition-all"
                           aria-label="Previous image"
                         >
                           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -213,7 +210,7 @@ const showFilters = !limit; // Hide filters completely on the homepage
                           </svg>
                         </button>
                         <button 
-                          class="slider-next absolute right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/50 hover:bg-white/75 border border-white/40 flex items-center justify-center text-gray-800 hover:text-black cursor-pointer shadow-md hover:scale-105 active:scale-95 transition-all backdrop-blur-sm"
+                          class="slider-next absolute right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white hover:bg-gray-50 border border-gray-200 flex items-center justify-center text-gray-600 hover:text-gray-900 cursor-pointer shadow-sm hover:shadow active:scale-95 transition-all"
                           aria-label="Next image"
                         >
                           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -225,7 +222,7 @@ const showFilters = !limit; // Hide filters completely on the homepage
                         <div class="absolute bottom-3 left-0 right-0 z-20 flex justify-center gap-1.5">
                           {vol.media.map((_, mIdx) => (
                             <span 
-                              class={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${mIdx === 0 ? "bg-white scale-125 px-1.5 rounded-sm" : "bg-white/40"}`}
+                              class={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${mIdx === 0 ? "bg-white scale-125 px-1.5 rounded-sm" : "bg-gray-900"}`}
                               data-dot-index={mIdx}
                             ></span>
                           ))}
@@ -294,10 +291,10 @@ const showFilters = !limit; // Hide filters completely on the homepage
           </div>
 
           <!-- Right Column Accordion Menu (Toggles left-side visual panels with Glass styles) -->
-          <div class="w-full md:w-[330px] shrink-0 mt-6 md:mt-0 border-t md:border-t-0 md:border-l border-white/20 pt-5 md:pt-0 md:pl-8 flex flex-col gap-2 relative z-10">
+          <div class="mt-auto pt-6 flex flex-col gap-2 relative z-10 border-t border-gray-200/50 w-full">
             
             <!-- Accordion 1: Activities & Scope (Expends inline in right column) -->
-            <div class="acc-item border border-white/25 bg-white/10 hover:bg-white/20 hover:border-white/40 rounded-2xl overflow-hidden transition-all duration-300 shadow-sm backdrop-blur-md">
+            <div class="acc-item border border-gray-200 bg-white hover:bg-gray-50 rounded-xl overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md hover:border-gray-300">
               <button 
                 class="acc-toggle-btn w-full px-4 py-3 flex items-center justify-between text-xs font-semibold text-gray-755 hover:text-black cursor-pointer text-left font-san"
               >
@@ -311,7 +308,7 @@ const showFilters = !limit; // Hide filters completely on the homepage
                   <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
-              <div class="acc-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-4 bg-white/5">
+              <div class="acc-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-4 bg-gray-50/50 border-t border-gray-100">
                 <ul class="list-disc pl-4 py-3.5 text-[11px] sm:text-xs text-gray-650 space-y-1.5 font-light leading-relaxed font-sans">
                   {vol.activities.map(act => (
                     <li>{act}</li>
@@ -322,7 +319,7 @@ const showFilters = !limit; // Hide filters completely on the homepage
 
             <!-- Accordion 2: Photo Slideshow Gallery Toggle (Expends left-side wide slideshow) -->
             {vol.media && vol.media.some(m => m.type === "image") && (
-              <div class="acc-item border border-white/25 bg-white/10 hover:bg-white/20 hover:border-white/40 rounded-2xl overflow-hidden transition-all duration-300 shadow-sm backdrop-blur-md" id={`acc-gallery-item-${vol.id}`}>
+              <div class="acc-item border border-gray-200 bg-white hover:bg-gray-50 rounded-xl overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md hover:border-gray-300" id={`acc-gallery-item-${vol.id}`}>
                 <button 
                   class="vol-gallery-toggle-btn w-full px-4 py-3 flex items-center justify-between text-xs font-semibold text-gray-755 hover:text-black cursor-pointer text-left font-san"
                   data-vol-id={vol.id}
@@ -342,7 +339,7 @@ const showFilters = !limit; // Hide filters completely on the homepage
 
             <!-- Accordion 3: Service Letter Toggle (Expends left-side mock letterhead document) -->
             {vol.media && vol.media.some(m => m.type === "document") && (
-              <div class="acc-item border border-white/25 bg-white/10 hover:bg-white/20 hover:border-white/40 rounded-2xl overflow-hidden transition-all duration-300 shadow-sm backdrop-blur-md" id={`acc-letter-item-${vol.id}`}>
+              <div class="acc-item border border-gray-200 bg-white hover:bg-gray-50 rounded-xl overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md hover:border-gray-300" id={`acc-letter-item-${vol.id}`}>
                 <button 
                   class="vol-letter-toggle-btn w-full px-4 py-3 flex items-center justify-between text-xs font-semibold text-gray-755 hover:text-black cursor-pointer text-left font-san"
                   data-vol-id={vol.id}
@@ -370,7 +367,7 @@ const showFilters = !limit; // Hide filters completely on the homepage
       <div class="mt-12 text-center relative z-20 font-san">
         <a
           href="/volunteer"
-          class="inline-flex items-center gap-2 bg-white/20 hover:bg-white/35 text-gray-800 hover:text-black px-8 py-3.5 rounded-full text-xs sm:text-sm font-medium border border-white/35 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 active:scale-98 shadow-sm group backdrop-blur-md"
+          class="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-gray-700 hover:text-gray-900 px-8 py-3.5 rounded-full text-sm font-medium border border-gray-200 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 active:scale-98 shadow-sm group"
           id="view-all-volunteer-btn"
         >
           {viewAllBtnText} ({volunteerExperiences.length})
@@ -473,10 +470,10 @@ const showFilters = !limit; // Hide filters completely on the homepage
   }
 
   /* Smooth card state configurations */
-  .vol-horizontal-card {
+  .vol-box-card {
     transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
   }
-  .vol-horizontal-card.card-filtered-out {
+  .vol-box-card.card-filtered-out {
     opacity: 0;
     transform: scale(0.96) translateY(12px);
     pointer-events: none;
@@ -520,16 +517,11 @@ const showFilters = !limit; // Hide filters completely on the homepage
 </style>
 
 <script define:vars={{ volunteerExperiences }}>
-  const initVolunteerScript = () => {
-    console.log("Volunteer script: Initializing... Total experiences:", volunteerExperiences.length);
-
-    // State indicators for Modal slide operations
+  document.addEventListener("DOMContentLoaded", () => {
     let currentModalVolId = "";
     let currentModalMediaIdx = 0;
 
-    // 1. Accordion Toggles (Scope Bullet Points inline on right side)
     const toggles = document.querySelectorAll(".acc-toggle-btn");
-    console.log("Volunteer script: Found", toggles.length, "acc-toggle-btn elements");
     toggles.forEach(toggle => {
       toggle.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -537,94 +529,71 @@ const showFilters = !limit; // Hide filters completely on the homepage
         const content = item.querySelector(".acc-content");
         const chevron = toggle.querySelector(".acc-chevron");
         const isOpen = content.style.maxHeight && content.style.maxHeight !== "0px";
-
-        console.log("Volunteer script: Clicked acc-toggle-btn. Is open before click:", isOpen);
-
-        const parentCard = toggle.closest(".vol-horizontal-card");
+        const parentCard = toggle.closest(".vol-box-card");
 
         if (isOpen) {
           content.style.maxHeight = "0px";
           chevron.style.transform = "rotate(0deg)";
-          item.classList.remove("bg-white/30", "border-white/45");
-          item.classList.add("bg-white/10", "border-white/25");
+          item.classList.remove("bg-blue-50", "border-blue-200"); item.classList.add("bg-white", "border-gray-200");
         } else {
-          // Close left visual panels
-          closeLeftPanels(parentCard);
+          if (parentCard) closeLeftPanels(parentCard);
+          
+          if (parentCard) {
+            const otherItems = parentCard.querySelectorAll(".acc-item");
+            otherItems.forEach(o => {
+              if (o !== item) {
+                const oContent = o.querySelector(".acc-content");
+                const oChevron = o.querySelector(".acc-chevron");
+                if (oContent) oContent.style.maxHeight = "0px";
+                if (oChevron) oChevron.style.transform = "rotate(0deg)";
+                o.classList.remove("bg-blue-50", "border-blue-200"); o.classList.add("bg-white", "border-gray-200");
+              }
+            });
+          }
 
-          // Close other inline accordions
-          const otherItems = parentCard.querySelectorAll(".acc-item");
-          otherItems.forEach(o => {
-            if (o !== item) {
-              const oContent = o.querySelector(".acc-content");
-              const oChevron = o.querySelector(".acc-chevron");
-              if (oContent) oContent.style.maxHeight = "0px";
-              if (oChevron) oChevron.style.transform = "rotate(0deg)";
-              o.classList.remove("bg-white/30", "border-white/45");
-              o.classList.add("bg-white/10", "border-white/25");
-            }
-          });
-
-          // Expand active accordion
           content.style.maxHeight = content.scrollHeight + "px";
           chevron.style.transform = "rotate(180deg)";
-          item.classList.remove("bg-white/10", "border-white/25");
-          item.classList.add("bg-white/30", "border-white/45");
+          item.classList.remove("bg-white", "border-gray-200"); item.classList.add("bg-blue-50", "border-blue-200");
         }
       });
     });
 
-    // Helper: Close left visual panels and clear accordion active chevron state for media/letter
     const closeLeftPanels = (parentCard) => {
-      console.log("Volunteer script: Closing left panels");
       const gPanel = parentCard.querySelector(".gallery-expanded-panel");
       const lPanel = parentCard.querySelector(".letter-expanded-panel");
       
       if (gPanel) gPanel.classList.remove("expanded");
       if (lPanel) lPanel.classList.remove("expanded");
 
-      // Reset accordion items for gallery/letter triggers
       const gAcc = parentCard.querySelector(".vol-gallery-toggle-btn");
       const lAcc = parentCard.querySelector(".vol-letter-toggle-btn");
 
       if (gAcc) {
         gAcc.querySelector(".acc-chevron").style.transform = "rotate(0deg)";
-        gAcc.closest(".acc-item").classList.remove("bg-white/30", "border-white/45");
-        gAcc.closest(".acc-item").classList.add("bg-white/10", "border-white/25");
+        gAcc.closest(".acc-item").classList.remove("bg-blue-50", "border-blue-200"); gAcc.closest(".acc-item").classList.add("bg-white", "border-gray-200");
       }
       if (lAcc) {
         lAcc.querySelector(".acc-chevron").style.transform = "rotate(0deg)";
-        lAcc.closest(".acc-item").classList.remove("bg-white/30", "border-white/45");
-        lAcc.closest(".acc-item").classList.add("bg-white/10", "border-white/25");
+        lAcc.closest(".acc-item").classList.remove("bg-blue-50", "border-blue-200"); lAcc.closest(".acc-item").classList.add("bg-white", "border-gray-200");
       }
     };
 
-    // 2. Project Gallery Toggles (Expands wide slideshow on the left)
     const galleryToggles = document.querySelectorAll(".vol-gallery-toggle-btn");
-    console.log("Volunteer script: Found", galleryToggles.length, "vol-gallery-toggle-btn elements");
     galleryToggles.forEach(toggle => {
       toggle.addEventListener("click", (e) => {
         e.stopPropagation();
-        const volId = toggle.getAttribute("data-vol-id");
-        console.log("Volunteer script: Clicked vol-gallery-toggle-btn for volId:", volId);
-        const parentCard = toggle.closest(".vol-horizontal-card");
+        const parentCard = toggle.closest(".vol-box-card");
         const panel = parentCard.querySelector(".gallery-expanded-panel");
-        if (!panel) {
-          console.error("Volunteer script: gallery-expanded-panel NOT found for card:", volId);
-          return;
-        }
         const chevron = toggle.querySelector(".acc-chevron");
         const item = toggle.closest(".acc-item");
         
         const isOpen = panel.classList.contains("expanded");
-        console.log("Volunteer script: Gallery panel was open before click:", isOpen);
 
         if (isOpen) {
           panel.classList.remove("expanded");
           chevron.style.transform = "rotate(0deg)";
-          item.classList.remove("bg-white/30", "border-white/45");
-          item.classList.add("bg-white/10", "border-white/25");
+          item.classList.remove("bg-blue-50", "border-blue-200"); item.classList.add("bg-white", "border-gray-200");
         } else {
-          // Close other panels and accordions
           closeLeftPanels(parentCard);
           const otherAccs = parentCard.querySelectorAll(".acc-toggle-btn");
           otherAccs.forEach(o => {
@@ -632,46 +601,32 @@ const showFilters = !limit; // Hide filters completely on the homepage
             const oChevron = o.querySelector(".acc-chevron");
             if (oContent) oContent.style.maxHeight = "0px";
             if (oChevron) oChevron.style.transform = "rotate(0deg)";
-            o.closest(".acc-item").classList.remove("bg-white/30", "border-white/45");
-            o.closest(".acc-item").classList.add("bg-white/10", "border-white/25");
+            o.closest(".acc-item").classList.remove("bg-blue-50", "border-blue-200"); o.closest(".acc-item").classList.add("bg-white", "border-gray-200");
           });
 
-          // Expand slideshow panel on left
           panel.classList.add("expanded");
           chevron.style.transform = "rotate(180deg)";
-          item.classList.remove("bg-white/10", "border-white/25");
-          item.classList.add("bg-white/30", "border-white/45");
+          item.classList.remove("bg-white", "border-gray-200"); item.classList.add("bg-blue-50", "border-blue-200");
         }
       });
     });
 
-    // 3. Service Letter Toggles (Expands mock letterhead document on the left)
     const letterToggles = document.querySelectorAll(".vol-letter-toggle-btn");
-    console.log("Volunteer script: Found", letterToggles.length, "vol-letter-toggle-btn elements");
     letterToggles.forEach(toggle => {
       toggle.addEventListener("click", (e) => {
         e.stopPropagation();
-        const volId = toggle.getAttribute("data-vol-id");
-        console.log("Volunteer script: Clicked vol-letter-toggle-btn for volId:", volId);
-        const parentCard = toggle.closest(".vol-horizontal-card");
+        const parentCard = toggle.closest(".vol-box-card");
         const panel = parentCard.querySelector(".letter-expanded-panel");
-        if (!panel) {
-          console.error("Volunteer script: letter-expanded-panel NOT found for card:", volId);
-          return;
-        }
         const chevron = toggle.querySelector(".acc-chevron");
         const item = toggle.closest(".acc-item");
         
         const isOpen = panel.classList.contains("expanded");
-        console.log("Volunteer script: Letter panel was open before click:", isOpen);
 
         if (isOpen) {
           panel.classList.remove("expanded");
           chevron.style.transform = "rotate(0deg)";
-          item.classList.remove("bg-white/30", "border-white/45");
-          item.classList.add("bg-white/10", "border-white/25");
+          item.classList.remove("bg-blue-50", "border-blue-200"); item.classList.add("bg-white", "border-gray-200");
         } else {
-          // Close other panels and accordions
           closeLeftPanels(parentCard);
           const otherAccs = parentCard.querySelectorAll(".acc-toggle-btn");
           otherAccs.forEach(o => {
@@ -679,20 +634,16 @@ const showFilters = !limit; // Hide filters completely on the homepage
             const oChevron = o.querySelector(".acc-chevron");
             if (oContent) oContent.style.maxHeight = "0px";
             if (oChevron) oChevron.style.transform = "rotate(0deg)";
-            o.closest(".acc-item").classList.remove("bg-white/30", "border-white/45");
-            o.closest(".acc-item").classList.add("bg-white/10", "border-white/25");
+            o.closest(".acc-item").classList.remove("bg-blue-50", "border-blue-200"); o.closest(".acc-item").classList.add("bg-white", "border-gray-200");
           });
 
-          // Expand letter panel on left
           panel.classList.add("expanded");
           chevron.style.transform = "rotate(180deg)";
-          item.classList.remove("bg-white/10", "border-white/25");
-          item.classList.add("bg-white/30", "border-white/45");
+          item.classList.remove("bg-white", "border-gray-200"); item.classList.add("bg-blue-50", "border-blue-200");
         }
       });
     });
 
-    // 4. Inline Slider Controls
     const sliders = document.querySelectorAll("[id^='slider-']");
     sliders.forEach(slider => {
       const volId = slider.id.replace("slider-", "");
@@ -706,23 +657,20 @@ const showFilters = !limit; // Hide filters completely on the homepage
       const vol = volunteerExperiences.find(v => v.id === volId);
 
       const updateSlider = (newIndex) => {
-        // Hide previous
         slides[currentIndex].classList.remove("opacity-100", "z-10");
         slides[currentIndex].classList.add("opacity-0", "z-0");
         if (dots[currentIndex]) {
-          dots[currentIndex].className = "w-1.5 h-1.5 rounded-full transition-all duration-300 bg-white/40";
+          dots[currentIndex].className = "w-1.5 h-1.5 rounded-full transition-all duration-300 bg-gray-900";
         }
 
         currentIndex = newIndex;
 
-        // Show next
         slides[currentIndex].classList.remove("opacity-0", "z-0");
         slides[currentIndex].classList.add("opacity-100", "z-10");
         if (dots[currentIndex]) {
-          dots[currentIndex].className = "w-1.5 h-1.5 rounded-full transition-all duration-300 bg-white scale-125 px-1.5 rounded-sm";
+          dots[currentIndex].className = "w-1.5 h-1.5 rounded-full transition-all duration-300 bg-gray-800 scale-125 px-1.5 rounded-sm";
         }
 
-        // Update Caption
         if (caption && vol && vol.media[currentIndex]) {
           caption.textContent = vol.media[currentIndex].desc;
         }
@@ -747,36 +695,32 @@ const showFilters = !limit; // Hide filters completely on the homepage
       }
     });
 
-    // 5. Filtering Logic for Cards (Only on dedicated page)
     const filterTabs = document.querySelectorAll(".vol-tab-btn");
-    const cards = document.querySelectorAll(".vol-horizontal-card");
+    const cards = document.querySelectorAll(".vol-box-card");
 
     if (filterTabs.length > 0) {
       filterTabs.forEach(tab => {
         tab.addEventListener("click", () => {
           const filter = tab.getAttribute("data-filter");
 
-          // Clear active styles (Glass tabs format)
           filterTabs.forEach(t => {
-            t.className = "vol-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium border border-white/20 bg-white/10 text-gray-700 hover:bg-white/30 hover:border-white/40 hover:text-black shadow-sm backdrop-blur-md transition-all duration-300 cursor-pointer font-san";
+            t.className = "vol-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 hover:text-black shadow-sm backdrop-blur-md transition-all duration-300 cursor-pointer font-san";
           });
 
-          // Add correct color classes
           if (filter === "all") {
             tab.classList.add("active-all");
-            tab.classList.remove("bg-white/10", "text-gray-700", "border-white/20");
+            tab.classList.remove("bg-white", "text-gray-600", "border-gray-200");
           } else if (filter === "science-tech") {
             tab.classList.add("active-tab-blue");
-            tab.classList.remove("bg-white/10", "text-gray-700", "border-white/20");
+            tab.classList.remove("bg-white", "text-gray-600", "border-gray-200");
           } else if (filter === "education") {
             tab.classList.add("active-tab-green");
-            tab.classList.remove("bg-white/10", "text-gray-700", "border-white/20");
+            tab.classList.remove("bg-white", "text-gray-600", "border-gray-200");
           } else if (filter === "social-services") {
             tab.classList.add("active-tab-amber");
-            tab.classList.remove("bg-white/10", "text-gray-700", "border-white/20");
+            tab.classList.remove("bg-white", "text-gray-600", "border-gray-200");
           }
 
-          // Hide / Show cards
           cards.forEach(card => {
             const cardCat = card.getAttribute("data-category");
             if (filter === "all" || cardCat === filter) {
@@ -795,179 +739,162 @@ const showFilters = !limit; // Hide filters completely on the homepage
       });
     }
 
-    // 6. Visual Magnification Modal Operations (With slide capability inside modal)
     const modalBackdrop = document.getElementById("vol-preview-backdrop");
     const modalBox = document.getElementById("modal-preview-placeholder");
     const modalClose = document.getElementById("vol-preview-close");
     const modalPrev = document.getElementById("modal-prev-btn");
     const modalNext = document.getElementById("modal-next-btn");
+    
+    if (modalBackdrop && modalBox) {
+      const populateModal = () => {
+        const vol = volunteerExperiences.find(v => v.id === currentModalVolId);
+        if (!vol) return;
+        const item = vol.media[currentModalMediaIdx];
+        if (!item) return;
 
-    // Modal populate content logic
-    const populateModal = () => {
-      const vol = volunteerExperiences.find(v => v.id === currentModalVolId);
-      if (!vol) return;
-      const item = vol.media[currentModalMediaIdx];
-      if (!item) return;
+        if (vol.media.length > 1) {
+          modalPrev.style.display = "flex";
+          modalNext.style.display = "flex";
+        } else {
+          modalPrev.style.display = "none";
+          modalNext.style.display = "none";
+        }
 
-      // Toggle display of arrows based on total items
-      if (vol.media.length > 1) {
-        modalPrev.style.display = "flex";
-        modalNext.style.display = "flex";
-      } else {
-        modalPrev.style.display = "none";
-        modalNext.style.display = "none";
-      }
-
-      modalBox.innerHTML = "";
-      if (item.type === "document") {
-        modalBox.innerHTML = `
-          <div class="w-full max-w-[420px] aspect-[1/1.414] bg-white border border-white/50 shadow-2xl p-8 flex flex-col justify-between text-gray-800 relative select-none rounded-2xl scale-100 font-sans mx-auto backdrop-blur-md shadow-[inset_0_1px_2px_rgba(255,255,255,0.7)]">
-            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 via-blue-500 to-amber-500"></div>
-            
-            <div class="text-center border-b border-gray-150 pb-5">
-              <span class="block text-[11px] font-bold text-gray-900 tracking-wider uppercase font-san">${item.letterHeader}</span>
-              <span class="block text-[7.5px] text-gray-400 mt-1 tracking-widest font-medium uppercase">${item.letterSubHeader}</span>
-            </div>
-            
-            <div class="my-auto flex flex-col justify-center gap-4 py-4 font-sans">
-              <h5 class="text-center text-[12px] font-bold text-gray-900 tracking-widest border-b border-gray-100 pb-2 max-w-[85%] mx-auto font-san">${item.letterTitle}</h5>
-              <p class="text-[10px] text-gray-650 leading-relaxed text-justify font-light whitespace-normal">
-                ${item.letterBody}
-              </p>
-            </div>
-            
-            <div class="flex items-end justify-between border-t border-gray-150 pt-5 text-[8px] font-medium text-gray-500 font-sans">
-              <div>
-                <span class="block font-bold text-gray-900 whitespace-pre-line leading-tight text-[9px] font-san">${item.letterSignatory}</span>
-                <span class="block text-[6.5px] text-gray-400 mt-1 uppercase font-semibold">SLIIT City Campus Liaison</span>
+        modalBox.innerHTML = "";
+        if (item.type === "document") {
+          modalBox.innerHTML = `
+            <div class="w-full max-w-[420px] aspect-[1/1.414] bg-white border border-white/50 shadow-2xl p-8 flex flex-col justify-between text-gray-800 relative select-none rounded-2xl scale-100 font-sans mx-auto backdrop-blur-md shadow-[inset_0_1px_2px_rgba(255,255,255,0.7)]">
+              <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 via-blue-500 to-amber-500"></div>
+              
+              <div class="text-center border-b border-gray-150 pb-5">
+                <span class="block text-[11px] font-bold text-gray-900 tracking-wider uppercase font-san">${item.letterHeader}</span>
+                <span class="block text-[7.5px] text-gray-400 mt-1 tracking-widest font-medium uppercase">${item.letterSubHeader}</span>
               </div>
               
-              <div class="relative flex items-center justify-center w-14 h-14 border border-red-500/20 rounded-full text-red-500/40 text-[7px] font-bold rotate-12 select-none uppercase">
-                <div class="text-center scale-90">
-                  <span>ICPC</span>
-                  <span class="block text-[4px] font-semibold mt-0.5">OFFICIAL</span>
+              <div class="my-auto flex flex-col justify-center gap-4 py-4 font-sans">
+                <h5 class="text-center text-[12px] font-bold text-gray-900 tracking-widest border-b border-gray-100 pb-2 max-w-[85%] mx-auto font-san">${item.letterTitle}</h5>
+                <p class="text-[10px] text-gray-650 leading-relaxed text-justify font-light whitespace-normal">
+                  ${item.letterBody}
+                </p>
+              </div>
+              
+              <div class="flex items-end justify-between border-t border-gray-150 pt-5 text-[8px] font-medium text-gray-500 font-sans">
+                <div>
+                  <span class="block font-bold text-gray-900 whitespace-pre-line leading-tight text-[9px] font-san">${item.letterSignatory}</span>
+                  <span class="block text-[6.5px] text-gray-400 mt-1 uppercase font-semibold">SLIIT City Campus Liaison</span>
+                </div>
+                
+                <div class="relative flex items-center justify-center w-14 h-14 border border-red-500/20 rounded-full text-red-500/40 text-[7px] font-bold rotate-12 select-none uppercase">
+                  <div class="text-center scale-90">
+                    <span>ICPC</span>
+                    <span class="block text-[4px] font-semibold mt-0.5">OFFICIAL</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        `;
-      } else {
-        modalBox.innerHTML = `
-          <div class="w-[500px] max-w-full aspect-[4/3] rounded-2xl shadow-2xl flex flex-col justify-between p-8 text-white relative overflow-hidden select-none border border-white/20 font-sans" style="background: ${item.mockTheme}">
-            <div class="absolute -top-12 -right-12 w-44 h-44 bg-white/5 rounded-full pointer-events-none"></div>
-            <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-white/5 rounded-full pointer-events-none"></div>
-            
-            <div class="flex items-center justify-between z-10">
-              <span class="text-[10px] font-bold tracking-widest bg-white/15 px-3 py-1 rounded border border-white/10 uppercase font-san">${item.mockTitle}</span>
-              <span class="text-[9px] font-mono text-white/50">SLIIT SB</span>
+          `;
+        } else {
+          modalBox.innerHTML = `
+            <div class="w-[500px] max-w-full aspect-[4/3] rounded-2xl shadow-2xl flex flex-col justify-between p-8 text-white relative overflow-hidden select-none border border-white/20 font-sans" style="background: ${item.mockTheme}">
+              <div class="absolute -top-12 -right-12 w-44 h-44 bg-white/5 rounded-full pointer-events-none"></div>
+              <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-white/5 rounded-full pointer-events-none"></div>
+              
+              <div class="flex items-center justify-between z-10">
+                <span class="text-[10px] font-bold tracking-widest bg-white/15 px-3 py-1 rounded border border-white/10 uppercase font-san">${item.mockTitle}</span>
+                <span class="text-[9px] font-mono text-white/50">SLIIT SB</span>
+              </div>
+              
+              <div class="z-10 my-auto">
+                <h5 class="font-heading text-2xl font-bold tracking-tight text-white mb-2 drop-shadow-md leading-tight">${item.name}</h5>
+                <p class="text-xs text-white/85 font-light tracking-wide">${item.desc}</p>
+              </div>
+              
+              <div class="z-10 flex items-center justify-between border-t border-white/10 pt-4">
+                <span class="text-[9px] font-semibold text-white/70">ARCHIVED PORTFOLIO DESIGN</span>
+                <span class="text-[9px] font-mono text-white/40">SLIIT-PV-2026</span>
+              </div>
             </div>
-            
-            <div class="z-10 my-auto">
-              <h5 class="font-heading text-2xl font-bold tracking-tight text-white mb-2 drop-shadow-md leading-tight">${item.name}</h5>
-              <p class="text-xs text-white/85 font-light tracking-wide">${item.desc}</p>
-            </div>
-            
-            <div class="z-10 flex items-center justify-between border-t border-white/10 pt-4">
-              <span class="text-[9px] font-semibold text-white/70">ARCHIVED PORTFOLIO DESIGN</span>
-              <span class="text-[9px] font-mono text-white/40">SLIIT-PV-2026</span>
-            </div>
-          </div>
-        `;
-      }
-    };
-
-    // Modal popup triggers
-    const openMediaModal = (volId, mediaIdx) => {
-      currentModalVolId = volId;
-      currentModalMediaIdx = mediaIdx;
-
-      populateModal();
-
-      // Display Modal elements
-      modalBackdrop.classList.remove("pointer-events-none", "opacity-0");
-      modalBackdrop.classList.add("opacity-100");
-      modalBox.classList.remove("scale-95", "opacity-0");
-      modalBox.classList.add("scale-100", "opacity-100");
-      document.body.style.overflow = "hidden"; // disable scroll
-    };
-
-    const closeMediaModal = () => {
-      modalBackdrop.classList.remove("opacity-100");
-      modalBackdrop.classList.add("opacity-0", "pointer-events-none");
-      modalBox.classList.remove("scale-100", "opacity-100");
-      modalBox.classList.add("scale-95", "opacity-0");
-      document.body.style.overflow = ""; // enable scroll
-    };
-
-    // Modal Prev / Next visual slide click events
-    modalPrev.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const vol = volunteerExperiences.find(v => v.id === currentModalVolId);
-      if (!vol) return;
-      currentModalMediaIdx = currentModalMediaIdx - 1;
-      if (currentModalMediaIdx < 0) {
-        currentModalMediaIdx = vol.media.length - 1;
-      }
-      populateModal();
-    });
-
-    modalNext.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const vol = volunteerExperiences.find(v => v.id === currentModalVolId);
-      if (!vol) return;
-      currentModalMediaIdx = currentModalMediaIdx + 1;
-      if (currentModalMediaIdx >= vol.media.length) {
-        currentModalMediaIdx = 0;
-      }
-      populateModal();
-    });
-
-    // Attach click events to slider slide items
-    const slideItems = document.querySelectorAll(".slide-item");
-    slideItems.forEach(slide => {
-      slide.addEventListener("click", () => {
-        const volId = slide.getAttribute("data-vol-id");
-        const idx = parseInt(slide.getAttribute("data-slide-index"), 10);
-        openMediaModal(volId, idx);
-      });
-    });
-
-    // Attach click events to expanded document items
-    const docItems = document.querySelectorAll(".vol-document-item");
-    console.log("Volunteer script: Found", docItems.length, "vol-document-item elements to bind click zoom");
-    docItems.forEach(doc => {
-      doc.addEventListener("click", () => {
-        const volId = doc.getAttribute("data-vol-id");
-        const idx = parseInt(doc.getAttribute("data-media-index"), 10);
-        console.log("Volunteer script: Zooming document for volId:", volId, "index:", idx);
-        openMediaModal(volId, idx);
-      });
-    });
-
-    modalClose.addEventListener("click", closeMediaModal);
-
-    modalBackdrop.addEventListener("click", (e) => {
-      if (e.target === modalBackdrop) closeMediaModal();
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !modalBackdrop.classList.contains("opacity-0")) {
-        closeMediaModal();
-      }
-      // Left/Right arrow modal navigation
-      if (!modalBackdrop.classList.contains("opacity-0")) {
-        if (e.key === "ArrowLeft") {
-          modalPrev.click();
-        } else if (e.key === "ArrowRight") {
-          modalNext.click();
+          `;
         }
-      }
-    });
-  };
+      };
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initVolunteerScript);
-  } else {
-    initVolunteerScript();
-  }
+      const openMediaModal = (volId, mediaIdx) => {
+        currentModalVolId = volId;
+        currentModalMediaIdx = mediaIdx;
+        populateModal();
+        modalBackdrop.classList.remove("pointer-events-none", "opacity-0");
+        modalBackdrop.classList.add("opacity-100");
+        modalBox.classList.remove("scale-95", "opacity-0");
+        modalBox.classList.add("scale-100", "opacity-100");
+        document.body.style.overflow = "hidden";
+      };
+
+      const closeMediaModal = () => {
+        modalBackdrop.classList.remove("opacity-100");
+        modalBackdrop.classList.add("opacity-0", "pointer-events-none");
+        modalBox.classList.remove("scale-100", "opacity-100");
+        modalBox.classList.add("scale-95", "opacity-0");
+        document.body.style.overflow = "";
+      };
+
+      modalPrev.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const vol = volunteerExperiences.find(v => v.id === currentModalVolId);
+        if (!vol) return;
+        currentModalMediaIdx = currentModalMediaIdx - 1;
+        if (currentModalMediaIdx < 0) {
+          currentModalMediaIdx = vol.media.length - 1;
+        }
+        populateModal();
+      });
+
+      modalNext.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const vol = volunteerExperiences.find(v => v.id === currentModalVolId);
+        if (!vol) return;
+        currentModalMediaIdx = currentModalMediaIdx + 1;
+        if (currentModalMediaIdx >= vol.media.length) {
+          currentModalMediaIdx = 0;
+        }
+        populateModal();
+      });
+
+      const slideItems = document.querySelectorAll(".slide-item");
+      slideItems.forEach(slide => {
+        slide.addEventListener("click", () => {
+          const volId = slide.getAttribute("data-vol-id");
+          const idx = parseInt(slide.getAttribute("data-slide-index"), 10);
+          openMediaModal(volId, idx);
+        });
+      });
+
+      const docItems = document.querySelectorAll(".vol-document-item");
+      docItems.forEach(doc => {
+        doc.addEventListener("click", () => {
+          const volId = doc.getAttribute("data-vol-id");
+          const idx = parseInt(doc.getAttribute("data-media-index"), 10);
+          openMediaModal(volId, idx);
+        });
+      });
+
+      modalClose.addEventListener("click", closeMediaModal);
+
+      modalBackdrop.addEventListener("click", (e) => {
+        if (e.target === modalBackdrop) closeMediaModal();
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !modalBackdrop.classList.contains("opacity-0")) {
+          modalClose.click();
+        }
+        if (!modalBackdrop.classList.contains("opacity-0")) {
+          if (e.key === "ArrowLeft") {
+            modalPrev.click();
+          } else if (e.key === "ArrowRight") {
+            modalNext.click();
+          }
+        }
+      });
+    }
+  });
 </script>

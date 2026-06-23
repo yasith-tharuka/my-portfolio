@@ -1,5 +1,4 @@
 ---
-import { ClientRouter } from 'astro:transitions';
 import Navbar from "../components/Navbar.astro";
 import SEO from "../components/SEO.astro";
 import '../styles/global.css';
@@ -18,7 +17,6 @@ const { title, description, image, article } = Astro.props;
 <html lang="en">
     <head>
         <SEO title={title} description={description} image={image} article={article} />
-        <ClientRouter />
         <!-- Google Fonts: Outfit for Headers, Inter for Body -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

@@ -77,6 +77,7 @@ export const certificationsData = {
       issuerLogo: "ieee_logo.jpg",
       skills: ["Professional Networking", "Technical Community Engagement", "Engineering Ethics"],
       proofImage: "/certificates/ieee_membershipID_2026.png",
+      credentialId: "#101464028",
       verifyUrl: "https://www.ieee.org/membership",
       description: "Active IEEE Student Member, participating in technical communities, workshops, and student branch activities as part of my early professional development."
     },

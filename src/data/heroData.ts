@@ -39,7 +39,7 @@ export const heroData = {
     downloadCvText: "Download CV",
     certificatesUrl: "/certifications",
     certificatesText: "Certificates",
-    portfolioUrl: "#projects",
+    portfolioUrl: "/projects",
     portfolioText: "Full Portfolio"
   },
 

@@ -2,20 +2,26 @@
 // src/components/Tools.astro
 import { toolsData } from "../data/toolsData";
 
+interface Props {
+  align?: "left" | "right";
+}
+
+const { align = "right" } = Astro.props;
 const { accent, heading, description, categories, tools } = toolsData;
 ---
 
-<div class="w-full bg-[#FAFAFC] border-t border-gray-150 py-20 relative overflow-hidden font-body">
+<div class="w-full bg-[#FAFAFC] py-20 relative font-body">
     <!-- Ambient liquid glass bubbles in background for depth -->
-    <div class="absolute top-10 left-5 w-64 h-64 rounded-full bg-blue-400/15 blur-3xl animate-float-bubble-1 pointer-events-none"></div>
-    <div class="absolute bottom-10 right-5 w-72 h-72 rounded-full bg-emerald-400/12 blur-3xl animate-float-bubble-2 pointer-events-none"></div>
-    <div class="absolute top-1/3 left-1/4 w-48 h-48 rounded-full bg-purple-400/10 blur-3xl animate-float-bubble-3 pointer-events-none"></div>
+    <div class={`absolute top-10 w-64 h-64 rounded-full bg-blue-400/15 blur-3xl animate-float-bubble-1 pointer-events-none ${align === 'right' ? 'right-5' : 'left-5'}`}></div>
+    <div class={`absolute bottom-10 w-72 h-72 rounded-full bg-emerald-400/12 blur-3xl animate-float-bubble-2 pointer-events-none ${align === 'right' ? 'left-5' : 'right-5'}`}></div>
+    <div class={`absolute top-1/3 w-48 h-48 rounded-full bg-purple-400/10 blur-3xl animate-float-bubble-3 pointer-events-none ${align === 'right' ? 'right-1/4' : 'left-1/4'}`}></div>
+    <div class={`absolute bottom-1/3 w-52 h-52 rounded-full bg-amber-400/8 blur-3xl animate-float-bubble-1 pointer-events-none ${align === 'right' ? 'left-1/4' : 'right-1/4'}`}></div>
 
     <div class="max-w-6xl mx-auto px-6 relative z-10">
         
-        <!-- Section Header (Left-aligned matching Volunteer and Education sections) -->
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-            <div class="max-w-2xl">
+        <!-- Section Header (Alternating alignment) -->
+        <div class={`flex flex-col justify-between gap-6 mb-12 ${align === 'right' ? 'md:flex-row-reverse md:items-end text-left md:text-right' : 'md:flex-row md:items-end text-left'}`}>
+            <div class={`max-w-2xl ${align === 'right' ? 'md:ml-auto' : ''}`}>
                 <span class="text-xs font-semibold text-[#4285F4] uppercase tracking-widest block mb-2 font-san">{accent}</span>
                 <h2 class="font-san text-3xl sm:text-4xl md:text-5xl font-normal text-gray-900 leading-[1.15] tracking-tight" set:html={heading}>
                 </h2>
@@ -24,7 +30,7 @@ const { accent, heading, description, categories, tools } = toolsData;
                 </p>
             </div>
 
-            <!-- Filter tabs on the right side on desktop, left on mobile -->
+            <!-- Filter tabs on the left side on desktop, left on mobile -->
             <div class="flex flex-wrap gap-1.5 p-1 rounded-full bg-white/40 border border-white/50 backdrop-blur-md shadow-[inset_0_1px_2px_rgba(255,255,255,0.6)] self-start md:self-auto">
                 {categories.map((cat, idx) => (
                     <button
@@ -32,7 +38,7 @@ const { accent, heading, description, categories, tools } = toolsData;
                         class={`filter-tab-btn px-4 py-1.5 rounded-full text-[11px] font-semibold tracking-wide cursor-pointer transition-all duration-300 ${
                             idx === 0
                                 ? "bg-gray-900 text-white shadow-sm"
-                                : "text-gray-650 hover:bg-white/60 hover:text-black"
+                                : "text-gray-655 hover:bg-white/60 hover:text-black"
                         }`}
                     >
                         {cat.label}
@@ -169,8 +175,14 @@ const { accent, heading, description, categories, tools } = toolsData;
         50% { transform: translateY(-25px) translateX(-20px) scale(0.95); }
         100% { transform: translateY(0px) translateX(0px) scale(1.05); }
     }
+    @keyframes float-bubble-3 {
+        0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) translateX(15px) rotate(180deg); }
+        100% { transform: translateY(0px) translateX(0px) rotate(360deg); }
+    }
     .animate-float-bubble-1 { animation: float-bubble-1 12s ease-in-out infinite; }
     .animate-float-bubble-2 { animation: float-bubble-2 15s ease-in-out infinite; }
+    .animate-float-bubble-3 { animation: float-bubble-3 18s ease-in-out infinite; }
 
     /* Custom layout styling for items scaling & hiding in filter */
     .tool-card {

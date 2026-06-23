@@ -29,7 +29,7 @@ export const navbarData = {
   },
 
   flatLinks: [
-    { name: "Projects", url: "/#projects" },
+    { name: "Projects", url: "/projects" },
     { name: "Certifications", url: "/certifications" },
     { name: "Blog", url: "/blog" }
   ]

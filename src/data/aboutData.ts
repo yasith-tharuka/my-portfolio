@@ -35,7 +35,7 @@ export const aboutData = {
   contacts: [
     { name: "LinkedIn", url: "https://www.linkedin.com/in/yasith-tharuka/", icon: "linkedin", color: "#0077B5", bg: "hover:bg-[#0077B5]/10 hover:border-[#0077B5]/40 text-[#0077B5]" },
     { name: "GitHub", url: "https://github.com/yasith-tharuka", icon: "github", color: "#24292e", bg: "hover:bg-[#24292e]/10 hover:border-[#24292e]/40 text-[#24292e]" },
-    { name: "Email", url: "mailto:yasiththaruka@outlook.com", icon: "email", color: "#EA4335", bg: "hover:bg-[#EA4335]/10 hover:border-[#EA4335]/40 text-[#EA4335]" },
+    { name: "Email", url: "mailto:tharukayasith8@gmail.com", icon: "email", color: "#EA4335", bg: "hover:bg-[#EA4335]/10 hover:border-[#EA4335]/40 text-[#EA4335]" },
     { name: "Google Scholar", url: "https://scholar.google.com/citations?user=Sm5u3UAAAAAJ", icon: "scholar", color: "#4285F4", bg: "hover:bg-[#4285F4]/10 hover:border-[#4285F4]/40 text-[#4285F4]" },
     { name: "Medium", url: "https://medium.com/@yasiththaruka", icon: "medium", color: "#12100e", bg: "hover:bg-[#12100e]/10 hover:border-[#12100e]/40 text-[#12100e]" },
     { name: "ResearchGate", url: "https://www.researchgate.net/profile/Yasith-Tharuka-2", icon: "researchgate", color: "#00CCBB", bg: "hover:bg-[#00CCBB]/10 hover:border-[#00CCBB]/40 text-[#00CCBB]" },

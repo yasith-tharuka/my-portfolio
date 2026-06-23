@@ -1,0 +1,20 @@
+---
+// src/pages/projects.astro
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
+import ProjectsSection from "../components/ProjectsSection.astro";
+import { projectsData } from "../data/projectsData";
+
+const { title, heroDescription } = projectsData;
+---
+
+<Layout 
+  title={title} 
+  description={heroDescription}
+>
+  <main class="w-full min-h-screen">
+    <!-- Render the dedicated projects page component -->
+    <ProjectsSection />
+  </main>
+  <Footer />
+</Layout>

@@ -236,6 +236,18 @@ export const timelineData = {
       description: "Commenced undergraduate studies in Computer Science at the University of Moratuwa, Sri Lanka's leading engineering institution.",
       skills: ["Computer Science", "Algorithms", "Mathematics"],
       color: "#4285F4" // Blue
+    },
+    {
+      //finalized
+      id: "Ordinery-level",
+      year: "2023",
+      title: "G.C.E. O/L Examination",
+      organization: "Private Candidate",
+      date: "2023",
+      category: "education",
+      description: "Completed G.C.E. O/L Examination as a private candidate, laying the groundwork for my A-Level studies.",
+      skills: ["Mathematics", "Physics", "Chemistry"],
+      color: "#EA4335" // Red
     }
   ]
 };

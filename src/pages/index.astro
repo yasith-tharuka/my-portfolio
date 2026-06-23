@@ -3,6 +3,7 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import Education from "../components/Education.astro";
+import CertificationsSection from "../components/CertificationsSection.astro";
 import Volunteer from "../components/Volunteer.astro";
 import Tools from "../components/Tools.astro";
 import TimelineSection from "../components/TimelineSection.astro";
@@ -13,16 +14,34 @@ import Footer from "../components/Footer.astro";
 	title="Yasith Tharuka | Portfolio" 
 	description="Welcome to the portfolio of Yasith Tharuka, a passionate software developer specializing in modern web technologies, AI, and scalable applications."
 >
-	<main class="w-full">
+	<main class="w-full overflow-hidden">
 		<Hero />
+		
+		<!-- 1. Education & Academic Journey (Left-aligned) -->
 		<section id="education">
 			<Education />
 		</section>
-		<Volunteer limit={5} showViewMore={true} />
-		<section id="tools">
-			<Tools />
+
+		<!-- 2. Professional Credentials & Certifications (Right-aligned) -->
+		<section id="certifications">
+			<CertificationsSection limit={6} showViewMore={true} align="right" />
 		</section>
-		<TimelineSection limit={8} isHomePage={true} />
+
+		<!-- 3. Volunteer & Community Impact (Left-aligned) -->
+		<section id="volunteer">
+			<Volunteer limit={5} showViewMore={true} />
+		</section>
+
+		<!-- 4. Technical Skills & Tools (Right-aligned) -->
+		<section id="tools">
+			<Tools align="right" />
+		</section>
+
+		<!-- 5. Interactive Timeline Journey (Left-aligned) -->
+		<section id="timeline">
+			<TimelineSection limit={8} isHomePage={true} />
+		</section>
 	</main>
 	<Footer />
 </Layout>
+

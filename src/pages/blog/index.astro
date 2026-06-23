@@ -9,8 +9,11 @@ const posts = (await getCollection("blog")).sort(
 );
 ---
 
-<Layout title="Blog | Insights & Thoughts">
-    <main class="min-h-screen bg-[#0a0a0a] text-white pt-24 pb-16 selection:bg-purple-500/30">
+<Layout 
+    title="Insights & Articles | Yasith Tharuka"
+    description="Explore my latest articles, tutorials, and insights on web development, AI, design, and software engineering."
+>
+    <main class="min-h-screen bg-[#0a0a0a] text-gray-200 selection:bg-purple-500/30 pt-24 pb-16">
         <!-- Hero Section -->
         <section class="max-w-6xl mx-auto px-6 mb-20">
             <div class="relative z-10">

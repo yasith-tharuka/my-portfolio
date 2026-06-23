@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: Change this to your actual domain once you deploy
+Sitemap: https://yasiththaruka.com/sitemap-index.xml

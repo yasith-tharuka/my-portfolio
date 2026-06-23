@@ -1,16 +1,24 @@
 ---
+import { ClientRouter } from 'astro:transitions';
 import Navbar from "../components/Navbar.astro";
+import SEO from "../components/SEO.astro";
 import '../styles/global.css';
 
-const { title } = Astro.props;
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  article?: boolean;
+}
+
+const { title, description, image, article } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
-        <title>{title}</title>
+        <SEO title={title} description={description} image={image} article={article} />
+        <ClientRouter />
         <!-- Google Fonts: Outfit for Headers, Inter for Body -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
